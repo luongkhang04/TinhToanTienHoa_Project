@@ -1,0 +1,271 @@
+% !TEX program = pdflatex
+\documentclass[aspectratio=169]{beamer}
+
+% Theme & colors
+\usetheme{CambridgeUS}
+\usecolortheme{beaver}
+\usefonttheme{professionalfonts}
+
+% Encoding & fonts
+\usepackage{tabularx}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{graphicx} % For images
+\usepackage{booktabs} % For professional tables
+
+% Math
+\usepackage{mathrsfs}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{bm}
+
+% Convenience
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Prb}{\mathbb{P}}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+% Metadata
+\title[Improved A* and DWA]{A Mobile Robot Path Planning Algorithm Based on Improved A* Algorithm and Dynamic Window Approach}
+\subtitle{Yonggang Li, Rencai Jin, Xiangrong Xu, et al.}
+\author[Khang Luong, Ong Xuan Son]{Presented by Khang Luong, Ong Xuan Son}
+
+\AtBeginSection[]{
+    \begin{frame}{Outline}
+        \tableofcontents[currentsection]
+    \end{frame}
+}
+
+\begin{document}
+
+%------------------------------------
+\begin{frame}
+    \titlepage
+\end{frame}
+
+%------------------------------------
+\section{Introduction}
+%------------------------------------
+\begin{frame}{Problem and Proposed Solution}
+    \textbf{Limitations of Traditional Algorithms:}
+    \begin{itemize}
+        \item \textbf{Traditional A* Algorithm:} Often produces paths with many turning points, redundant nodes, and large turning angles. It is unable to avoid dynamic obstacles.
+        \item \textbf{Dynamic Window Approach (DWA):} As a local algorithm, it is prone to getting trapped in local optima and may fail to reach the target position.
+    \end{itemize}
+
+    \medskip
+    \textbf{Proposed Solution:}
+    \begin{itemize}
+        \item This paper presents a \textbf{hybrid algorithm} that fuses an \textbf{improved A*} with the \textbf{DWA}.
+        \item \textbf{A* Algorithm Improvements:}
+        \begin{itemize}
+            \item An \textbf{adaptive adjustment step algorithm} to enhance flexibility based on obstacle density.
+            \item A \textbf{three-time Bezier curve} to smooth the trajectory, reducing turning points and angles.
+        \end{itemize}
+        \item \textbf{Fusion:} The improved A* algorithm plans the global path, and the DWA is then used for local planning and real-time dynamic obstacle avoidance.
+    \end{itemize}
+\end{frame}
+
+%------------------------------------
+\begin{frame}{Problem Formulation}
+    \begin{columns}[c]
+        \begin{column}{0.5\textwidth}
+            \textbf{Input:}
+            \begin{itemize}
+                \item A global map of the static environment.
+                \item Start and target coordinates $(x_{start}, y_{start})$ and $(x_{target}, y_{target})$.
+                \item Real-time sensor data (e.g., from Lidar) for detecting dynamic obstacles.
+            \end{itemize}
+            \medskip
+            \textbf{Output:}
+            \begin{itemize}
+                \item A safe, smooth, and optimal (or near-optimal) trajectory from the start to the target.
+                \item A sequence of velocity commands $(v, \omega)$ for the robot to follow the trajectory.
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \textbf{Environment Model:}
+            \begin{itemize}
+                \item The environment is represented using a \textbf{grid method} (raster modeling).
+                \item The space is divided into equal, disjoint grid cells.
+                \item Each cell is classified as either \textbf{free} (white) or \textbf{occupied} (black).
+                \item The model contains both static obstacles (known on the global map) and dynamic obstacles (detected locally).
+            \end{itemize}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+%------------------------------------
+\section{A* Algorithm Improvements}
+%------------------------------------
+\begin{frame}{Traditional A* Algorithm}
+    The A* algorithm is a heuristic search method for global path planning.
+    
+    \medskip
+    \textbf{Cost Function:}
+    The cost of a node $n$ is evaluated by the function:
+    \[ f(n) = g(n) + h(n) \]
+    $f(n)$: The total estimated cost of the path through node $n$.\\
+    $g(n)$: The \textbf{actual cost} from the start node to the current node $n$.\\
+    $h(n)$: The \textbf{heuristic estimated cost} from node $n$ to the target node.
+    
+    \medskip
+    \textbf{Search Process:}
+    \begin{itemize}
+        \item It uses 2 lists: an \textbf{Open list} for unexpanded nodes and a \textbf{Closed list} for expanded nodes.
+        \item It repeatedly selects the node with the smallest $f(n)$ value from the Open list, expands it, and moves it to the Closed list until the target is found.
+        \item The search typically explores neighbors in four or eight directions.
+    \end{itemize}
+\end{frame}
+
+%------------------------------------
+\begin{frame}{Improvement 1: Adaptive Step Size}
+    To increase flexibility, the algorithm adapts its step size based on the surrounding environment.
+    
+    \medskip
+    \textbf{Threat Function:}
+    The obstacle density is quantified by a threat function $f(x_1, x_2)$:
+    $$ f(x_1, x_2) = \begin{cases} \frac{1}{k_1 x_1 + k_2 x_2 + c} & \text{if } d=0 \\ 1 & \text{if } d \neq 0 \end{cases} $$
+    \begin{itemize}
+        \item $x_1, x_2$: The number of static obstacles in immediate and nearby areas, respectively.
+        \item $d$: The number of dynamic obstacles in the direction of motion.
+        \item $k_1, k_2, c$: Weighting coefficients.
+    \end{itemize}
+    
+    \textbf{Adaptive Step Size Formula:}
+    The step length $l$ is then calculated as:
+    $$ l = \begin{cases} f(x_1, x_2) \cdot l_{\max} & \text{if } d=0 \\ f(x_1, x_2) \cdot l_{\min} & \text{if } d \neq 0 \end{cases} $$
+    This allows the robot to take larger steps in open spaces and smaller, safer steps near obstacles.
+\end{frame}
+
+%------------------------------------
+\begin{frame}{Improvement 2: Path Smoothing with Bezier Curves}
+    \begin{columns}[c]
+        \begin{column}{0.6\textwidth}
+            \textbf{Cubic Bezier Curve Formula:}
+            \begin{itemize}
+                \item A curve segment is defined by a start point $P_0$, an end point $P_3$, and two control points $P_1, P_2$.
+                \item The coordinates $B(t)$ on the curve at time $t \in [0,1]$ are given by:
+            \end{itemize}
+            $$ B(t) = (1-t)^{3}P_{0}+3t(1-t)^{2}P_{1}+3t^{2}(1-t)P_{2}+t^{3}P_{3} $$
+            This smoothing process ensures the robot can travel smoothly, reducing motor strain and satisfying motion constraints.
+        \end{column}
+        \begin{column}{0.4\textwidth}
+            \begin{figure}
+                \includegraphics[width=\textwidth]{images/smooth.jpeg}
+            \end{figure}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+%------------------------------------
+\section{Dynamic Window Approach (DWA)}
+%------------------------------------
+\begin{frame}{DWA Overview and Evaluation Function}
+    \begin{enumerate}
+        \item \textbf{Velocity Sampling:} Sample multiple pairs of linear ($v$) and angular ($\omega$) velocities within a "dynamic window" constrained by motor performance, acceleration limits, and a safe braking distance.
+        \item \textbf{Trajectory Simulation:} Predict the robot's trajectory for each sampled velocity pair over a short time interval.
+        \item \textbf{Evaluation and Selection:} Use an evaluation function to score valid (non-colliding) trajectories and select the one with the highest score.
+    \end{enumerate}
+    
+    \textbf{DWA Evaluation Function:}
+    $$ G(v,\omega)=\sigma[\alpha\cdot head(v,\omega)+\beta\cdot stob(v,\omega) + \delta\cdot dyob(v,\omega)+\gamma\cdot velo(v,\omega)] $$
+    $head(v,\omega)$: \textbf{Azimuth}, measuring angular deviation from the global path.\\
+    $stob(v,\omega)$: \textbf{Distance} to the nearest static obstacle.\\
+    $dyob(v,\omega)$: \textbf{Distance} to the nearest dynamic obstacle.\\
+    $velo(v,\omega)$: The robot's forward \textbf{velocity}.
+\end{frame}
+
+%------------------------------------
+\section{The Hybrid Algorithm}
+%------------------------------------
+\begin{frame}{Fusing Improved A* and DWA}
+    \begin{columns}[c]
+        \begin{column}{0.6\textwidth}
+            \begin{enumerate}
+                \item \textbf{Global Planning:} The improved A* algorithm (with adaptive step and Bezier smoothing) plans a globally optimal path on the static map.
+                \item \textbf{Local Target Points:} Key points from the global path serve as temporary sub-goals for the local planner.
+                \item \textbf{Local Planning:} The DWA algorithm navigates toward the current local target, performing real-time avoidance of both static and dynamic obstacles using sensor data.
+                \item \textbf{Update and Repeat:} As the robot moves, the local target point is continuously updated along the global path until the final destination is reached.
+            \end{enumerate}
+        \end{column}
+        \begin{column}{0.4\textwidth}
+            \begin{figure}
+                \includegraphics[width=\textwidth]{images/hybridalgo.jpeg}
+            \end{figure}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Hybrid Algorithm Performance}
+    \textbf{Quantitative Comparison:}
+    \begin{table}[h]
+        \centering
+        \begin{tabular}{lcccc}
+            \toprule
+            \textbf{Algorithm} & \textbf{Turning} & \textbf{Smoothness} & \textbf{Dynamic Avoid} & \textbf{Path Length} \\
+            \midrule
+            Traditional A* & 8 & No & No & 14.07 \\
+            Improved A* & 6 & Yes & No & 11.92 \\
+            DWA & - & Yes & Yes & Not reached \\
+            \textbf{Hybrid Algorithm} & \textbf{4} & \textbf{Yes} & \textbf{Yes} & \textbf{13.56} \\
+            \bottomrule
+        \end{tabular}
+        \caption{Performance comparison of the different algorithms.}
+    \end{table}
+    
+    \medskip
+    \begin{itemize}
+        \item Compared to the traditional A* algorithm, the hybrid method reduces the number of turns by \textbf{50\%} and the path length by \textbf{3.62\%}.
+        \item The algorithm successfully solves the inability of A* to avoid dynamic obstacles and prevents DWA from getting trapped in local optima.
+    \end{itemize}
+\end{frame}
+
+%------------------------------------
+\section{Experimental Results}
+%------------------------------------
+\begin{frame}{Real-World Robot Experiments}
+    \begin{columns}[c]
+        \begin{column}{0.6\textwidth}
+            \textbf{Setup:}
+            \begin{itemize}
+                \item \textbf{Software:} Ubuntu 18.04 with ROS (Melodic).
+                \item \textbf{Robot Hardware:} Equipped with Lidar, Camera, IMU, and Mecanum wheels.
+                \item \textbf{Environment:} An 80m² lab space for physical tests.
+            \end{itemize}
+            
+            \textbf{Key Findings (Average of 10 runs):}
+            \begin{itemize}
+                \item The hybrid algorithm reduced the average time consumption by \textbf{10.27\%}.
+                \item The number of path inflection points was reduced by \textbf{57.14\%}.
+                \item The accuracy at the end point was higher by \textbf{33.33\%} compared to the traditional algorithm.
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.4\textwidth}
+            \begin{figure}
+                \includegraphics[width=\textwidth]{images/experiment.jpeg}
+            \end{figure}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+%------------------------------------
+\section{Conclusion}
+%------------------------------------
+\begin{frame}{Conclusion and Future Work}
+    \textbf{Summary of Contributions:}
+    \begin{itemize}
+        \item An \textbf{improved A* algorithm} was developed using an adaptive step size and Bezier curve smoothing, which reduces run time and the number of turning points.
+        \item A \textbf{hybrid algorithm} was created by fusing the improved A* with DWA, successfully combining global optimality with real-time dynamic obstacle avoidance.
+        \item Extensive simulations and real-world experiments validated that the proposed algorithm has good applicability and security for complex dynamic environments.
+    \end{itemize}
+
+    \medskip
+    \textbf{Future Work:}
+    \begin{itemize}
+        \item The authors suggest further exploring the path planning of mobile robots in multi-task complex scenes.
+        \item Future research will also investigate combining the algorithm with deep learning and machine vision.
+    \end{itemize}
+\end{frame}
+
+\end{document}
