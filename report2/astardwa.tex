@@ -1,0 +1,154 @@
+% !TEX program = pdflatex
+\documentclass[aspectratio=169]{beamer}
+
+% Theme & colors
+\usetheme{CambridgeUS}
+\usecolortheme{beaver}
+\usefonttheme{professionalfonts}
+
+% Encoding & fonts
+\usepackage{tabularx}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{graphicx} % For images
+\usepackage{booktabs} % For professional tables
+
+% Math
+\usepackage{mathrsfs}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{bm}
+
+% Convenience
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Prb}{\mathbb{P}}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+% Metadata
+\title[Improved A* and DWA]{A Mobile Robot Path Planning Algorithm Based on Improved A* Algorithm and Dynamic Window Approach}
+\subtitle{Yonggang Li, Rencai Jin, Xiangrong Xu, et al.}
+\author[Khang Luong, Ong Xuan Son]{Presented by Khang Luong, Ong Xuan Son}
+
+\AtBeginSection[]{
+    \begin{frame}{Outline}
+        \tableofcontents[currentsection]
+    \end{frame}
+}
+
+\begin{document}
+
+%------------------------------------
+\begin{frame}
+    \titlepage
+\end{frame}
+
+%==================== SLIDE 1 ====================%
+\begin{frame}{Traditional Dynamic Window Approach (DWA)}
+
+\textbf{System Model}
+\[
+\dot{x} = v\cos\theta,\quad 
+\dot{y} = v\sin\theta,\quad 
+\dot{\theta}=\omega
+\]
+
+\textbf{Dynamic Window}
+\[
+(v,\omega)\in
+\begin{cases}
+[v_{\text{cur}}-\dot v_{\max}\Delta t,\;
+ v_{\text{cur}}+\dot v_{\max}\Delta t] \\
+[\omega_{\text{cur}}-\dot\omega_{\max}\Delta t,\;
+ \omega_{\text{cur}}+\dot\omega_{\max}\Delta t]
+\end{cases}
+\]
+
+\textbf{Trajectory Rollout}
+\[
+\mathbf{s}(t+\tau)=f(\mathbf{s}(t),(v,\omega)),\quad \tau\in[0,T]
+\]
+
+\textbf{Score Function}
+\[
+J = w_h H + w_c C + w_v V
+\]
+\vspace{-0.3cm}
+\begin{itemize}
+    \item $H$: heading to goal
+    \item $C$: clearance to obstacles
+    \item $V$: forward velocity
+\end{itemize}
+
+\textbf{Issues:}\; weight tuning, short-horizon myopia, local minima.
+
+\end{frame}
+
+%==================== SLIDE 2 ====================%
+\begin{frame}{RL to Improve DWA}
+
+\textbf{Idea 1: Learn Weights}
+\[
+(w_h, w_c, w_v) = \pi_\theta(s_t)
+\]
+
+\textbf{Idea 2: Learn Sampling Distribution}
+\[
+(v,\omega)\sim \pi_\theta(v,\omega\mid s_t)
+\]
+
+\textbf{Idea 3: RL Overrides, DWA as Safety Filter}
+\[
+(v,\omega)_{\text{exec}} =
+\begin{cases}
+(v,\omega)_\text{RL}, & \text{if safe}\\
+(v,\omega)_\text{DWA}, & \text{otherwise}
+\end{cases}
+\]
+
+\textbf{Benefits}
+\begin{itemize}
+    \item Avoid manual tuning
+    \item Adapt to dynamic obstacles
+    \item Multi-step reasoning beyond DWA rollout
+\end{itemize}
+
+\end{frame}
+
+%==================== SLIDE 3 ====================%
+\begin{frame}{Replacing DWA with Monte Carlo Tree Search (MCTS)}
+
+\textbf{Action Set}
+\[
+\mathcal{A}=\{(v_i,\omega_j)\},\; i=1..N_v,\; j=1..N_\omega
+\]
+
+\textbf{Tree Expansion: rollout dynamics}
+\[
+s_{t+1}=f(s_t,a_t),\qquad a_t\in\mathcal{A}
+\]
+
+\textbf{UCT Selection}
+\[
+a^*=\arg\max_a 
+\left[
+Q(s,a)+c\sqrt{\frac{\ln N(s)}{N(s,a)}}
+\right]
+\]
+
+\textbf{Advantages}
+\begin{itemize}
+    \item Multi-step lookahead instead of single-step rollout
+    \item Naturally handles uncertainty \& dynamic obstacles
+    \item Eliminates hand-tuned weights entirely
+\end{itemize}
+
+\textbf{Output}
+\[
+a_0^* = \text{best action at root}
+\]
+
+\end{frame}
+
+
+\end{document}
