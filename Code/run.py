@@ -24,7 +24,7 @@ class PathPlanner:
     """
     
     def __init__(self, map_filename, global_planner_name='grid_bfs', 
-                 local_planner_name='reactive_bfs', num_obstacles=200):
+                 local_planner_name='reactive_bfs', num_obstacles=100):
         """
         Args:
             map_filename: Name of map PNG file in 'map/' directory
@@ -136,21 +136,40 @@ class PathPlanner:
         self.local_planner = self._create_local_planner(self.local_planner_name)
         
         idx_goal = 0
-        current_state = tuple(agent.location)
+        current_state = tuple(int(x) for x in agent.location)
         previous_state = current_state
         self.complete_path = [current_state]
         
         max_steps = 1000  # Prevent infinite loops
         steps = 0
         stuck_counter = 0
-        stuck_threshold = 15
+        stuck_threshold = 20  # Trigger replanning after 20 steps without progress
         
         while idx_goal < len(global_path) and steps < max_steps:
-            goal = tuple(global_path[idx_goal])
+            goal = tuple(int(x) for x in global_path[idx_goal])
             projected_goal = self.local_planner.graph.project_to_surroundings(goal)
             
             # Get local plan
             action = self.local_planner.plan_to_goal(current_state, projected_goal)
+            
+            # If no action, try random movement or skip
+            action = tuple(int(x) for x in action) if action is not None else (0, 0)
+            
+            if action == (0, 0):
+                # Try to escape stuck position with random valid move
+                from utils.agent_graph import agent_graph as get_graph
+                obs = self.g.observe()
+                temp_graph = get_graph(agent, obs, self.map_width, self.map_height, inflation=1)
+                valid_neighbors = temp_graph.get_adjacent_states(current_state)
+                
+                if valid_neighbors:
+                    action = (valid_neighbors[0][0] - current_state[0], 
+                             valid_neighbors[0][1] - current_state[1])
+                else:
+                    # Completely stuck, try moving to next waypoint
+                    idx_goal += 1
+                    stuck_counter = 0
+                    continue
             
             # Execute action
             agent.action = action
@@ -159,22 +178,32 @@ class PathPlanner:
             
             # Update state
             previous_state = current_state
-            current_state = tuple(agent.location)
+            current_state = tuple(int(x) for x in agent.location)
             self.complete_path.append(current_state)
             
-            # Detect stuck: not moving
+            # Detect stuck: not moving OR not making progress toward goal
             if current_state == previous_state:
                 stuck_counter += 1
-                if stuck_counter > stuck_threshold:
-                    # Replan globally from current position to final goal
-                    print(f"  Stuck detected at {current_state}, replanning global path")
-                    global_path, global_time = self.global_planner.plan(current_state, self.goal_pos)
-                    self.times.append(global_time)
-                    idx_goal = 0
-                    stuck_counter = 0
-                    continue
             else:
+                # Check if we're making progress toward goal
+                old_dist = abs(previous_state[0] - goal[0]) + abs(previous_state[1] - goal[1])
+                new_dist = abs(current_state[0] - goal[0]) + abs(current_state[1] - goal[1])
+                if new_dist >= old_dist:
+                    stuck_counter += 1  # Not making progress
+                else:
+                    stuck_counter = 0
+            
+            if stuck_counter > stuck_threshold:
+                # Replan globally from current position to final goal
+                print(f"  Stuck detected at {current_state}, replanning global path")
+                global_path, global_time = self.global_planner.plan(current_state, self.goal_pos)
+                self.times.append(global_time)
+                idx_goal = 0
                 stuck_counter = 0
+                if not global_path:
+                    print("  Global replanning failed, skipping to next waypoint")
+                    idx_goal += 1
+                continue
             
             # Update observation
             obs = self.g.observe()
@@ -185,8 +214,9 @@ class PathPlanner:
                 self.moving_obstacles_positions[obstacle].append(
                     tuple(obstacle.location))
             
-            # Check goal reached
-            if current_state == goal:
+            # Check goal reached (with tolerance)
+            dist_to_goal = abs(current_state[0] - goal[0]) + abs(current_state[1] - goal[1])
+            if dist_to_goal <= 2:  # Within 2 cells of waypoint
                 idx_goal += 1
                 stuck_counter = 0
             

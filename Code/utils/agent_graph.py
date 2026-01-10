@@ -164,8 +164,6 @@ class agent_graph():
 
     def get_path_DFS(self, start_state, end_state, path = [], visited = set()):
         if self.is_in_obstacles_expanded(start_state) or self.is_in_obstacles_expanded(end_state):
-            print("start state or end state in obstacles")
-            print(" Don't move")
             return [start_state, start_state]
         new_path = path
         new_visited = visited

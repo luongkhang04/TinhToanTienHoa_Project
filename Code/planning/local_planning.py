@@ -61,41 +61,55 @@ class LocalPlanner:
         return self._clearance_map
 
     def _compute_clearance_map(self):
-        """Distance (Chebyshev) to nearest obstacle within observation; out-of-bounds treated as obstacle."""
-        obs = self.observation
-        H, W = obs.shape
-        dist = np.full((H, W), fill_value=np.iinfo(np.int16).max, dtype=np.int16)
+        """Distance (Chebyshev) to nearest obstacle within observation; out-of-bounds treated as obstacle.
+
+        Note: Global.observe() returns grid slices in (x, y) order. We keep that order
+        here to stay consistent with agent_graph, so we index obs[x, y].
+        """
+        obs = self.observation  # shape: (W, H) with x-first indexing
+        W, H = obs.shape
+        dist = np.full((W, H), fill_value=np.iinfo(np.int16).max, dtype=np.int16)
         from collections import deque
         q = deque()
-        # obstacles are >0
-        for y in range(H):
-            for x in range(W):
-                if obs[y, x] > 0:
-                    dist[y, x] = 0
+        # obstacles are encoded as 1; ignore agent cells (value 2)
+        for x in range(W):
+            for y in range(H):
+                if obs[x, y] == 1:
+                    dist[x, y] = 0
                     q.append((x, y))
         if not q:
             return dist
         dirs = [(-1,-1),(0,-1),(1,-1),(-1,0),(1,0),(-1,1),(0,1),(1,1)]
         while q:
             x, y = q.popleft()
-            nd = dist[y, x] + 1
+            nd = dist[x, y] + 1
             for dx, dy in dirs:
                 nx, ny = x + dx, y + dy
-                if 0 <= nx < W and 0 <= ny < H and nd < dist[ny, nx]:
-                    dist[ny, nx] = nd
+                if 0 <= nx < W and 0 <= ny < H and nd < dist[nx, ny]:
+                    dist[nx, ny] = nd
                     q.append((nx, ny))
         return dist
 
     def _cell_has_margin(self, pos, margin=None):
-        x, y = int(pos[0]), int(pos[1])
+        """Check clearance - pos is in GLOBAL coordinates, converts to local"""
+        gx, gy = int(pos[0]), int(pos[1])
         m = self.margin if margin is None else margin
-        obs = self.observation
-        H, W = obs.shape
-        # Out of observation or out of world is obstacle
-        if not (0 <= x < W and 0 <= y < H):
+        
+        # Convert to local observation coordinates
+        agent_loc = self.agent.location
+        agent_range = self.agent.range
+        
+        obs_x_min = max(0, int(agent_loc[0]) - agent_range)
+        obs_y_min = max(0, int(agent_loc[1]) - agent_range)
+        
+        lx = gx - obs_x_min
+        ly = gy - obs_y_min
+        
+        W, H = self.observation.shape
+        if not (0 <= lx < W and 0 <= ly < H):
             return False
         cm = self._ensure_clearance_map()
-        return cm[y, x] > m
+        return cm[lx, ly] > m
 
 
 class ReactiveBFSPlanner(LocalPlanner):
@@ -265,14 +279,56 @@ class GreedyLocalPlanner(LocalPlanner):
                     self.stuck_count = 0
                     return move_vector
         
-        # No improving move found
+        # No improving move found, try any valid move
+        for move_vector in [move.RIGHT, move.LEFT, move.UP, move.DOWN, 
+                            move.NE, move.NW, move.SE, move.SW]:
+            next_pos = current + move_vector
+            if self._is_valid_move(next_pos):
+                self.stuck_count += 1
+                return move_vector
+        
         self.stuck_count += 1
         return move.NONE
     
     def _is_valid_move(self, pos):
-        """Check if move to position is valid (respects margin, in bounds)"""
-        x, y = int(pos[0]), int(pos[1])
-        obs_shape = self.observation.shape
-        if not (0 <= x < obs_shape[1] and 0 <= y < obs_shape[0]):
+        """Check if move to position is valid (respects margin, in bounds)
+        
+        pos is in global coordinates, need to convert to local observation coords
+        """
+        gx, gy = int(pos[0]), int(pos[1])
+        
+        # Check global bounds first
+        if not (0 <= gx < self.xlim and 0 <= gy < self.ylim):
             return False
-        return self._cell_has_margin((x, y), margin=self.margin)
+        
+        # Convert to local observation coordinates
+        agent_loc = self.agent.location
+        agent_range = self.agent.range
+        
+        # Local observation bounds
+        obs_x_min = max(0, int(agent_loc[0]) - agent_range)
+        obs_y_min = max(0, int(agent_loc[1]) - agent_range)
+        
+        # Local coordinates within observation
+        lx = gx - obs_x_min
+        ly = gy - obs_y_min
+        
+        W, H = self.observation.shape
+        if not (0 <= lx < W and 0 <= ly < H):
+            return False
+        
+        # Check if cell is free (not obstacle)
+        if self.observation[lx, ly] == 1:
+            return False
+        
+        # Check margin using local coordinates
+        return self._cell_has_margin_local(lx, ly, margin=self.margin)
+    
+    def _cell_has_margin_local(self, lx, ly, margin=None):
+        """Check clearance using local observation coordinates"""
+        m = self.margin if margin is None else margin
+        W, H = self.observation.shape
+        if not (0 <= lx < W and 0 <= ly < H):
+            return False
+        cm = self._ensure_clearance_map()
+        return cm[lx, ly] > m

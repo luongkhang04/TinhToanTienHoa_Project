@@ -1,0 +1,391 @@
+\section{METHODOLOGY}
+
+\subsection{System Architecture}
+
+The implemented system employs a \textbf{two-level hierarchical path planning architecture} that combines global strategic planning with local reactive navigation to handle dynamic environments containing moving obstacles. This hierarchical approach decomposes the complex navigation problem into two manageable sub-problems:
+
+\begin{enumerate}
+    \item \textbf{Global Planning Layer:} Computes high-level waypoint paths from start to goal using the static map
+    \item \textbf{Local Planning Layer:} Performs real-time reactive navigation within the agent's observation range, adapting to moving obstacles
+\end{enumerate}
+
+\subsection{Global Path Planning Algorithms}
+
+The global planning layer computes strategic paths through the environment using the complete static map. Four different algorithms have been implemented and evaluated.
+
+\subsubsection{Grid-Based Breadth-First Search (Grid BFS)}
+
+Grid BFS performs a complete breadth-first exploration of the configuration space to find the shortest path in terms of the number of grid cells traversed.
+
+\textbf{Algorithm:}
+\begin{enumerate}
+    \item Initialize queue with start position
+    \item While queue is not empty:
+    \begin{itemize}
+        \item Dequeue current node
+        \item If current node is goal, reconstruct and return path
+        \item For each 8-connected neighbor:
+        \begin{itemize}
+            \item Check if neighbor is free and satisfies safety margin
+            \item If not visited, add to queue and record parent
+        \end{itemize}
+    \end{itemize}
+    \item Apply line-of-sight sparsification to reduce waypoints
+    \item Push waypoints away from walls to ensure safety margin
+\end{enumerate}
+
+\textbf{Key Features:}
+\begin{itemize}
+    \item Uses 8-connected grid neighborhood (allowing diagonal movements)
+    \item Maintains safety margin (default: 2 cells) from obstacles using pre-computed clearance map
+    \item Clearance map computed via multi-source BFS from all obstacle cells
+    \item Guarantees shortest path if one exists
+    \item Time complexity: $O(|V| + |E|)$ where $V$ is the number of free cells
+\end{itemize}
+
+\subsubsection{Grid-Based Depth-First Search (Grid DFS)}
+
+Grid DFS explores paths deeply before backtracking, using a stack-based approach to traverse the configuration space.
+
+\textbf{Algorithm:}
+\begin{enumerate}
+    \item Initialize stack with start position
+    \item Initialize visited set
+    \item While stack is not empty:
+    \begin{itemize}
+        \item Pop current node
+        \item If current node is goal, reconstruct and return path
+        \item For each 8-connected neighbor:
+        \begin{itemize}
+            \item Check if neighbor is free and satisfies safety margin
+            \item If not visited, add to stack, visited set, and record parent
+        \end{itemize}
+    \end{itemize}
+    \item Apply post-processing (sparsification and wall-pushing)
+\end{enumerate}
+
+\textbf{Key Features:}
+\begin{itemize}
+    \item Lower memory footprint compared to BFS in large spaces
+    \item Does not guarantee shortest path
+    \item Can be faster when goal is "deep" in search tree
+    \item Same safety margin enforcement as BFS
+\end{itemize}
+
+\subsubsection{A* Search}
+
+A* is an informed search algorithm that uses a heuristic function to guide exploration toward the goal, combining actual cost from start with estimated cost to goal.
+
+\textbf{Cost Function:}
+\begin{equation}
+f(n) = g(n) + h(n)
+\end{equation}
+
+where:
+\begin{itemize}
+    \item $g(n)$: actual cost from start (1.0 for cardinal moves, 1.414 for diagonal)
+    \item $h(n)$: Manhattan distance heuristic to goal: $h(n) = |x_n - x_{goal}| + |y_n - y_{goal}|$
+\end{itemize}
+
+\textbf{Algorithm:}
+\begin{enumerate}
+    \item Initialize priority queue with start node and $f(start) = h(start)$
+    \item While priority queue is not empty:
+    \begin{itemize}
+        \item Extract node with minimum $f$-value
+        \item If current node is goal, reconstruct and return path
+        \item For each 8-connected neighbor:
+        \begin{itemize}
+            \item Calculate tentative $g$-score
+            \item If better than previous $g$-score:
+            \begin{itemize}
+                \item Update $g$-score and parent
+                \item Calculate $f$-score and add to priority queue
+            \end{itemize}
+        \end{itemize}
+    \end{itemize}
+    \item Apply Bresenham line-of-sight sparsification
+\end{enumerate}
+
+\textbf{Key Features:}
+\begin{itemize}
+    \item Uses an 8-connected neighborhood with move costs 1.0 (cardinal) and 1.414 (diagonal)
+    \item Heuristic: Manhattan distance $h(n)=|x_n-x_{goal}|+|y_n-y_{goal}|$ (simple goal guidance)
+    \item Note: with diagonal moves enabled, Manhattan distance can overestimate the true optimal cost; therefore this implementation is \emph{not guaranteed} to be optimal in all cases
+    \item Uses a min-heap (priority queue) for selecting the next node to expand
+\end{itemize}
+
+\subsubsection{Dijkstra's Algorithm}
+
+Dijkstra's algorithm finds the shortest path by exploring nodes in order of increasing cost from the start, without using goal-directed heuristics.
+
+\textbf{Algorithm:}
+\begin{enumerate}
+    \item Initialize distances: $d(start) = 0$, all others to $\infty$
+    \item Initialize unvisited set with all free cells
+    \item While unvisited set is not empty:
+    \begin{itemize}
+        \item Select node $u$ with minimum distance from unvisited set
+        \item If $u$ is goal, reconstruct and return path
+        \item Remove $u$ from unvisited set
+        \item For each neighbor $v$ of $u$:
+        \begin{itemize}
+            \item Calculate new distance: $d_{new} = d(u) + cost(u,v)$
+            \item If $d_{new} < d(v)$, update $d(v)$ and parent
+        \end{itemize}
+    \end{itemize}
+\end{enumerate}
+
+\textbf{Key Features:}
+\begin{itemize}
+    \item Guarantees optimal path (shortest in terms of actual distance)
+    \item Edge costs: 1.0 for cardinal, 1.414 for diagonal movements
+    \item More thorough but slower than A* for single-goal queries
+    \item Implementation detail: selects the minimum-distance unvisited node via a linear scan over an unvisited set (i.e., no priority queue), giving worst-case time complexity $O(|V|^2)$
+\end{itemize}
+
+\subsection{Path Optimization Techniques}
+
+Several optimization techniques are applied to improve path quality:
+
+\subsubsection{Clearance Map Computation}
+
+A clearance map is pre-computed using multi-source BFS to determine the distance from each free cell to the nearest obstacle:
+
+\begin{enumerate}
+    \item Initialize all obstacle cells with distance 0 and add to queue
+    \item For each cell in queue, propagate distance to 8-connected neighbors
+    \item Result: each cell contains Chebyshev distance to nearest obstacle
+\end{enumerate}
+
+This map enables efficient safety margin enforcement during planning.
+
+\subsubsection{Line-of-Sight Sparsification}
+
+The Bresenham line algorithm is used to reduce waypoint count:
+
+\begin{enumerate}
+    \item Start with first waypoint as anchor
+    \item Find furthest waypoint visible from anchor (no obstacles on line)
+    \item Add this waypoint to sparse path and set as new anchor
+    \item Repeat until goal is reached
+\end{enumerate}
+
+This reduces the dense cell-by-cell paths to sparse waypoint sequences.
+
+\subsubsection{Wall-Pushing Strategy}
+
+Waypoints are adjusted to maintain safety margin from obstacles:
+
+\begin{enumerate}
+    \item For each waypoint, check if clearance exceeds margin
+    \item If insufficient clearance, search local neighborhood
+    \item Select nearby cell with maximum clearance
+    \item Replace waypoint with safer alternative
+\end{enumerate}
+
+\subsection{Local Path Planning Algorithms}
+
+The local planning layer handles real-time reactive navigation within the agent's observation range. Four reactive strategies have been implemented.
+
+\subsubsection{Reactive BFS Planner}
+
+Performs BFS within the agent's local observation window to find collision-free paths to the current waypoint.
+
+\textbf{Agent Graph Construction:}
+\begin{enumerate}
+    \item Define observation window: $[x_a - r, x_a + r] \times [y_a - r, y_a + r]$
+    \item For each observed obstacle, inflate by safety margin using Chebyshev distance
+    \item Create state space of free cells within observation
+    \item Build adjacency graph using 4-connected moves (UP/DOWN/LEFT/RIGHT). A \texttt{NONE} action exists but does not expand the search.
+\end{enumerate}
+
+\textbf{Waypoint Projection:}
+When global waypoint falls outside observation or in inflated obstacles:
+\begin{enumerate}
+    \item Find all free cells in observation
+    \item Compute Euclidean distance from each to waypoint
+    \item Select cell with minimum distance as projected goal
+\end{enumerate}
+
+\textbf{Path Computation:}
+\begin{enumerate}
+    \item Apply BFS on agent graph from current position to projected waypoint
+    \item Extract next step from computed path
+    \item Convert to action vector (movement direction)
+\end{enumerate}
+
+\textbf{Key Features:}
+\begin{itemize}
+    \item Fast replanning in constrained local space
+    \item Guaranteed to find path in local observation if one exists
+    \item Adapts to moving obstacles via observation updates
+    \item Time complexity: $O(r^2)$ in the size of the observation window (roughly $(2r+1)^2$ cells)
+\end{itemize}
+
+\subsubsection{Reactive DFS Planner}
+
+Uses depth-first search strategy for local navigation, exploring paths deeply before backtracking.
+
+\textbf{Algorithm:}
+\begin{enumerate}
+    \item Build agent graph with inflated obstacles
+    \item Apply recursive DFS from current position to projected waypoint
+    \item Return first found path (not necessarily shortest)
+    \item Track stuck counter to detect navigation failures
+\end{enumerate}
+
+\textbf{Key Features:}
+\begin{itemize}
+    \item Lower memory usage than BFS in local space
+    \item Can find alternative paths in environments with multiple routes
+    \item Useful when multiple similar-length paths exist
+    \item May explore longer paths before finding goal
+\end{itemize}
+
+\subsubsection{Potential Field Planner}
+
+Models navigation as moving under artificial forces: attractive force toward goal and repulsive forces from obstacles.
+
+\textbf{Force Model:}
+\begin{equation}
+\vec{F}_{total} = \vec{F}_{attractive} + \vec{F}_{repulsive}
+\end{equation}
+
+\textbf{Attractive Force:}
+\begin{equation}
+\vec{F}_{attractive} = k_a \cdot \frac{\vec{d}_{goal}}{||\vec{d}_{goal}||}
+\end{equation}
+
+where $k_a$ is attraction weight (default: 1.0) and $\vec{d}_{goal}$ is the direction vector to the goal.
+
+\textbf{Repulsive Force:}
+\begin{equation}
+\vec{F}_{repulsive} = \sum_{i \in obstacles} k_r \cdot \frac{\vec{d}_{away,i}}{||\vec{d}_{away,i}||}
+\end{equation}
+
+where $k_r$ is repulsion weight (default: 2.0), computed for all obstacles within repulsion range (default: 3 cells).
+
+\textbf{Force-to-Action Conversion:}
+\begin{enumerate}
+    \item Compute total force vector
+    \item Determine dominant direction (horizontal vs. vertical)
+    \item Map to a \textbf{4-connected} discrete action: UP, DOWN, LEFT, or RIGHT (no diagonal actions in this planner)
+    \item Treat cells that violate the clearance margin as obstacles (repulsion is computed against the \emph{inflated} free-space constraint)
+\end{enumerate}
+
+\textbf{Key Features:}
+\begin{itemize}
+    \item Smooth, reactive behavior without explicit path search
+    \item Naturally avoids obstacles through repulsive forces
+    \item Can suffer from local minima in complex configurations
+    \item Computationally efficient: $O(r^2)$ for force computation
+    \item No memory overhead for graph structures
+\end{itemize}
+
+\subsubsection{Greedy Local Planner}
+
+Selects actions that maximize progress toward the goal while avoiding obstacles using a simple greedy heuristic.
+
+\textbf{Algorithm:}
+\begin{enumerate}
+    \item Calculate current distance to goal: $d_{current} = ||\vec{goal} - \vec{current}||$
+    \item For each of 8 possible actions (cardinal + diagonal):
+    \begin{itemize}
+        \item Compute next position
+        \item Check validity (within global bounds, within the current observation window, not an obstacle, and satisfies clearance margin)
+        \item Calculate new distance to goal: $d_{new}$
+        \item If $d_{new} < d_{current}$, select this action
+    \end{itemize}
+    \item If no improving action found, increment stuck counter
+\end{enumerate}
+
+\textbf{Key Features:}
+\begin{itemize}
+    \item Simple and computationally efficient: $O(1)$ per step
+    \item No memory overhead (no graph or queue structures)
+    \item Works well in open spaces with sparse obstacles
+    \item Can get trapped in local minima or dead ends
+    \item Myopic decision-making without lookahead
+\end{itemize}
+
+\subsection{Integration and Coordination}
+
+The hierarchical system coordinates global and local planning through several mechanisms:
+
+\subsubsection{Waypoint Following}
+
+\begin{enumerate}
+    \item Local planner maintains current waypoint index in global path
+    \item Projects current waypoint into local observation space
+    \item Executes local plan to reach projected waypoint
+    \item When waypoint reached (within a small tolerance), advances to next waypoint
+    \item Repeats until final goal is reached
+\end{enumerate}
+
+\subsubsection{Stuck Detection and Recovery}
+
+To handle situations where the agent cannot make progress, the execution loop tracks both \emph{no-motion} and \emph{no-progress} events:
+
+\begin{enumerate}
+    \item Monitor agent position changes across time steps, and whether distance to the \emph{current waypoint} decreases
+    \item Increment stuck counter when the agent does not move, or when the Manhattan distance to the current waypoint does not decrease
+    \item When stuck counter exceeds a threshold (typically 15--20 steps depending on the execution script):
+    \begin{itemize}
+        \item Trigger global replanning from current position
+        \item Compute new waypoint sequence to final goal
+        \item Reset waypoint index and stuck counter
+        \item Resume local planning with new global path
+    \end{itemize}
+\end{enumerate}
+
+\subsubsection{Observation Updates}
+
+After each action execution:
+
+\begin{enumerate}
+    \item Agent moves to new position
+    \item Observe environment within sensing range
+    \item Detect obstacle positions (static and moving)
+    \item Reconstruct agent graph with updated observations
+    \item Inflate newly detected obstacles by safety margin (Chebyshev radius)
+    \item Continue local planning with updated graph
+\end{enumerate}
+
+\subsubsection{Safety Margin Enforcement}
+
+Consistent safety enforcement across both layers:
+
+\begin{itemize}
+    \item \textbf{Global layer:} Pre-computes clearance map over entire environment using multi-source BFS with Chebyshev distance metric
+    \item \textbf{Local layer:} Computes local clearance map within observation window for each update
+    \item \textbf{Coordination:} Both layers enforce a configurable margin; in the provided runner/benchmark setup the global margin is typically 2 cells while the local inflation margin is set to 1 cell
+    \item \textbf{Obstacle inflation:} Chebyshev ball of radius $m$ around each obstacle cell
+\end{itemize}
+
+\subsection{Algorithm Comparison Framework}
+
+The implementation provides a flexible framework for comparative evaluation of different algorithm combinations.
+
+\subsubsection{Configurable Parameters}
+
+\begin{itemize}
+    \item \textbf{Global planner:} \texttt{grid\_bfs}, \texttt{grid\_dfs}, \texttt{astar}, \texttt{dijkstra}
+    \item \textbf{Local planner:} \texttt{reactive\_bfs}, \texttt{reactive\_dfs}, \texttt{potential\_field}, \texttt{greedy}
+    \item \textbf{Number of moving obstacles:} Configurable (default: 100 in the demo runner; benchmark evaluates $\{0, 50, 100, 200\}$)
+    \item \textbf{Safety margin:} Configurable clearance from obstacles (global typically 2; local inflation typically 1)
+    \item \textbf{Agent sensing range:} Observation window radius (default: 2 cells)
+    \item \textbf{Map selection:} Multiple test environments (maps 1-7)
+\end{itemize}
+
+\subsubsection{Performance Metrics}
+
+The system measures the following metrics for evaluation:
+
+\begin{itemize}
+    \item \textbf{Global planning time:} Time to compute initial waypoint path (seconds)
+    \item \textbf{Total execution steps:} Number of discrete time steps to reach goal
+    \item \textbf{Path length:} Total number of cells traversed in complete path
+    \item \textbf{Success rate:} Goal reached vs. maximum step limit (1000 steps)
+    \item \textbf{Replanning frequency:} Number of stuck detections requiring global replanning
+\end{itemize}

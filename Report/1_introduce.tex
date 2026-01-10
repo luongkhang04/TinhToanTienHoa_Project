@@ -1,0 +1,33 @@
+\section{INTRODUCTION}
+
+\subsection{Motivation}
+Path planning is a core capability in mobile robotics and autonomous systems: an agent must compute a collision-free route from a start state to a goal state while respecting motion constraints and environmental obstacles. In many realistic applications (e.g., service robots in human environments, warehouse automation, and autonomous driving), the environment is \textit{dynamic}: obstacles move, new obstacles appear, and previously free regions may become temporarily blocked. As a result, a path that is optimal (or even feasible) at planning time can quickly become invalid at execution time.
+
+Classical shortest-path methods on graphs (e.g., Dijkstra and A*) provide strong optimality guarantees for static maps when costs are known \cite{dijkstra1959note,hart1968astar}. However, dynamic environments introduce an additional time dimension and demand either frequent replanning or policies that can react online. A practical planner must balance \textit{safety} (collision avoidance), \textit{efficiency} (short travel time/length), and \textit{real-time performance} under limited sensing and compute budgets \cite{lavalle2006planning,thrun2005probabilistic}.
+
+\subsection{Why Dynamic Environments Are Hard}
+Compared to static planning, dynamic environments create several coupled challenges:
+\begin{itemize}
+	\item \textbf{Time-varying feasibility:} The free space changes over time, so a solution is more naturally a trajectory in space--time rather than a purely geometric path.
+	\item \textbf{Partial observability and uncertainty:} The agent often only observes a local neighborhood and must act before it has perfect knowledge of future obstacle motion \cite{thrun2005probabilistic}.
+	\item \textbf{Responsiveness:} Replanning from scratch at every step can be too slow; incremental or hierarchical approaches are commonly used to reduce latency \cite{koenig2002dstar,stentz1994optimal}.
+	\item \textbf{Safety with moving obstacles:} Avoidance must consider relative motion. Reactive techniques such as the Dynamic Window Approach and (reciprocal) velocity obstacles have proven effective for local collision avoidance in real time \cite{fox1997dynamic,fiorini1998vo,vandenberg2008rvo}.
+\end{itemize}
+
+These difficulties motivate hybrid solutions that combine global reasoning (to avoid dead-ends and reduce detours) with local reactive behaviors (to handle short-term dynamics).
+
+\subsection{Scope and Approach of This Report}
+This report focuses on path planning for a single holonomic agent in a two-dimensional discrete grid with both static and moving obstacles. The agent receives local observations and must reach a fixed goal without collisions.
+
+To address the real-time requirements of dynamic navigation, we adopt a \textbf{two-level hierarchical architecture}. A \textit{global planner} computes a waypoint route using the static map, while a \textit{local planner} continuously replans within the agent's observation window to avoid moving obstacles and track the global waypoints. This design follows a widely used separation of concerns in mobile robot navigation: global planning provides long-horizon structure, while local planning provides short-horizon safety and responsiveness \cite{lavalle2006planning,thrun2005probabilistic}.
+
+\subsection{Contributions}
+The main contributions of this work are:
+\begin{itemize}
+	\item A unified experimental framework for evaluating multiple grid-based global planners (BFS, DFS, Dijkstra, and A*) under a shared map representation.
+	\item A local replanning module that operates on local observations to avoid dynamic obstacles online while tracking global waypoints.
+	\item A set of path post-processing techniques (sparsification and safety-margin enforcement) to improve waypoint quality and collision robustness.
+\end{itemize}
+
+\subsection{Report Organization}
+The rest of the report is organized as follows. Section~2 reviews related work in motion planning for dynamic environments. Section~3 formalizes the problem setting and assumptions. Section~4 describes the proposed hierarchical planning methodology and the implemented algorithms. Section~5 presents the experimental setup and quantitative results. Finally, Section~6 concludes the report and discusses limitations and future directions.

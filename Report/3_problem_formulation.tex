@@ -1,0 +1,39 @@
+\section{PROBLEM FORMULATION}
+
+We study motion planning for a single holonomic robot operating in a two-dimensional discrete grid. The objective is to synthesize a collision-free trajectory from a known start position to a fixed goal while both static and dynamic obstacles may be present. Unlike classical formulations that assume a static environment, we explicitly allow obstacles to move over time and require the planner to account for this evolution when producing a feasible path.
+
+\subsection{General Assumptions}
+\begin{itemize}
+	\item The environment is a discrete gridworld (discrete space and discrete time).
+	\item The robot is holonomic with deterministic dynamics and is modeled as a point mass.
+	\item The initial robot state and the goal state are known and fixed.
+	\item The number of obstacles and their initial positions are known.
+	\item The robot state is observable at every time step.
+	\item The robot is equipped with a local sensor that yields a $5 \times 5$ occupancy grid centered on the robot (local observation of nearby cells).
+\end{itemize}
+
+\subsection{Mathematical Model}
+The planning problem is defined on the following spaces:
+\begin{align*}
+	\text{State space:}\quad & S = \{(x,y) \mid x,y \in \mathbb{N},\ 0 \leq x \leq X_{\text{dim}},\ 0 \leq y \leq Y_{\text{dim}}\} \subset \mathbb{N}^2, \\
+	\text{Action space:}\quad & A = \{(0,1),\ (0,-1),\ (-1,0),\ (1,0),\ (0,0)\} \subset \mathbb{Z}^2, \\
+	\text{Observation space:}\quad & G \in [0,1]^{5 \times 5}, \\
+	\text{Static obstacles:}\quad & O \subset S.
+\end{align*}
+
+The robot dynamics are given by a deterministic transition function
+\begin{equation*}
+	f : S \times A \rightarrow S,
+\end{equation*}
+which maps the current state and chosen action to the next state. Dynamic obstacles
+evolve over time; let $M_i \subset S$ denote the set of moving obstacle states at
+discrete time index $i \in \{0,\dots, N-1\}$ for a planning horizon of length $N$.
+
+\subsection{Planning Objective}
+We seek a trajectory $T = \{S_0, S_1, \dots, S_{N-1}\}$ such that $S_0$ is the known
+initial state and $S_{N-1}$ coincides with the goal state. The trajectory is feasible if
+for every $i \in \{0,\dots, N-2\}$ there exists an action $a \in A$ satisfying
+\begin{equation*}
+	f(S_i, a) = S_{i+1}, \qquad S_i \notin O, \qquad S_i \notin M_i.
+\end{equation*}
+The task is to compute at least one such collision-free trajectory that respects both static and time-varying obstacle sets under the stated assumptions.

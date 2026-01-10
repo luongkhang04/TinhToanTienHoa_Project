@@ -1,0 +1,30 @@
+\section{RELATED WORKS}
+
+Path planning in dynamic environments lies at the intersection of classical motion planning, real-time replanning, and collision avoidance. This section summarizes the main research directions most relevant to our setting (grid-based navigation with moving obstacles and local sensing).
+
+\subsection{Graph Search on Grids and Static Maps}
+Many robotics systems discretize the workspace into a grid or graph and compute shortest paths using graph search. Dijkstra's algorithm provides optimal shortest paths for nonnegative edge costs \cite{dijkstra1959note}, while A* accelerates search using admissible heuristics and remains optimal under standard assumptions \cite{hart1968astar}. These approaches are well suited for static environments but do not directly address time-varying obstacles, since the cost and feasibility of edges can change during execution \cite{lavalle2006planning}.
+
+\subsection{Incremental and Anytime Replanning}
+To cope with changes in the environment or partial knowledge, incremental search methods reuse previous computation when the map changes. Early work on D* showed how to efficiently update shortest paths in partially known environments \cite{stentz1994optimal}. D* Lite reformulates these ideas with a simpler implementation and strong practical performance \cite{koenig2002dstar}. Related incremental variants such as Lifelong Planning A* (LPA*) maintain shortest-path information across repeated queries \cite{koenig2004lpa}.
+
+Another complementary idea is \textit{anytime} planning, where an initial feasible solution is produced quickly and then improved as time allows. Algorithms such as Anytime Repairing A* (ARA*) explicitly trade solution suboptimality for speed and can refine plans online \cite{likhachev2003ara}. These approaches are attractive for dynamic environments because they can deliver a usable plan under strict time constraints while still enabling improvement when computation is available.
+
+\subsection{Sampling-Based Motion Planning}
+For high-dimensional or continuous configuration spaces, sampling-based planners are widely used. Probabilistic Roadmaps (PRM) construct a roadmap by sampling collision-free configurations and connecting nearby samples \cite{kavraki1996prm}. Rapidly-exploring Random Trees (RRT) grow trees toward unexplored regions and are effective in complex spaces \cite{lavalle1998rrt}. RRT* extends RRT with asymptotic optimality guarantees, improving solution quality as the number of samples increases \cite{karaman2011rrtstar}.
+
+While these methods excel in static environments, dynamic obstacles require either frequent replanning, incorporation of time into the state (space--time planning), or local reactive collision avoidance layered on top of a nominal plan \cite{lavalle2006planning}.
+
+\subsection{Trajectory Optimization and Model-Predictive Planning}
+Instead of searching discretized graphs, trajectory optimization methods solve for a continuous trajectory by minimizing an objective that penalizes collisions, control effort, and smoothness. CHOMP introduced functional-gradient optimization for collision-free trajectories \cite{ratliff2009chomp}, and later work such as TrajOpt formulated planning as sequential convex optimization with efficient collision checking \cite{schulman2014trajopt}. In dynamic settings, model-predictive control (MPC)-style replanning can continuously update the trajectory over a receding horizon, providing responsiveness to changing obstacles when computation permits \cite{lavalle2006planning}.
+
+\subsection{Reactive Collision Avoidance for Moving Obstacles}
+Many deployed navigation stacks separate global path planning from local collision avoidance. The Dynamic Window Approach (DWA) is a classic real-time local planner that selects feasible velocity commands while considering robot dynamics \cite{fox1997dynamic}. Velocity-obstacle formulations model imminent collisions in velocity space, enabling fast avoidance in dynamic scenes \cite{fiorini1998vo}. Reciprocal Velocity Obstacles (RVO) and its extensions address multi-agent interactions by accounting for mutual avoidance behaviors \cite{vandenberg2008rvo,vandenberg2011orca}.
+
+Reactive techniques are particularly relevant when the agent only observes a local window, since they can respond immediately to nearby moving obstacles even when long-horizon predictions are uncertain \cite{thrun2005probabilistic}.
+
+\subsection{Learning-Based Planning (Brief Overview)}
+Recent work also explores learning-based components (e.g., imitation learning or reinforcement learning) for navigation policies in dynamic environments, typically leveraging large-scale data or simulation. These methods can yield strong empirical performance but may require careful safety handling and often integrate with classical planners to provide guarantees or fallback behaviors \cite{thrun2005probabilistic,lavalle2006planning}.
+
+\subsection{Positioning of Our Work}
+Motivated by these strands, our report follows a pragmatic and widely used design: a global planner computes a waypoint route on a static grid using standard graph-search methods (BFS/DFS/Dijkstra/A*), while a local replanning component reacts online within the agent's observation range to avoid moving obstacles. This mirrors the common global--local decomposition found in many robotics navigation systems \cite{thrun2005probabilistic,lavalle2006planning}.
