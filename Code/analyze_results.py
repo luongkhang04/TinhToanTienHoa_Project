@@ -40,7 +40,7 @@ def plot_success_rates(df, save_path='success_rates.png'):
     success_by_combo = success_by_combo.sort_values('success_rate', ascending=False)
     
     # Plot
-    plt.figure(figsize=(14, 8))
+    plt.figure(figsize=(15, 7))
     colors = plt.cm.viridis(np.linspace(0, 1, len(success_by_combo)))
     bars = plt.bar(range(len(success_by_combo)), success_by_combo['success_rate'], color=colors)
     plt.xlabel('Algorithm Combination', fontsize=12)
@@ -79,7 +79,7 @@ def plot_metrics_comparison(df, save_path='metrics_comparison.png'):
     metrics = metrics.sort_values('path_length')
     
     # Create subplots
-    fig, axes = plt.subplots(1, 3, figsize=(18, 6))
+    fig, axes = plt.subplots(1, 3, figsize=(18, 8))
     
     # Path length
     axes[0].barh(range(len(metrics)), metrics['path_length'], color='steelblue')
@@ -139,7 +139,7 @@ def plot_obstacle_impact(df, save_path='obstacle_impact.png'):
     metrics_by_obs = metrics_by_obs[metrics_by_obs['combo'].isin(top_combos)]
     
     # Create subplots
-    fig, axes = plt.subplots(1, 3, figsize=(18, 5))
+    fig, axes = plt.subplots(1, 3, figsize=(18, 7))
     
     # Path length vs obstacles
     for combo in top_combos:
@@ -209,7 +209,7 @@ def plot_heatmap(df, save_path='algorithm_heatmap.png'):
     )
     
     # Create subplots
-    fig, axes = plt.subplots(1, 3, figsize=(18, 5))
+    fig, axes = plt.subplots(1, 3, figsize=(18, 6))
     
     # Path length heatmap
     sns.heatmap(pivot_path, annot=True, fmt='.1f', cmap='RdYlGn_r', ax=axes[0], cbar_kws={'label': 'Path Length'})

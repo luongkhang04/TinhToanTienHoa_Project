@@ -75,8 +75,7 @@
 \textbf{Contributions}
 \begin{itemize}
     \item Hierarchical planner: \textbf{global waypoint path} + \textbf{local reactive navigation}.
-    \item Unified evaluation across global planners (BFS/DFS/Dijkstra/A*) and local planners.
-    \item Path post-processing: \textbf{line-of-sight sparsification} + \textbf{safety-margin enforcement}.
+    \item Unified evaluation across 24 combinations of 4 global planners and 6 local planners.
 \end{itemize}
 \end{frame}
 
@@ -84,13 +83,14 @@
 \section{Problem Formulation}
 
 \begin{frame}{Gridworld Model}
-\begin{itemize}
-    \item State: $S = \{(x,y)\}$ with discrete space/time.
-    \item Actions: $A = \{(0,1),(0,-1),(-1,0),(1,0),(0,0)\}$.
-    \item Static obstacles: $O \subset S$.
-    \item Moving obstacles vary over time: $M_i$ at time step $i$.
-    \item Observation: local $5\times 5$ occupancy grid centered on the agent.
-\end{itemize}
+\begin{align*}
+	\text{State space:}\quad & S = \{(x,y) \mid x,y \in \mathbb{N},\ 0 \leq x \leq X_{\text{dim}},\ 0 \leq y \leq Y_{\text{dim}}\} \subset \mathbb{N}^2, \\
+	\text{Action space:}\quad & A = \{(0,1),\ (0,-1),\ (-1,0),\ (1,0),\ (0,0)\} \subset \mathbb{Z}^2, \\
+	\text{Observation space:}\quad & G \in \{0,1\}^{5 \times 5}, \\
+	\text{Static obstacles:}\quad & O \subset S.\\
+    \text{Dynamic obstacles:}\quad & M_t \subset S \text{ at time } t.\\
+    \text{Transition function:}\quad & f : S \times A \rightarrow S.
+\end{align*}
 \end{frame}
 
 \begin{frame}{Planning Objective}
@@ -124,7 +124,7 @@ Find a trajectory $T = \{S_0, S_1, \dots, S_{N-1}\}$ such that:
         \item Triggers global replanning when stuck.
     \end{itemize}
     \column{0.45\textwidth}
-    \includegraphics[width=\linewidth,keepaspectratio]{1.png}
+    \includegraphics[width=\linewidth,keepaspectratio]{planning.png}
     \vspace{0.2em}
     \scriptsize Example grid map (from benchmark set).
 \end{columns}
@@ -134,34 +134,74 @@ Find a trajectory $T = \{S_0, S_1, \dots, S_{N-1}\}$ such that:
 \begin{itemize}
     \item \textbf{Grid BFS}: shortest in number of grid steps (8-connected), with safety margin.
     \item \textbf{Grid DFS}: lower memory; not guaranteed shortest.
-    \item \textbf{A*}: $f(n)=g(n)+h(n)$; uses Manhattan heuristic with diagonal moves enabled (not always optimal).
-    \item \textbf{Dijkstra}: optimal distances; slower (worst-case $O(|V|^2)$ in this implementation).
+    \item \textbf{A*}: $f(n)=g(n)+h(n)$; uses Manhattan heuristic with diagonal moves enabled.
+    \item \textbf{Dijkstra}: optimal distances; slower.
 \end{itemize}
 \vspace{0.3em}
-\textbf{Post-processing:} clearance map (multi-source BFS), Bresenham line-of-sight sparsification, wall pushing.
+\textbf{Post-processing:} clearance map, Bresenham line-of-sight sparsification, wall pushing.
 \end{frame}
 
 \begin{frame}{Local Planners (Reactive Navigation)}
 \begin{itemize}
-    \item \textbf{Reactive BFS}: BFS in local observation graph (fast, robust).
-    \item \textbf{Reactive DFS}: DFS locally (can be brittle under dynamics).
-    \item \textbf{Potential Field}: attractive + repulsive forces, mapped to 4-connected action.
-    \item \textbf{Greedy}: choose locally improving action (myopic; can get stuck).
+    \item \textbf{Reactive BFS}: BFS in local observation graph.
+    \item \textbf{Reactive DFS}: DFS locally.
+    \item \textbf{Potential Field}: attractive + repulsive forces.
+    \item \textbf{Greedy}: choose locally improving action.
+    \item \textbf{DWA}: simulate short trajectories, pick best.
+    \item \textbf{Evolutionary}: optimizes a sequence of actions \(\pi=(a_0,\dots,a_{H-1})\) over a 5-action set.
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Stuck Detection \,\&\, Replanning}
-Execution loop monitors:
-\begin{itemize}
-    \item No-motion events and no-progress events to current waypoint.
-    \item If stuck counter exceeds threshold (typically 15 steps in benchmark):
+\begin{frame}{Local Planner: Potential Field}
+    \begin{columns}[T,onlytextwidth]
+    \column{0.6\textwidth}
     \begin{itemize}
-        \item Trigger \textbf{global replanning} from current position to final goal.
-        \item Reset waypoint index and continue.
+        \item Computes an attractive force toward the projected waypoint and repulsive forces away from obstacles.
+        \item Net force: \(\bm{F}=\bm{F}_{att}+\bm{F}_{rep}\).
+        \item Maps \(\bm{F}\) to a \textbf{4-connected} action (dominant axis) while respecting the margin constraint.
     \end{itemize}
+    \column{0.4\textwidth}
+    \includegraphics[width=\linewidth,keepaspectratio]{potential field.jpg}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Local Planner: Dynamic Window Approach (DWA)}
+\begin{itemize}
+    \item Samples discrete velocity commands within a \textbf{window} around the previous action
+    \begin{equation}
+    v_x \in [v_{x,t-1}-a_{max},\, v_{x,t-1}+a_{max}], \quad
+    v_y \in [v_{y,t-1}-a_{max},\, v_{y,t-1}+a_{max}],
+    \end{equation}
+    \item Simulates short trajectories (prediction horizon).
+    \begin{equation}
+    \vec{p}_k = \vec{p}_0 + k\vec{v}, \quad k=1,\dots,N
+    \end{equation}
+    \item Scores candidates by goal heading, obstacle clearance, and speed.
+    \begin{equation}
+    J(\vec{v}) = w_h \, S_{heading} + w_c \, S_{clearance} + w_s \, S_{speed}
+    \end{equation}
+    \[S_{heading} = \frac{1}{\|\vec{p}_{final}-\vec{p}_{goal}\|+1}
+    \quad S_{clearance} = \frac{\min(c_{min}, c_{cap})}{c_{cap}}
+    \quad S_{speed} = \frac{k\|\vec{v}\|}{v_{max}}\]
 \end{itemize}
-\vspace{0.3em}
-Consistent safety margins: global margin typically 2 cells; local obstacle inflation typically 1 cell.
+\end{frame}
+
+\begin{frame}{Local Planner: Rolling-Horizon Evolutionary}
+\begin{itemize}
+    \item Optimizes a short sequence of actions \(\pi=(a_0,\dots,a_{H-1})\) over a 5-action set.
+    \item Fitness combines distance-to-goal terms, clearance risk, turn/stall penalties, and unknown-space penalty.
+    \[
+    d_t = |x_t - x_g| + |y_t - y_g|,
+    \quad d_{final} = d_H, 
+    \quad d_{min} = \min_{1 \le t \le H} d_t, 
+    \quad \bar{d} = \frac{1}{H}\sum_{t=1}^{H} d_t
+    \]
+    \[
+    T = \sum_{t=1}^{H-1} \mathbb{I}[a_{t-1} \neq \texttt{NONE} \wedge a_t \neq \texttt{NONE} \wedge a_{t-1} \neq a_t], 
+    \quad S = \sum_{t=0}^{H-1} \mathbb{I}[a_t = \texttt{NONE}]
+    \]
+    \item Evolves a population via elitism, tournament selection, crossover, and mutation.
+\end{itemize}
 \end{frame}
 
 %====================================
@@ -170,7 +210,7 @@ Consistent safety margins: global margin typically 2 cells; local obstacle infla
 \begin{frame}{Benchmark Setup}
 \begin{itemize}
     \item 7 maps, obstacle counts $\{0,50,100,200\}$.
-    \item 16 combinations: 4 global \(\times\) 4 local planners $\Rightarrow 448$ runs.
+    \item 24 combinations: 4 global \(\times\) 6 local planners $\Rightarrow 672$ runs.
     \item Observation radius $r=2$ ($5\times 5$ window); local inflation margin 1.
     \item Stop: 2000 steps or 100 seconds; success when Manhattan distance to goal $\le 3$.
 \end{itemize}
@@ -192,58 +232,27 @@ Consistent safety margins: global margin typically 2 cells; local obstacle infla
 \scriptsize White: free space. Black: obstacles.
 \end{frame}
 
-\begin{frame}{Overall Results (448 runs)}
-\begin{itemize}
-    \item Total success: \textbf{237/448} $\Rightarrow$ \textbf{52.9\%}.
-    \item Successful runs: average path length \textbf{327.10 $\pm$ 243.60} cells.
-    \item Successful runs: average runtime \textbf{5.3429 $\pm$ 5.1084} seconds.
-\end{itemize}
-\vspace{0.6em}
+\begin{frame}{Overall Results (672 runs)}
 \centering
-\includegraphics[width=0.95\linewidth,height=0.55\textheight,keepaspectratio]{success_rates.png}
-\end{frame}
-
-\begin{frame}{Key Finding: Local Method Dominates Reliability}
-\begin{itemize}
-    \item \textbf{Potential field} combinations rank highest in success rate.
-    \item \textbf{Reactive BFS} is competitive but consistently below potential field.
-    \item \textbf{Greedy} gives mid-range success.
-    \item \textbf{Reactive DFS fails across all globals} (0/28 per combination).
-\end{itemize}
+\includegraphics[width=\linewidth,height=0.85\textheight,keepaspectratio]{success_rates.png}
 \end{frame}
 
 \begin{frame}{Path Quality \,\&\, Runtime (Successful Runs)}
 \centering
-\includegraphics[width=0.95\linewidth,height=0.78\textheight,keepaspectratio]{metrics_comparison.png}
+\includegraphics[width=\linewidth,height=0.85\textheight,keepaspectratio]{metrics_comparison.png}
 \end{frame}
 
 \begin{frame}{Impact of Obstacle Density}
 \centering
-\includegraphics[width=0.95\linewidth,height=0.78\textheight,keepaspectratio]{obstacle_impact.png}
+\includegraphics[width=\linewidth,height=0.85\textheight,keepaspectratio]{obstacle_impact.png}
 \end{frame}
 
 \begin{frame}{Heatmap Summary (Averages)}
 \centering
-\includegraphics[width=0.95\linewidth,height=0.78\textheight,keepaspectratio]{algorithm_heatmap.png}
+\includegraphics[width=\linewidth,height=0.85\textheight,keepaspectratio]{algorithm_heatmap.png}
 \end{frame}
 
 %====================================
-\section{Conclusion}
-
-\begin{frame}{Conclusions}
-\begin{itemize}
-    \item A hierarchical \textbf{global waypoint + local reactive} planner works well under moving obstacles.
-    \item In this benchmark, \textbf{local planning choice} is the biggest factor for success.
-    \item Potential-field local planning achieves the best overall robustness and trajectory smoothness.
-\end{itemize}
-\vspace{0.6em}
-\textbf{Future work}
-\begin{itemize}
-    \item Improve local minima handling for potential fields.
-    \item Use admissible heuristic for diagonal A* (e.g., octile distance).
-    \item Stronger dynamic-obstacle prediction and richer action set.
-\end{itemize}
-\end{frame}
 
 \begin{frame}{Q\,\&\,A}
 \centering

@@ -354,7 +354,7 @@ The selected local action is the $\vec{v}$ that maximizes $J(\vec{v})$.
 Implements a \textbf{rolling-horizon evolutionary algorithm} that optimizes a short discrete action sequence and executes only the first action, replanning at every step.
 
 \textbf{Action Representation:}
-Plans are sequences $\pi = (a_0,\dots,a_{H-1})$ of horizon length $H$, where each $a_i$ is chosen from a 9-action set (8-connected moves + \texttt{NONE}).
+Plans are sequences $\pi = (a_0,\dots,a_{H-1})$ of horizon length $H$, where each $a_i$ is chosen from a 5-action set (4-connected moves + \texttt{NONE}).
 
 \textbf{Population Initialization:}
 \begin{enumerate}
@@ -372,6 +372,35 @@ Each sequence is simulated from the current state. A sequence is invalid (discar
     \item Turn count and \texttt{NONE} (stall) count (action smoothness and progress)
     \item Steps outside observation (unknown-space penalty)
 \end{itemize}
+
+\textbf{Cost Formulation:}
+Let $\vec{p}_0=(x_0,y_0)$ be the current state, goal $\vec{g}=(x_g,y_g)$, and simulated rollout
+$\vec{p}_{t+1}=\vec{p}_t + a_t$ for $t=0,\dots,H-1$. Define the Manhattan distance at step $t$:
+\begin{equation}
+d_t = |x_t - x_g| + |y_t - y_g|
+\end{equation}
+with derived terms:
+\begin{align}
+d_{final} &= d_H, \qquad d_{min} = \min_{1 \le t \le H} d_t, \qquad \bar{d} = \frac{1}{H}\sum_{t=1}^{H} d_t
+\end{align}
+The penalties used in the implementation are:
+\begin{align}
+P_{inc} &= \sum_{t=1}^{H} \max(0, d_t - d_{t-1}) \\
+P_{fs} &=
+\begin{cases}
+0, & d_1 < d_0 \\
+(d_1 - d_0) + 1, & d_1 \ge d_0
+\end{cases} \\
+T &= \sum_{t=1}^{H-1} \mathbb{I}[a_{t-1} \neq \texttt{NONE} \wedge a_t \neq \texttt{NONE} \wedge a_{t-1} \neq a_t] \\
+S &= \sum_{t=0}^{H-1} \mathbb{I}[a_t = \texttt{NONE}] \\
+U &= \sum_{t=1}^{H} \mathbb{I}[\vec{p}_t \notin \Omega_{obs}] \\
+C &= \sum_{t=1}^{H} \mathbb{I}[\vec{p}_t \in \Omega_{obs}] \cdot \frac{1}{c_t + 1}
+\end{align}
+where $\Omega_{obs}$ is the current observation window and $c_t$ is the local clearance value (Chebyshev distance to the nearest observed obstacle) at $\vec{p}_t$. The total sequence cost is:
+\begin{equation}
+J(\pi)= w_g(0.7 d_{final} + 0.3 d_{min}) + w_{step}\bar{d} + w_{inc}P_{inc} + w_{fs}P_{fs} + w_{clr}C + w_{turn}T + w_{stall}S + w_{unk}U
+\end{equation}
+Weights $\{w_\cdot\}$ correspond to the tunable parameters \texttt{goal\_weight}, \texttt{step\_weight}, \texttt{increase\_weight}, \texttt{first\_step\_weight}, \texttt{clearance\_weight}, \texttt{turn\_weight}, \texttt{stall\_weight}, and \texttt{unknown\_weight}.
 Lower cost corresponds to better sequences.
 
 \textbf{Evolutionary Update:}
