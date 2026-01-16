@@ -2,7 +2,7 @@
 
 \subsection{Experiment Design}
 
-We evaluate the hierarchical planner using the automated benchmark in \texttt{Code/benchmark.py}. The benchmark tests all $4\times 4=16$ combinations of global planners (\texttt{grid\_bfs}, \texttt{grid\_dfs}, \texttt{astar}, \texttt{dijkstra}) and local planners (\texttt{reactive\_bfs}, \texttt{reactive\_dfs}, \texttt{potential\_field}, \texttt{greedy}) across 7 maps and 4 obstacle counts $\{0,50,100,200\}$, totaling 448 runs.
+We evaluate the hierarchical planner using the automated benchmark in \texttt{Code/benchmark.py}. The benchmark tests all $4\times 6=24$ combinations of global planners (\texttt{grid\_bfs}, \texttt{grid\_dfs}, \texttt{astar}, \texttt{dijkstra}) and local planners (\texttt{reactive\_bfs}, \texttt{reactive\_dfs}, \texttt{potential\_field}, \texttt{greedy}, \texttt{dwa}, \texttt{evolutionary}) across 7 maps and 4 obstacle counts $\{0,50,100,200\}$, totaling 672 runs.
 
 Each run uses an agent observation radius $r=2$ (a $5\times5$ local window) and inflates observed obstacles with margin 1. Runs terminate at 2000 steps or 100 seconds; success is declared when Manhattan distance to the final goal is $\leq 3$ (waypoints use tolerance 2). When the agent fails to move or does not reduce distance to its current target for 15 steps, the system triggers global replanning from the current state to the final goal.
 
@@ -10,7 +10,7 @@ We report success rate (primary), executed path length, direction changes (smoot
 
 Figure~\ref{fig:benchmark_maps} shows representative benchmark maps (white: free space, black: obstacles).
 
-\begin{figure}[t]
+\begin{figure}[ht]
 \centering
 \captionsetup{font=small}
 \captionsetup[subfigure]{font=footnotesize}
@@ -55,50 +55,50 @@ Figure~\ref{fig:benchmark_maps} shows representative benchmark maps (white: free
 
 \subsection{Benchmark Results}
 
-The full benchmark contains 448 test configurations (7 maps $\times$ 4 obstacle settings $\times$ 16 algorithm combinations). Overall, 237/448 runs succeeded, corresponding to a 52.9\% success rate.
+The full benchmark contains 672 test configurations (7 maps $\times$ 4 obstacle settings $\times$ 24 algorithm combinations). Overall, 416/672 runs succeeded, corresponding to a 61.9\% success rate.
 
-For successful runs, the average path length is 327.10 $\pm$ 243.60 cells and the average total runtime is 5.3429 $\pm$ 5.1084 seconds.
+For successful runs, the average path length is 286.14 $\pm$ 187.46 cells, with 86.64 $\pm$ 149.21 direction changes, and an average execution time of 6.9900 $\pm$ 6.5079 seconds (accumulated global planning time: 2.3969 $\pm$ 4.6303 seconds).
 
 \subsubsection{Success Rate by Algorithm Combination}
 
-Figure~\ref{fig:success_rates} ranks all 16 planner combinations by success rate (each entry aggregates 7 maps $\times$ 4 obstacle settings, i.e., 28 runs per combination). Figure~\ref{fig:success_rates} visualizes the same ranking.
+Figure~\ref{fig:success_rates} ranks all 24 planner combinations by success rate (each entry aggregates 7 maps $\times$ 4 obstacle settings, i.e., 28 runs per combination).
 
-\begin{figure}[t]
+\begin{figure}[ht]
 \centering
-\includegraphics[width=0.95\linewidth]{../Code/results/success_rates.png}
+\includegraphics[width=\linewidth]{../Code/results/success_rates.png}
 \caption{Success rate by global+local algorithm combination (computed from \texttt{benchmark\_results.csv}).}
 \label{fig:success_rates}
 \end{figure}
 
-Overall, combinations with \texttt{potential\_field} achieve the best reliability (top three and near-perfect success with \texttt{dijkstra} and \texttt{astar}, and perfect success with \texttt{grid\_bfs}). \texttt{reactive\_bfs} is competitive but consistently below \texttt{potential\_field}, while \texttt{greedy} yields mid-range success rates. In contrast, \texttt{reactive\_dfs} fails across all global planners (0/28), indicating that its local behavior is not robust to dynamic obstacles and the benchmark replanning trigger.
+The most reliable combinations are \texttt{astar} + \texttt{dwa} and \texttt{dijkstra} + \texttt{evolutionary} (96.4\%), with \texttt{grid\_bfs} + \texttt{potential\_field} matching the same success rate. \texttt{potential\_field}, \texttt{dwa}, and \texttt{evolutionary} consistently outperform \texttt{reactive\_bfs} and \texttt{greedy}, while \texttt{grid\_dfs} as the global planner reduces success rates across nearly all local methods. In contrast, \texttt{reactive\_dfs} fails across all global planners (0/28), indicating that its depth-first local behavior is not robust to dynamic obstacles and the benchmark replanning trigger.
 
-\subsubsection{Path Quality and Runtime}
-
-Figure~\ref{fig:metrics_comparison} compares the average path length, number of direction changes, and total runtime over successful runs. Overall, \texttt{potential\_field} produces the shortest and smoothest trajectories (fewest direction changes), especially with \texttt{astar} and \texttt{grid\_bfs}. \texttt{reactive\_bfs} is a competitive middle ground (moderate path length and smoothness). In contrast, \texttt{greedy} tends to generate longer and less smooth paths, with \texttt{dijkstra + greedy} showing both high direction-change counts and the largest planning times, which is consistent with more frequent replanning and oscillatory local behavior.
-
-\begin{figure}[t]
+\begin{figure}[ht]
 \centering
-\includegraphics[width=0.95\linewidth]{../Code/results/metrics_comparison.png}
+\includegraphics[width=\linewidth]{../Code/results/metrics_comparison.png}
 \caption{Comparison of path length, direction changes, and runtime across algorithm combinations.}
 \label{fig:metrics_comparison}
 \end{figure}
 
+\subsubsection{Path Quality and Runtime}
+
+Figure~\ref{fig:metrics_comparison} compares the average path length, number of direction changes, and execution time over successful runs. Overall, \texttt{dwa} produces the shortest trajectories and the lowest execution times, while \texttt{potential\_field} yields the smoothest paths (fewest direction changes). \texttt{evolutionary} achieves high success rates but is substantially slower, reflecting the cost of per-step optimization. In contrast, \texttt{greedy} tends to generate longer and less smooth paths, with \texttt{dijkstra + greedy} exhibiting the largest path lengths and the highest direction-change counts among successful combinations.
+
 \subsubsection{Impact of Obstacle Density}
 
-Figure~\ref{fig:obstacle_impact} shows how increasing the number of moving obstacles affects the top-performing combinations. Across obstacle counts, \texttt{potential\_field} remains the most stable: it keeps direction-change counts low and planning time nearly flat, with only mild variation in path length. In contrast, \texttt{reactive\_bfs} becomes noticeably less smooth as obstacle density increases (higher direction changes) and exhibits larger variability in both path length and runtime, including a pronounced slowdown around 100 obstacles for \texttt{dijkstra + reactive\_bfs}. Overall, denser dynamic obstacles primarily increase local maneuvering (more turns) and can trigger additional replanning overhead, especially for reactive local policies.
+Figure~\ref{fig:obstacle_impact} shows how increasing the number of moving obstacles affects the top-performing combinations. Overall success decreases as obstacle density increases (from 68.5\% at 0--50 obstacles to 51.2\% at 200 obstacles). Across obstacle counts, \texttt{potential\_field} remains the most stable: it keeps direction-change counts low and execution time nearly flat, with only mild variation in path length. In contrast, \texttt{dwa} maintains short paths but becomes less smooth at high obstacle density (more direction changes), indicating more frequent local avoidance maneuvers. The \texttt{evolutionary} local planner stays reliable but consistently incurs higher execution time than the other top combinations.
 
-\begin{figure}[t]
+\begin{figure}[ht]
 \centering
-\includegraphics[width=0.95\linewidth]{../Code/results/obstacle_impact.png}
+\includegraphics[width=\linewidth]{../Code/results/obstacle_impact.png}
 \caption{Effect of obstacle count on path length, direction changes, and runtime (top combinations).}
 \label{fig:obstacle_impact}
 \end{figure}
 
 \subsubsection{Heatmap Summary}
 
-Figure~\ref{fig:heatmap} provides a compact heatmap view of average performance across global and local methods.
+Figure~\ref{fig:heatmap} provides a compact heatmap view of average performance across global and local methods. Consistent with the ranked plots, \texttt{dwa} is best on path length and execution time, \texttt{potential\_field} is best on smoothness, and \texttt{grid\_dfs} tends to underperform other global methods. \texttt{greedy} shows the worst path quality and smoothness, while \texttt{reactive\_dfs} yields no successful runs and is omitted from the heatmaps.
 
-\begin{figure}[t]
+\begin{figure}[ht]
 \centering
 \includegraphics[width=0.95\linewidth]{../Code/results/algorithm_heatmap.png}
 \caption{Heatmap summary of average path length, direction changes, and runtime by method.}

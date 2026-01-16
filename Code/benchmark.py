@@ -24,6 +24,7 @@ from utils.Global import Global
 from planning.global_planning import GridBFSPlanner, GridDFSPlanner, GridAStarPlanner, SimpleDijkstraPlanner
 from planning.local_planning import (
     ReactiveBFSPlanner,
+    ReactiveDFSPlanner,
     PotentialFieldPlanner,
     GreedyLocalPlanner,
     DynamicWindowPlanner,
@@ -45,6 +46,7 @@ class BenchmarkRunner:
     
     LOCAL_ALGORITHMS = {
         'reactive_bfs': ReactiveBFSPlanner,
+        'reactive_dfs': ReactiveDFSPlanner,
         'potential_field': PotentialFieldPlanner,
         'greedy': GreedyLocalPlanner,
         'dwa': DynamicWindowPlanner,

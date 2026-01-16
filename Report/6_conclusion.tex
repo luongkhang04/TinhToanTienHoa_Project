@@ -1,1 +1,16 @@
 \section{CONCLUSION}
+
+This report studied path planning for a single holonomic agent in a dynamic gridworld with limited local sensing. We implemented a two-level hierarchical navigation system that combines global waypoint planning on a static map with continuous local replanning to handle moving obstacles, and we evaluated a diverse set of global and local planners within a shared execution and benchmarking framework.
+
+\subsection{Key Findings}
+\begin{itemize}
+    \item Across 672 benchmark runs, the system achieves an overall success rate of 61.9\%, with the top global--local combinations reaching 96.4\% success.
+    \item Robustness in dynamic scenes depends strongly on the local planner: \texttt{potential\_field}, \texttt{dwa}, and \texttt{evolutionary} outperform \texttt{reactive\_bfs} and \texttt{greedy}.
+    \item The \texttt{reactive\_dfs} local planner yields no successful runs, indicating that DFS-style local behavior is not reliable under moving obstacles and replanning triggers.
+    \item Among successful runs, \texttt{dwa} yields the shortest and fastest trajectories, \texttt{potential\_field} produces the smoothest paths (fewest direction changes), and \texttt{evolutionary} trades increased computation for high reliability.
+    \item Increasing obstacle density reduces success and tends to increase maneuvering; the more stable local methods degrade more gracefully under 200 moving obstacles.
+    \item On the global layer, \texttt{grid\_dfs} generally underperforms other global planners, indicating that the quality of waypoint structure impacts downstream local execution.
+\end{itemize}
+
+\subsection{Limitations and Future Work}
+The current system operates in a discrete grid with a holonomic point-mass model and does not explicitly predict obstacle motion in the global plan. Promising directions include: (i) incorporating motion prediction or probabilistic safety margins to reduce late replans, (ii) using incremental global planners (e.g., D* variants) to amortize replanning cost, (iii) extending the local layer to kinematic constraints and continuous control, and (iv) improving the evolutionary local planner via better seeding, parallel evaluation, or adaptive hyperparameters to reduce runtime while preserving robustness.
