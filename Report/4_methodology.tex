@@ -186,7 +186,7 @@ Waypoints are adjusted to maintain safety margin from obstacles:
 
 \subsection{Local Path Planning Algorithms}
 
-The local planning layer handles real-time reactive navigation within the agent's observation range. Four reactive strategies have been implemented.
+The local planning layer handles real-time reactive navigation within the agent's observation range. Six reactive strategies have been implemented.
 
 \subsubsection{Reactive BFS Planner}
 
@@ -309,6 +309,86 @@ Selects actions that maximize progress toward the goal while avoiding obstacles 
     \item Myopic decision-making without lookahead
 \end{itemize}
 
+\subsubsection{Dynamic Window Approach (DWA) Planner}
+
+Implements a \textbf{grid-adapted Dynamic Window Approach} that samples discrete velocity commands and selects the action that best balances goal progress, obstacle clearance, and speed.
+
+\textbf{Dynamic Window Sampling:}
+At each time step, candidate velocities $\vec{v}=(v_x, v_y)$ are generated from a bounded window around the previous action $\vec{v}_{t-1}$:
+\begin{equation}
+v_x \in [v_{x,t-1}-a_{max},\, v_{x,t-1}+a_{max}], \quad
+v_y \in [v_{y,t-1}-a_{max},\, v_{y,t-1}+a_{max}], \quad
+\max(|v_x|,|v_y|)\le v_{max}
+\end{equation}
+
+\textbf{Trajectory Prediction and Feasibility:}
+For each candidate $\vec{v}$, a short trajectory is simulated with constant velocity for $N$ prediction steps:
+\begin{equation}
+\vec{p}_k = \vec{p}_0 + k\vec{v}, \quad k=1,\dots,N
+\end{equation}
+The candidate is rejected if any predicted position violates global bounds or the local \emph{inflated} obstacle constraint (clearance $\le m$). Prediction is truncated once the simulated state leaves the current observation window.
+
+\textbf{Scoring Function:}
+Each feasible candidate is scored by a weighted sum:
+\begin{equation}
+J(\vec{v}) = w_h \, S_{heading} + w_c \, S_{clearance} + w_s \, S_{speed}
+\end{equation}
+where:
+\begin{itemize}
+    \item $S_{heading} = \frac{1}{\|\vec{p}_{final}-\vec{p}_{goal}\|+1}$ (Euclidean goal proximity)
+    \item $S_{clearance} = \frac{\min(c_{min}, c_{cap})}{c_{cap}}$, with $c_{min}$ the minimum local clearance along the trajectory
+    \item $S_{speed} = \frac{\|\vec{v}\|}{v_{max}}$
+\end{itemize}
+The selected local action is the $\vec{v}$ that maximizes $J(\vec{v})$.
+
+\textbf{Key Features:}
+\begin{itemize}
+    \item Incorporates short-horizon lookahead while remaining reactive
+    \item Acceleration-limited sampling yields smoother action changes across steps
+    \item Explicitly trades off goal progress vs. obstacle clearance via weights
+    \item Computationally light due to small discrete candidate set
+\end{itemize}
+
+\subsubsection{Rolling-Horizon Evolutionary Local Planner}
+
+Implements a \textbf{rolling-horizon evolutionary algorithm} that optimizes a short discrete action sequence and executes only the first action, replanning at every step.
+
+\textbf{Action Representation:}
+Plans are sequences $\pi = (a_0,\dots,a_{H-1})$ of horizon length $H$, where each $a_i$ is chosen from a 9-action set (8-connected moves + \texttt{NONE}).
+
+\textbf{Population Initialization:}
+\begin{enumerate}
+    \item Optionally seed one individual using the local BFS path converted into an action sequence
+    \item Generate the remaining individuals by sampling valid actions, with a \emph{goal bias} that prefers actions reducing Manhattan distance to the projected waypoint
+\end{enumerate}
+
+\textbf{Sequence Evaluation:}
+Each sequence is simulated from the current state. A sequence is invalid (discarded) if it exits global bounds or enters an inflated obstacle cell within the observation window. The fitness is a weighted cost that combines:
+\begin{itemize}
+    \item Final and best-achieved Manhattan distance to goal (goal-reaching pressure)
+    \item Average distance-to-goal over the horizon (path efficiency)
+    \item Penalties for moving away from the goal and for a non-improving first step (stuck avoidance)
+    \item Clearance cost accumulated as $\sum \frac{1}{c+1}$ for observed steps (risk sensitivity)
+    \item Turn count and \texttt{NONE} (stall) count (action smoothness and progress)
+    \item Steps outside observation (unknown-space penalty)
+\end{itemize}
+Lower cost corresponds to better sequences.
+
+\textbf{Evolutionary Update:}
+\begin{enumerate}
+    \item Keep an elite fraction of the best sequences
+    \item Generate the remaining population using tournament selection, single-point crossover, and mutation
+    \item After a fixed number of generations, select the best sequence and execute its first action
+\end{enumerate}
+
+\textbf{Key Features:}
+\begin{itemize}
+    \item Lookahead-based local planning that can escape greedy local minima
+    \item BFS seeding provides a strong baseline when a local path exists
+    \item Penalizes unknown regions while still allowing boundary exploration
+    \item Replans each step, enabling adaptation to moving obstacles
+\end{itemize}
+
 \subsection{Integration and Coordination}
 
 The hierarchical system coordinates global and local planning through several mechanisms:
@@ -371,7 +451,7 @@ The implementation provides a flexible framework for comparative evaluation of d
 
 \begin{itemize}
     \item \textbf{Global planner:} \texttt{grid\_bfs}, \texttt{grid\_dfs}, \texttt{astar}, \texttt{dijkstra}
-    \item \textbf{Local planner:} \texttt{reactive\_bfs}, \texttt{reactive\_dfs}, \texttt{potential\_field}, \texttt{greedy}
+    \item \textbf{Local planner:} \texttt{reactive\_bfs}, \texttt{reactive\_dfs}, \texttt{potential\_field}, \texttt{greedy}, \texttt{dwa}, \texttt{evolutionary}
     \item \textbf{Number of moving obstacles:} Configurable (default: 100 in the demo runner; benchmark evaluates $\{0, 50, 100, 200\}$)
     \item \textbf{Safety margin:} Configurable clearance from obstacles (global typically 2; local inflation typically 1)
     \item \textbf{Agent sensing range:} Observation window radius (default: 2 cells)
