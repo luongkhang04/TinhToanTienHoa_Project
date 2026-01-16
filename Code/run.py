@@ -21,6 +21,7 @@ from planning.local_planning import (
     PotentialFieldPlanner,
     GreedyLocalPlanner,
     DynamicWindowPlanner,
+    EvolutionaryLocalPlanner,
 )
 
 
@@ -95,6 +96,7 @@ class PathPlanner:
             'potential_field': PotentialFieldPlanner,
             'greedy': GreedyLocalPlanner,
             'dwa': DynamicWindowPlanner,
+            'evolutionary': EvolutionaryLocalPlanner,
         }
         
         planner_class = planners.get(planner_name, ReactiveBFSPlanner)
@@ -341,7 +343,7 @@ def main():
                        choices=['grid_bfs', 'grid_dfs', 'astar', 'dijkstra'],
                        default='grid_bfs', help='Global planning algorithm')
     parser.add_argument('-l', '--local', dest='local_planner',
-                       choices=['reactive_bfs', 'reactive_dfs', 'potential_field', 'greedy', 'dwa'],
+                       choices=['reactive_bfs', 'reactive_dfs', 'potential_field', 'greedy', 'dwa', 'evolutionary'],
                        default='reactive_bfs', help='Local planning algorithm')
     parser.add_argument('-o', '--obstacles', type=int, default=100, help='Number of moving obstacles')
     parser.add_argument('-v', '--visualize', action='store_true', help='Show visualization')

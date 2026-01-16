@@ -24,10 +24,10 @@ from utils.Global import Global
 from planning.global_planning import GridBFSPlanner, GridDFSPlanner, GridAStarPlanner, SimpleDijkstraPlanner
 from planning.local_planning import (
     ReactiveBFSPlanner,
-    ReactiveDFSPlanner,
     PotentialFieldPlanner,
     GreedyLocalPlanner,
     DynamicWindowPlanner,
+    EvolutionaryLocalPlanner,
 )
 from utils.agent_graph import agent_graph
 
@@ -45,10 +45,10 @@ class BenchmarkRunner:
     
     LOCAL_ALGORITHMS = {
         'reactive_bfs': ReactiveBFSPlanner,
-        'reactive_dfs': ReactiveDFSPlanner,
         'potential_field': PotentialFieldPlanner,
         'greedy': GreedyLocalPlanner,
         'dwa': DynamicWindowPlanner,
+        'evolutionary': EvolutionaryLocalPlanner,
     }
     
     def __init__(self, maps=None, obstacle_counts=None, max_steps=2000, timeout=100):

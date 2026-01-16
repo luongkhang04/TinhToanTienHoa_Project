@@ -73,7 +73,7 @@ def check_modules():
         return False
     
     try:
-        from planning.local_planning import ReactiveBFSPlanner, ReactiveDFSPlanner, PotentialFieldPlanner, GreedyLocalPlanner
+        from planning.local_planning import ReactiveBFSPlanner, ReactiveDFSPlanner, PotentialFieldPlanner, GreedyLocalPlanner, EvolutionaryLocalPlanner
         print("  ✓ Local planning algorithms")
     except ImportError as e:
         print(f"  ✗ Local planning algorithms - {e}")
