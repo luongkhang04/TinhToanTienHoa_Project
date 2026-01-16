@@ -2,71 +2,75 @@
 BENCHMARK RESULTS REPORT
 ================================================================================
 
-Total Tests: 448
-Successful: 237 (52.9%)
-Failed: 211 (47.1%)
+Total Tests: 560
+Successful: 322 (57.5%)
+Failed: 238 (42.5%)
 
 --------------------------------------------------------------------------------
 SUCCESSFUL RUNS STATISTICS
 --------------------------------------------------------------------------------
-Average Path Length: 327.10 ± 243.60
-Average Direction Changes: 107.78 ± 220.95
-Average Total Time: 5.3429s ± 5.1084s
-Average Global Planning Time: 2.3088s ± 4.2183s
+Average Path Length: 287.08 Â± 199.44
+Average Direction Changes: 80.83 Â± 165.67
+Average Total Time: 4.8729s Â± 4.2582s
+Average Global Planning Time: 2.2093s Â± 4.1484s
 
 --------------------------------------------------------------------------------
 ALGORITHM COMBINATIONS RANKED BY SUCCESS RATE
 --------------------------------------------------------------------------------
- 1. grid_bfs + potential_field          28.0/28.0 (100.0%)
- 2. dijkstra + potential_field          27.0/28.0 ( 96.4%)
- 3. astar + potential_field             25.0/28.0 ( 89.3%)
- 4. dijkstra + reactive_bfs             22.0/28.0 ( 78.6%)
- 5. astar + reactive_bfs                21.0/28.0 ( 75.0%)
- 6. grid_bfs + reactive_bfs             20.0/28.0 ( 71.4%)
- 7. grid_dfs + potential_field          20.0/28.0 ( 71.4%)
- 8. astar + greedy                      18.0/28.0 ( 64.3%)
- 9. dijkstra + greedy                   17.0/28.0 ( 60.7%)
-10. grid_dfs + reactive_bfs             15.0/28.0 ( 53.6%)
-11. grid_bfs + greedy                   14.0/28.0 ( 50.0%)
-12. grid_dfs + greedy                   10.0/28.0 ( 35.7%)
-13. dijkstra + reactive_dfs             0.0/28.0 (  0.0%)
-14. astar + reactive_dfs                0.0/28.0 (  0.0%)
-15. grid_bfs + reactive_dfs             0.0/28.0 (  0.0%)
-16. grid_dfs + reactive_dfs             0.0/28.0 (  0.0%)
+ 1. astar + dwa                         27.0/28.0 ( 96.4%)
+ 2. grid_bfs + potential_field          27.0/28.0 ( 96.4%)
+ 3. dijkstra + potential_field          26.0/28.0 ( 92.9%)
+ 4. astar + potential_field             26.0/28.0 ( 92.9%)
+ 5. dijkstra + dwa                      25.0/28.0 ( 89.3%)
+ 6. grid_bfs + dwa                      24.0/28.0 ( 85.7%)
+ 7. dijkstra + reactive_bfs             23.0/28.0 ( 82.1%)
+ 8. astar + reactive_bfs                22.0/28.0 ( 78.6%)
+ 9. astar + greedy                      21.0/28.0 ( 75.0%)
+10. grid_bfs + reactive_bfs             21.0/28.0 ( 75.0%)
+11. grid_dfs + potential_field          17.0/28.0 ( 60.7%)
+12. grid_bfs + greedy                   15.0/28.0 ( 53.6%)
+13. grid_dfs + reactive_bfs             13.0/28.0 ( 46.4%)
+14. grid_dfs + dwa                      13.0/28.0 ( 46.4%)
+15. dijkstra + greedy                   13.0/28.0 ( 46.4%)
+16. grid_dfs + greedy                   9.0/28.0 ( 32.1%)
+17. dijkstra + reactive_dfs             0.0/28.0 (  0.0%)
+18. astar + reactive_dfs                0.0/28.0 (  0.0%)
+19. grid_bfs + reactive_dfs             0.0/28.0 (  0.0%)
+20. grid_dfs + reactive_dfs             0.0/28.0 (  0.0%)
 
 --------------------------------------------------------------------------------
 PERFORMANCE BY OBSTACLE COUNT
 --------------------------------------------------------------------------------
 
-0 Obstacles: 64/112 successful (57.1%)
-  Avg Path Length: 269.22
-  Avg Direction Changes: 53.09
-  Avg Time: 4.2531s
+0 Obstacles: 89/140 successful (63.6%)
+  Avg Path Length: 253.79
+  Avg Direction Changes: 46.57
+  Avg Time: 4.2589s
 
-50 Obstacles: 70/112 successful (62.5%)
-  Avg Path Length: 396.27
-  Avg Direction Changes: 165.16
-  Avg Time: 6.4134s
+50 Obstacles: 91/140 successful (65.0%)
+  Avg Path Length: 328.37
+  Avg Direction Changes: 117.93
+  Avg Time: 5.6794s
 
-100 Obstacles: 56/112 successful (50.0%)
-  Avg Path Length: 328.11
-  Avg Direction Changes: 116.04
-  Avg Time: 5.6349s
+100 Obstacles: 76/140 successful (54.3%)
+  Avg Path Length: 277.82
+  Avg Direction Changes: 79.67
+  Avg Time: 4.7152s
 
-200 Obstacles: 47/112 successful (42.0%)
-  Avg Path Length: 301.68
-  Avg Direction Changes: 86.94
-  Avg Time: 4.8844s
+200 Obstacles: 66/140 successful (47.1%)
+  Avg Path Length: 285.70
+  Avg Direction Changes: 77.20
+  Avg Time: 4.7708s
 
 --------------------------------------------------------------------------------
 PERFORMANCE BY MAP
 --------------------------------------------------------------------------------
-Map 1: 25/64 successful ( 39.1%)
-Map 2: 33/64 successful ( 51.6%)
-Map 3: 39/64 successful ( 60.9%)
-Map 4: 36/64 successful ( 56.2%)
-Map 5: 37/64 successful ( 57.8%)
-Map 6: 36/64 successful ( 56.2%)
-Map 7: 31/64 successful ( 48.4%)
+Map 1: 34/80 successful ( 42.5%)
+Map 2: 46/80 successful ( 57.5%)
+Map 3: 51/80 successful ( 63.7%)
+Map 4: 43/80 successful ( 53.8%)
+Map 5: 50/80 successful ( 62.5%)
+Map 6: 46/80 successful ( 57.5%)
+Map 7: 52/80 successful ( 65.0%)
 
 ================================================================================

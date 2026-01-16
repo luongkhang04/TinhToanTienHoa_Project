@@ -1,449 +1,561 @@
 map,global_alg,local_alg,obstacles,success,path_length,direction_changes,global_time,total_time,steps,error
-1,grid_bfs,reactive_bfs,0,True,482,143,0.0935362778882336,5.867199897766113,479,
-1,grid_bfs,reactive_dfs,0,False,0,0,0.041617393493652344,24.08905267715454,2000,"Failed to reach goal (reached 1/10 waypoints, dist=118)"
-1,grid_bfs,potential_field,0,True,444,44,0.06232903532782075,5.400292158126831,442,
-1,grid_bfs,greedy,0,False,0,0,0.04147648811340332,24.335275650024414,2000,"Failed to reach goal (reached 1/10 waypoints, dist=147)"
-1,grid_dfs,reactive_bfs,0,True,738,210,0.02815532684326172,8.959457159042358,737,
-1,grid_dfs,reactive_dfs,0,False,0,0,0.028075218200683594,24.127848148345947,2000,"Failed to reach goal (reached 1/23 waypoints, dist=118)"
-1,grid_dfs,potential_field,0,False,0,0,0.04148571754376462,4.9306230545043945,402,"Failed to reach goal (reached 0/1 waypoints, dist=86)"
-1,grid_dfs,greedy,0,False,0,0,0.027920007705688477,23.995397806167603,2000,"Failed to reach goal (reached 1/23 waypoints, dist=103)"
-1,astar,reactive_bfs,0,True,432,127,0.05534100532531738,5.1996355056762695,431,
-1,astar,reactive_dfs,0,False,0,0,0.053195953369140625,24.175782203674316,2000,"Failed to reach goal (reached 1/12 waypoints, dist=118)"
-1,astar,potential_field,0,True,418,50,0.053159236907958984,5.055899381637573,417,
-1,astar,greedy,0,True,427,56,0.05240488052368164,5.139848947525024,426,
-1,dijkstra,reactive_bfs,0,True,482,129,20.235902742279904,19.461114406585693,479,
-1,dijkstra,reactive_dfs,0,False,0,0,6.799965858459473,24.124492168426514,2000,"Failed to reach goal (reached 1/10 waypoints, dist=118)"
-1,dijkstra,potential_field,0,True,444,44,12.78820042282041,11.527589321136475,442,
-1,dijkstra,greedy,0,False,0,0,6.67563796043396,24.42546558380127,2000,"Failed to reach goal (reached 1/10 waypoints, dist=147)"
-1,grid_bfs,reactive_bfs,50,True,486,156,0.10426430907227768,5.995147705078125,483,
-1,grid_bfs,reactive_dfs,50,False,0,0,0.04117107391357422,24.501144409179688,2000,"Failed to reach goal (reached 1/10 waypoints, dist=130)"
-1,grid_bfs,potential_field,50,True,476,60,0.08787283452329575,5.881353378295898,473,
-1,grid_bfs,greedy,50,True,449,63,0.041291236877441406,5.42877197265625,448,
-1,grid_dfs,reactive_bfs,50,True,772,259,0.028131484985351562,9.46939754486084,771,
-1,grid_dfs,reactive_dfs,50,False,0,0,0.03951263427734375,24.367271900177002,2000,"Failed to reach goal (reached 1/23 waypoints, dist=126)"
-1,grid_dfs,potential_field,50,False,0,0,0.04150709716577694,4.995428800582886,404,"Failed to reach goal (reached 0/1 waypoints, dist=86)"
-1,grid_dfs,greedy,50,False,0,0,0.028301715850830078,100.00006151199341,871,"Failed to reach goal (reached 23/23 waypoints, dist=148)"
-1,astar,reactive_bfs,50,True,445,142,0.05349421501159668,5.46976637840271,444,
-1,astar,reactive_dfs,50,False,0,0,0.05345964431762695,100.00003552436829,96,"Failed to reach goal (reached 12/12 waypoints, dist=120)"
-1,astar,potential_field,50,True,418,52,0.05256247520446777,5.134645462036133,417,
-1,astar,greedy,50,False,0,0,0.05293536186218262,100.00002837181091,318,"Failed to reach goal (reached 12/12 waypoints, dist=113)"
-1,dijkstra,reactive_bfs,50,True,504,157,20.34416347482602,19.860121726989746,501,
-1,dijkstra,reactive_dfs,50,False,0,0,6.853292942047119,24.329323291778564,2000,"Failed to reach goal (reached 1/10 waypoints, dist=126)"
-1,dijkstra,potential_field,50,True,444,46,13.025682226264507,11.643050193786621,442,
-1,dijkstra,greedy,50,False,0,0,6.87485408782959,100.0000331401825,785,"Failed to reach goal (reached 10/10 waypoints, dist=148)"
-1,grid_bfs,reactive_bfs,100,True,520,161,0.10494110602667206,6.522619724273682,517,
-1,grid_bfs,reactive_dfs,100,False,0,0,0.04221463203430176,24.63855528831482,2000,"Failed to reach goal (reached 1/10 waypoints, dist=118)"
-1,grid_bfs,potential_field,100,True,418,49,0.041068315505981445,5.187407732009888,417,
-1,grid_bfs,greedy,100,False,0,0,0.041448116302490234,100.00001287460327,180,"Failed to reach goal (reached 10/10 waypoints, dist=147)"
-1,grid_dfs,reactive_bfs,100,False,0,0,0.028688430786132812,100.00002264976501,467,"Failed to reach goal (reached 23/23 waypoints, dist=88)"
-1,grid_dfs,reactive_dfs,100,False,0,0,0.028786420822143555,24.772422075271606,2000,"Failed to reach goal (reached 1/23 waypoints, dist=122)"
-1,grid_dfs,potential_field,100,False,0,0,0.04144953890499892,5.270889520645142,418,"Failed to reach goal (reached 0/1 waypoints, dist=86)"
-1,grid_dfs,greedy,100,False,0,0,0.027701139450073242,100.00005054473877,1266,"Failed to reach goal (reached 23/23 waypoints, dist=103)"
-1,astar,reactive_bfs,100,True,478,173,0.053035736083984375,5.927716255187988,477,
-1,astar,reactive_dfs,100,False,0,0,0.05253100395202637,100.0000388622284,559,"Failed to reach goal (reached 12/12 waypoints, dist=133)"
-1,astar,potential_field,100,False,0,0,0.053363800048828125,100.00002312660217,99,"Failed to reach goal (reached 12/12 waypoints, dist=149)"
-1,astar,greedy,100,False,0,0,0.06088113784790039,100.00000643730164,421,"Failed to reach goal (reached 12/12 waypoints, dist=40)"
-1,dijkstra,reactive_bfs,100,True,511,161,20.856723252039956,20.01843810081482,508,
-1,dijkstra,reactive_dfs,100,False,0,0,7.0538506507873535,100.00001502037048,572,"Failed to reach goal (reached 10/10 waypoints, dist=120)"
-1,dijkstra,potential_field,100,True,444,46,13.310543712901563,11.640744686126709,442,
-1,dijkstra,greedy,100,True,675,293,7.013129234313965,7.9622111320495605,674,
-1,grid_bfs,reactive_bfs,200,False,0,0,0.03989672660827637,100.00002551078796,4,"Failed to reach goal (reached 10/10 waypoints, dist=115)"
-1,grid_bfs,reactive_dfs,200,False,0,0,0.03966927528381348,100.0000069141388,332,"Failed to reach goal (reached 10/10 waypoints, dist=120)"
-1,grid_bfs,potential_field,200,True,432,58,0.03990364074707031,5.230827331542969,431,
-1,grid_bfs,greedy,200,False,0,0,0.03962564468383789,100.00001239776611,370,"Failed to reach goal (reached 10/10 waypoints, dist=123)"
-1,grid_dfs,reactive_bfs,200,False,0,0,0.0270688533782959,100.00001931190491,36,"Failed to reach goal (reached 23/23 waypoints, dist=114)"
-1,grid_dfs,reactive_dfs,200,False,0,0,0.02710127830505371,100.00005722045898,261,"Failed to reach goal (reached 23/23 waypoints, dist=127)"
-1,grid_dfs,potential_field,200,False,0,0,0.039983251266676234,100.00002431869507,89,"Failed to reach goal (reached 24/24 waypoints, dist=110)"
-1,grid_dfs,greedy,200,False,0,0,0.02705836296081543,100.00000715255737,502,"Failed to reach goal (reached 23/23 waypoints, dist=138)"
-1,astar,reactive_bfs,200,False,0,0,0.05077934265136719,100.00001502037048,255,"Failed to reach goal (reached 12/12 waypoints, dist=128)"
-1,astar,reactive_dfs,200,False,0,0,0.05047011375427246,24.781625747680664,2000,"Failed to reach goal (reached 1/12 waypoints, dist=138)"
-1,astar,potential_field,200,False,0,0,0.062303781509399414,100.00002479553223,207,"Failed to reach goal (reached 12/12 waypoints, dist=130)"
-1,astar,greedy,200,False,0,0,0.050598859786987305,100.00003290176392,338,"Failed to reach goal (reached 12/12 waypoints, dist=119)"
-1,dijkstra,reactive_bfs,200,False,0,0,21.049283291098618,100.00001549720764,237,"Failed to reach goal (reached 8/8 waypoints, dist=163)"
-1,dijkstra,reactive_dfs,200,False,0,0,6.993793487548828,100.00002813339233,1772,"Failed to reach goal (reached 10/10 waypoints, dist=128)"
-1,dijkstra,potential_field,200,True,501,66,20.486042402777457,19.574562311172485,498,
-1,dijkstra,greedy,200,True,538,156,6.96082878112793,6.496462345123291,537,
-2,grid_bfs,reactive_bfs,0,True,321,125,0.028556346893310547,6.057196617126465,320,
-2,grid_bfs,reactive_dfs,0,False,0,0,0.02863335609436035,37.60068440437317,2000,"Failed to reach goal (reached 1/10 waypoints, dist=113)"
-2,grid_bfs,potential_field,0,True,309,80,0.05213520707366115,5.864933729171753,307,
-2,grid_bfs,greedy,0,False,0,0,0.028255701065063477,37.779818296432495,2000,"Failed to reach goal (reached 2/10 waypoints, dist=116)"
-2,grid_dfs,reactive_bfs,0,True,361,175,0.020953655242919922,6.842700481414795,360,
-2,grid_dfs,reactive_dfs,0,False,0,0,0.020835161209106445,37.77814221382141,2000,"Failed to reach goal (reached 1/10 waypoints, dist=113)"
-2,grid_dfs,potential_field,0,True,323,81,0.03354285844579863,6.134891986846924,321,
-2,grid_dfs,greedy,0,False,0,0,0.02121877670288086,37.835139989852905,2000,"Failed to reach goal (reached 2/10 waypoints, dist=110)"
-2,astar,reactive_bfs,0,True,319,125,0.03636598587036133,6.014956712722778,318,
-2,astar,reactive_dfs,0,False,0,0,0.03611493110656738,38.19307589530945,2000,"Failed to reach goal (reached 1/10 waypoints, dist=113)"
-2,astar,potential_field,0,True,309,80,0.042567388314637356,5.869883060455322,307,
-2,astar,greedy,0,False,0,0,0.036083221435546875,38.19588494300842,2000,"Failed to reach goal (reached 2/10 waypoints, dist=116)"
-2,dijkstra,reactive_bfs,0,True,317,128,3.370562791824341,5.994843482971191,316,
-2,dijkstra,reactive_dfs,0,False,0,0,3.359532117843628,38.04398250579834,2000,"Failed to reach goal (reached 1/10 waypoints, dist=113)"
-2,dijkstra,potential_field,0,True,309,80,6.378896015734426,8.841569423675537,307,
-2,dijkstra,greedy,0,False,0,0,3.443807363510132,37.88833951950073,2000,"Failed to reach goal (reached 2/10 waypoints, dist=116)"
-2,grid_bfs,reactive_bfs,50,True,332,138,0.028541088104248047,6.276212453842163,331,
-2,grid_bfs,reactive_dfs,50,False,0,0,0.02851080894470215,100.00004196166992,751,"Failed to reach goal (reached 10/10 waypoints, dist=120)"
-2,grid_bfs,potential_field,50,True,313,92,0.039436690571164945,5.943039178848267,311,
-2,grid_bfs,greedy,50,True,1817,1589,0.042526960372924805,34.63519835472107,1816,
-2,grid_dfs,reactive_bfs,50,True,375,159,0.02083110809326172,7.1646270751953125,374,
-2,grid_dfs,reactive_dfs,50,False,0,0,0.02101421356201172,38.291491746902466,2000,"Failed to reach goal (reached 1/10 waypoints, dist=117)"
-2,grid_dfs,potential_field,50,True,362,104,0.020750999450683594,6.9340198040008545,361,
-2,grid_dfs,greedy,50,True,371,128,0.02094745635986328,7.02821946144104,370,
-2,astar,reactive_bfs,50,False,0,0,0.048355817794799805,100.00002074241638,214,"Failed to reach goal (reached 10/10 waypoints, dist=88)"
-2,astar,reactive_dfs,50,False,0,0,0.03664588928222656,100.00002479553223,195,"Failed to reach goal (reached 10/10 waypoints, dist=117)"
-2,astar,potential_field,50,True,309,82,0.04261605177089223,5.912241458892822,307,
-2,astar,greedy,50,True,1439,1214,0.03665447235107422,27.25055432319641,1438,
-2,dijkstra,reactive_bfs,50,True,321,137,3.3607261180877686,6.117638826370239,320,
-2,dijkstra,reactive_dfs,50,False,0,0,3.374967336654663,100.0000331401825,633,"Failed to reach goal (reached 10/10 waypoints, dist=116)"
-2,dijkstra,potential_field,50,True,329,90,6.459641274570458,9.289443254470825,327,
-2,dijkstra,greedy,50,True,1623,1406,3.380415439605713,30.85517406463623,1622,
-2,grid_bfs,reactive_bfs,100,False,0,0,0.028563261032104492,100.00003242492676,59,"Failed to reach goal (reached 10/10 waypoints, dist=134)"
-2,grid_bfs,reactive_dfs,100,False,0,0,0.028329133987426758,100.00001573562622,1012,"Failed to reach goal (reached 10/10 waypoints, dist=119)"
-2,grid_bfs,potential_field,100,True,313,82,0.051531874772990705,6.009048700332642,311,
-2,grid_bfs,greedy,100,False,0,0,0.028306007385253906,100.00001430511475,1903,"Failed to reach goal (reached 10/10 waypoints, dist=103)"
-2,grid_dfs,reactive_bfs,100,True,388,157,0.02091836929321289,7.425094842910767,387,
-2,grid_dfs,reactive_dfs,100,False,0,0,0.021021366119384766,100.0000433921814,534,"Failed to reach goal (reached 10/10 waypoints, dist=118)"
-2,grid_dfs,potential_field,100,True,328,78,0.03329483817105938,6.304560422897339,326,
-2,grid_dfs,greedy,100,True,540,302,0.0208892822265625,10.310979843139648,539,
-2,astar,reactive_bfs,100,True,327,152,0.03650403022766113,6.2292938232421875,326,
-2,astar,reactive_dfs,100,False,0,0,0.049007415771484375,100.00000953674316,892,"Failed to reach goal (reached 10/10 waypoints, dist=111)"
-2,astar,potential_field,100,True,310,84,0.04266212457878282,5.955284118652344,308,
-2,astar,greedy,100,False,0,0,0.03688979148864746,100.0000627040863,1814,"Failed to reach goal (reached 10/10 waypoints, dist=104)"
-2,dijkstra,reactive_bfs,100,False,0,0,3.440636396408081,100.00003027915955,42,"Failed to reach goal (reached 10/10 waypoints, dist=134)"
-2,dijkstra,reactive_dfs,100,False,0,0,3.393089771270752,100.00004124641418,1507,"Failed to reach goal (reached 10/10 waypoints, dist=120)"
-2,dijkstra,potential_field,100,True,327,102,6.401986684120857,9.267318964004517,325,
-2,dijkstra,greedy,100,True,800,580,3.4449498653411865,15.289626598358154,799,
-2,grid_bfs,reactive_bfs,200,True,349,157,0.028287649154663086,6.743250131607056,348,
-2,grid_bfs,reactive_dfs,200,False,0,0,0.02848529815673828,100.00005221366882,1440,"Failed to reach goal (reached 10/10 waypoints, dist=120)"
-2,grid_bfs,potential_field,200,True,320,92,0.04090879529030644,6.399630784988403,318,
-2,grid_bfs,greedy,200,False,0,0,0.042122840881347656,100.0000262260437,191,"Failed to reach goal (reached 10/10 waypoints, dist=111)"
-2,grid_dfs,reactive_bfs,200,False,0,0,0.020964622497558594,100.00001120567322,0,"Failed to reach goal (reached 10/10 waypoints, dist=108)"
-2,grid_dfs,reactive_dfs,200,False,0,0,0.021247386932373047,100.0000307559967,974,"Failed to reach goal (reached 10/10 waypoints, dist=112)"
-2,grid_dfs,potential_field,200,True,357,98,0.03522707990850904,7.2825727462768555,355,
-2,grid_dfs,greedy,200,False,0,0,0.022001981735229492,100.00001454353333,763,"Failed to reach goal (reached 10/10 waypoints, dist=95)"
-2,astar,reactive_bfs,200,True,351,142,0.038323163986206055,7.083758592605591,350,
-2,astar,reactive_dfs,200,False,0,0,0.03777503967285156,40.59594774246216,2000,"Failed to reach goal (reached 1/10 waypoints, dist=117)"
-2,astar,potential_field,200,True,337,92,0.059142284146219026,6.8169755935668945,335,
-2,astar,greedy,200,True,614,404,0.03798389434814453,12.405655145645142,613,
-2,dijkstra,reactive_bfs,200,False,0,0,3.251889944076538,100.00002026557922,346,"Failed to reach goal (reached 10/10 waypoints, dist=30)"
-2,dijkstra,reactive_dfs,200,False,0,0,3.3525819778442383,100.00004553794861,210,"Failed to reach goal (reached 10/10 waypoints, dist=117)"
-2,dijkstra,potential_field,200,False,0,0,6.37976963258734,100.00003814697266,315,"Failed to reach goal (reached 8/8 waypoints, dist=12)"
-2,dijkstra,greedy,200,False,0,0,3.340555191040039,100.00003695487976,93,"Failed to reach goal (reached 10/10 waypoints, dist=127)"
-3,grid_bfs,reactive_bfs,0,True,239,34,0.060996294021606445,2.1576974391937256,238,
-3,grid_bfs,reactive_dfs,0,False,0,0,0.044994354248046875,18.385387659072876,2000,"Failed to reach goal (reached 1/5 waypoints, dist=233)"
-3,grid_bfs,potential_field,0,True,237,21,0.04498910903930664,2.149559259414673,236,
-3,grid_bfs,greedy,0,True,248,27,0.056298017501831055,2.223529100418091,247,
-3,grid_dfs,reactive_bfs,0,True,245,20,0.0195462703704834,2.220187187194824,244,
-3,grid_dfs,reactive_dfs,0,False,0,0,0.019136428833007812,18.12228298187256,2000,"Failed to reach goal (reached 1/4 waypoints, dist=233)"
-3,grid_dfs,potential_field,0,True,241,7,0.019128799438476562,2.209740400314331,240,
-3,grid_dfs,greedy,0,True,244,18,0.018921375274658203,2.1978626251220703,243,
-3,astar,reactive_bfs,0,True,247,40,0.07685184478759766,2.234262228012085,246,
-3,astar,reactive_dfs,0,False,0,0,0.07711291313171387,18.245556592941284,2000,"Failed to reach goal (reached 1/5 waypoints, dist=233)"
-3,astar,potential_field,0,True,235,6,0.08867764472961426,2.127962827682495,234,
-3,astar,greedy,0,True,242,17,0.07699131965637207,2.1754870414733887,241,
-3,dijkstra,reactive_bfs,0,True,239,35,8.381383180618286,2.1457748413085938,238,
-3,dijkstra,reactive_dfs,0,False,0,0,8.604449033737183,18.40112543106079,2000,"Failed to reach goal (reached 1/5 waypoints, dist=233)"
-3,dijkstra,potential_field,0,True,237,21,8.593761444091797,2.156981945037842,236,
-3,dijkstra,greedy,0,True,248,27,8.58988618850708,2.237569570541382,247,
-3,grid_bfs,reactive_bfs,50,False,0,0,0.044457435607910156,100.00001358985901,178,"Failed to reach goal (reached 5/5 waypoints, dist=74)"
-3,grid_bfs,reactive_dfs,50,False,0,0,0.04467439651489258,18.549548387527466,2000,"Failed to reach goal (reached 1/5 waypoints, dist=227)"
-3,grid_bfs,potential_field,50,True,237,21,0.04506969451904297,2.1831166744232178,236,
-3,grid_bfs,greedy,50,True,258,36,0.05651712417602539,2.3530404567718506,257,
-3,grid_dfs,reactive_bfs,50,True,257,32,0.0192718505859375,2.349846839904785,256,
-3,grid_dfs,reactive_dfs,50,False,0,0,0.019579410552978516,18.384867668151855,2000,"Failed to reach goal (reached 1/4 waypoints, dist=235)"
-3,grid_dfs,potential_field,50,True,241,7,0.019261598587036133,2.2075915336608887,240,
-3,grid_dfs,greedy,50,True,254,27,0.019010543823242188,2.3222498893737793,253,
-3,astar,reactive_bfs,50,True,271,66,0.07683134078979492,2.472229480743408,270,
-3,astar,reactive_dfs,50,False,0,0,0.07806682586669922,18.22236657142639,2000,"Failed to reach goal (reached 1/5 waypoints, dist=233)"
-3,astar,potential_field,50,True,237,8,0.0767664909362793,2.1927433013916016,236,
-3,astar,greedy,50,True,242,17,0.07656407356262207,2.207900285720825,241,
-3,dijkstra,reactive_bfs,50,True,257,48,8.494251489639282,2.356081962585449,256,
-3,dijkstra,reactive_dfs,50,False,0,0,8.509077787399292,18.56637716293335,2000,"Failed to reach goal (reached 1/5 waypoints, dist=217)"
-3,dijkstra,potential_field,50,True,241,24,8.456178665161133,2.2240686416625977,240,
-3,dijkstra,greedy,50,True,254,36,8.523232221603394,2.3201587200164795,253,
-3,grid_bfs,reactive_bfs,100,False,0,0,0.04514169692993164,100.00002145767212,67,"Failed to reach goal (reached 5/5 waypoints, dist=172)"
-3,grid_bfs,reactive_dfs,100,False,0,0,0.044952392578125,100.00001096725464,1686,"Failed to reach goal (reached 5/5 waypoints, dist=205)"
-3,grid_bfs,potential_field,100,True,237,23,0.05785703659057617,2.204249858856201,236,
-3,grid_bfs,greedy,100,True,250,30,0.04561114311218262,2.315584897994995,249,
-3,grid_dfs,reactive_bfs,100,False,0,0,0.019497156143188477,100.00002336502075,262,"Failed to reach goal (reached 4/4 waypoints, dist=29)"
-3,grid_dfs,reactive_dfs,100,False,0,0,0.01952362060546875,100.00001645088196,475,"Failed to reach goal (reached 4/4 waypoints, dist=234)"
-3,grid_dfs,potential_field,100,True,241,7,0.01948094367980957,2.274747610092163,240,
-3,grid_dfs,greedy,100,True,264,37,0.019335031509399414,2.421888589859009,263,
-3,astar,reactive_bfs,100,False,0,0,0.07698750495910645,100.00002908706665,171,"Failed to reach goal (reached 5/5 waypoints, dist=96)"
-3,astar,reactive_dfs,100,False,0,0,0.07663273811340332,18.79192280769348,2000,"Failed to reach goal (reached 1/5 waypoints, dist=231)"
-3,astar,potential_field,100,True,237,12,0.07660341262817383,2.2183127403259277,236,
-3,astar,greedy,100,False,0,0,0.08894801139831543,100.00001955032349,154,"Failed to reach goal (reached 5/5 waypoints, dist=96)"
-3,dijkstra,reactive_bfs,100,True,261,61,8.556025505065918,2.425323963165283,260,
-3,dijkstra,reactive_dfs,100,False,0,0,8.646765232086182,100.00003099441528,808,"Failed to reach goal (reached 5/5 waypoints, dist=231)"
-3,dijkstra,potential_field,100,True,237,21,8.806968688964844,2.211893081665039,236,
-3,dijkstra,greedy,100,True,263,51,8.62024736404419,2.429321050643921,262,
-3,grid_bfs,reactive_bfs,200,False,0,0,0.045186519622802734,100.00002789497375,220,"Failed to reach goal (reached 5/5 waypoints, dist=31)"
-3,grid_bfs,reactive_dfs,200,False,0,0,0.056795597076416016,100.0000388622284,171,"Failed to reach goal (reached 5/5 waypoints, dist=228)"
-3,grid_bfs,potential_field,200,True,238,22,0.04516768455505371,2.2814652919769287,237,
-3,grid_bfs,greedy,200,True,295,86,0.04485821723937988,2.78725528717041,294,
-3,grid_dfs,reactive_bfs,200,True,294,75,0.019190311431884766,2.796294689178467,293,
-3,grid_dfs,reactive_dfs,200,False,0,0,0.019316673278808594,19.150651216506958,2000,"Failed to reach goal (reached 1/4 waypoints, dist=219)"
-3,grid_dfs,potential_field,200,True,241,9,0.01940631866455078,2.3182191848754883,240,
-3,grid_dfs,greedy,200,True,272,49,0.01908087730407715,2.5858469009399414,271,
-3,astar,reactive_bfs,200,True,303,93,0.07697105407714844,2.890941858291626,302,
-3,astar,reactive_dfs,200,False,0,0,0.08937597274780273,100.00003266334534,1730,"Failed to reach goal (reached 5/5 waypoints, dist=239)"
-3,astar,potential_field,200,True,243,15,0.07710957527160645,2.3337690830230713,242,
-3,astar,greedy,200,False,0,0,0.0768578052520752,100.00003123283386,194,"Failed to reach goal (reached 5/5 waypoints, dist=74)"
-3,dijkstra,reactive_bfs,200,False,0,0,8.577979803085327,100.00004744529724,4,"Failed to reach goal (reached 5/5 waypoints, dist=227)"
-3,dijkstra,reactive_dfs,200,False,0,0,8.53905701637268,100.00002932548523,241,"Failed to reach goal (reached 5/5 waypoints, dist=232)"
-3,dijkstra,potential_field,200,True,240,23,8.509275197982788,2.311185836791992,239,
-3,dijkstra,greedy,200,False,0,0,8.600189447402954,100.00001621246338,750,"Failed to reach goal (reached 5/5 waypoints, dist=84)"
-4,grid_bfs,reactive_bfs,0,True,180,74,0.035181522369384766,3.2068190574645996,179,
-4,grid_bfs,reactive_dfs,0,False,0,0,0.0352473258972168,35.74958610534668,2000,"Failed to reach goal (reached 1/6 waypoints, dist=70)"
-4,grid_bfs,potential_field,0,True,204,51,0.03511691093444824,3.646597146987915,203,
-4,grid_bfs,greedy,0,True,187,28,0.048911094665527344,3.3043715953826904,186,
-4,grid_dfs,reactive_bfs,0,False,0,0,0.020169734954833984,35.76258611679077,2000,"Failed to reach goal (reached 4/10 waypoints, dist=36)"
-4,grid_dfs,reactive_dfs,0,False,0,0,0.02551883451451431,35.874091386795044,2000,"Failed to reach goal (reached 1/10 waypoints, dist=70)"
-4,grid_dfs,potential_field,0,False,0,0,0.020154237747192383,35.99256181716919,2000,"Failed to reach goal (reached 2/10 waypoints, dist=70)"
-4,grid_dfs,greedy,0,False,0,0,0.020064353942871094,35.55445837974548,2000,"Failed to reach goal (reached 4/10 waypoints, dist=35)"
-4,astar,reactive_bfs,0,True,182,81,0.04565238952636719,3.230377435684204,181,
-4,astar,reactive_dfs,0,False,0,0,0.04673957824707031,35.838764667510986,2000,"Failed to reach goal (reached 1/6 waypoints, dist=70)"
-4,astar,potential_field,0,True,204,49,0.04557919502258301,3.611560821533203,203,
-4,astar,greedy,0,True,187,26,0.04552030563354492,3.308832883834839,186,
-4,dijkstra,reactive_bfs,0,True,182,85,4.483919143676758,3.2330691814422607,181,
-4,dijkstra,reactive_dfs,0,False,0,0,4.584961652755737,36.15166354179382,2000,"Failed to reach goal (reached 1/6 waypoints, dist=70)"
-4,dijkstra,potential_field,0,True,204,51,4.595502853393555,3.6086528301239014,203,
-4,dijkstra,greedy,0,True,187,28,4.505083322525024,3.311849355697632,186,
-4,grid_bfs,reactive_bfs,50,True,194,75,0.03500247001647949,3.4949193000793457,193,
-4,grid_bfs,reactive_dfs,50,False,0,0,0.03488636016845703,36.201740980148315,2000,"Failed to reach goal (reached 1/6 waypoints, dist=64)"
-4,grid_bfs,potential_field,50,True,204,53,0.049599647521972656,3.7007155418395996,203,
-4,grid_bfs,greedy,50,True,187,40,0.035101890563964844,3.3525187969207764,186,
-4,grid_dfs,reactive_bfs,50,True,246,81,0.020166635513305664,4.425477504730225,245,
-4,grid_dfs,reactive_dfs,50,False,0,0,0.025041627652171883,36.40160346031189,2000,"Failed to reach goal (reached 1/10 waypoints, dist=70)"
-4,grid_dfs,potential_field,50,True,1380,1170,0.020299196243286133,24.89452862739563,1379,
-4,grid_dfs,greedy,50,False,0,0,0.020241737365722656,35.98011112213135,2000,"Failed to reach goal (reached 4/10 waypoints, dist=35)"
-4,astar,reactive_bfs,50,True,188,91,0.04599809646606445,3.368565320968628,187,
-4,astar,reactive_dfs,50,False,0,0,0.06838594879263837,100.00002026557922,1181,"Failed to reach goal (reached 5/5 waypoints, dist=97)"
-4,astar,potential_field,50,True,208,56,0.04542827606201172,3.7321925163269043,207,
-4,astar,greedy,50,True,187,30,0.04583573341369629,3.31201171875,186,
-4,dijkstra,reactive_bfs,50,True,182,78,4.573541879653931,3.2661385536193848,181,
-4,dijkstra,reactive_dfs,50,False,0,0,8.67310990200167,40.45174860954285,2000,"Failed to reach goal (reached 1/6 waypoints, dist=98)"
-4,dijkstra,potential_field,50,True,206,54,4.5640342235565186,3.687141180038452,205,
-4,dijkstra,greedy,50,True,187,30,4.531100034713745,3.3284733295440674,186,
-4,grid_bfs,reactive_bfs,100,True,184,74,0.035063743591308594,3.314798593521118,183,
-4,grid_bfs,reactive_dfs,100,False,0,0,0.03521132469177246,100.00003147125244,440,"Failed to reach goal (reached 6/6 waypoints, dist=97)"
-4,grid_bfs,potential_field,100,True,203,51,0.03443503379821777,3.678584575653076,202,
-4,grid_bfs,greedy,100,True,207,49,0.035048484802246094,3.6938984394073486,206,
-4,grid_dfs,reactive_bfs,100,False,0,0,0.033468008041381836,100.00000858306885,730,"Failed to reach goal (reached 10/10 waypoints, dist=35)"
-4,grid_dfs,reactive_dfs,100,False,0,0,0.03626942384107679,36.50120401382446,2000,"Failed to reach goal (reached 1/11 waypoints, dist=97)"
-4,grid_dfs,potential_field,100,True,785,578,0.020246028900146484,14.24406623840332,784,
-4,grid_dfs,greedy,100,False,0,0,0.02031087875366211,100.00004076957703,1035,"Failed to reach goal (reached 10/10 waypoints, dist=36)"
-4,astar,reactive_bfs,100,True,196,90,0.04645395278930664,3.5114917755126953,195,
-4,astar,reactive_dfs,100,False,0,0,0.059110403060913086,100.00004363059998,655,"Failed to reach goal (reached 6/6 waypoints, dist=68)"
-4,astar,potential_field,100,True,204,51,0.04375910758972168,3.5254580974578857,203,
-4,astar,greedy,100,True,199,35,0.043955326080322266,3.4034926891326904,198,
-4,dijkstra,reactive_bfs,100,False,0,0,4.68461012840271,100.00002694129944,183,"Failed to reach goal (reached 6/6 waypoints, dist=12)"
-4,dijkstra,reactive_dfs,100,False,0,0,4.71333909034729,100.00003600120544,823,"Failed to reach goal (reached 6/6 waypoints, dist=69)"
-4,dijkstra,potential_field,100,True,204,53,4.613744497299194,3.541181802749634,203,
-4,dijkstra,greedy,100,True,223,68,4.663379430770874,3.8404500484466553,222,
-4,grid_bfs,reactive_bfs,200,False,0,0,0.03378105163574219,100.00001907348633,150,"Failed to reach goal (reached 6/6 waypoints, dist=52)"
-4,grid_bfs,reactive_dfs,200,False,0,0,0.04995216685711057,100.00001454353333,619,"Failed to reach goal (reached 6/6 waypoints, dist=97)"
-4,grid_bfs,potential_field,200,True,200,55,0.03567647933959961,3.6742565631866455,199,
-4,grid_bfs,greedy,200,True,206,60,0.04842042922973633,3.7847864627838135,205,
-4,grid_dfs,reactive_bfs,200,False,0,0,0.0205078125,100.00002121925354,164,"Failed to reach goal (reached 10/10 waypoints, dist=39)"
-4,grid_dfs,reactive_dfs,200,False,0,0,0.02509419998204976,100.00001788139343,336,"Failed to reach goal (reached 10/10 waypoints, dist=72)"
-4,grid_dfs,potential_field,200,True,761,557,0.020548105239868164,14.076281547546387,760,
-4,grid_dfs,greedy,200,True,287,85,0.020209789276123047,5.266757965087891,286,
-4,astar,reactive_bfs,200,False,0,0,0.05958843231201172,100.00001692771912,110,"Failed to reach goal (reached 6/6 waypoints, dist=49)"
-4,astar,reactive_dfs,200,False,0,0,0.04618644714355469,100.00001931190491,62,"Failed to reach goal (reached 6/6 waypoints, dist=72)"
-4,astar,potential_field,200,False,0,0,0.045960187911987305,100.00001835823059,148,"Failed to reach goal (reached 6/6 waypoints, dist=34)"
-4,astar,greedy,200,True,213,54,0.045761823654174805,3.8927345275878906,212,
-4,dijkstra,reactive_bfs,200,False,0,0,4.576505184173584,100.00002098083496,57,"Failed to reach goal (reached 6/6 waypoints, dist=50)"
-4,dijkstra,reactive_dfs,200,False,0,0,4.676585674285889,100.00001692771912,1398,"Failed to reach goal (reached 6/6 waypoints, dist=98)"
-4,dijkstra,potential_field,200,True,211,58,4.680118799209595,3.8551647663116455,210,
-4,dijkstra,greedy,200,True,213,58,4.6534600257873535,3.897779941558838,212,
-5,grid_bfs,reactive_bfs,0,True,227,75,0.03923296928405762,4.360275745391846,226,
-5,grid_bfs,reactive_dfs,0,False,0,0,0.03897356986999512,38.30790328979492,2000,"Failed to reach goal (reached 1/6 waypoints, dist=195)"
-5,grid_bfs,potential_field,0,True,235,9,0.07546819648996461,4.52336573600769,233,
-5,grid_bfs,greedy,0,False,0,0,0.03894972801208496,38.649338722229004,2000,"Failed to reach goal (reached 1/6 waypoints, dist=164)"
-5,grid_dfs,reactive_bfs,0,True,347,92,0.07189712309263996,6.699214935302734,345,
-5,grid_dfs,reactive_dfs,0,False,0,0,0.0362241268157959,38.402047634124756,2000,"Failed to reach goal (reached 1/4 waypoints, dist=195)"
-5,grid_dfs,potential_field,0,True,275,8,0.05106990671265521,5.291817903518677,273,
-5,grid_dfs,greedy,0,False,0,0,0.036377906799316406,38.56710457801819,2000,"Failed to reach goal (reached 1/4 waypoints, dist=164)"
-5,astar,reactive_bfs,0,True,227,89,0.023351430892944336,4.344282627105713,226,
-5,astar,reactive_dfs,0,False,0,0,0.023442983627319336,38.419999837875366,2000,"Failed to reach goal (reached 1/6 waypoints, dist=195)"
-5,astar,potential_field,0,True,235,10,0.02964952261754661,4.504973411560059,233,
-5,astar,greedy,0,False,0,0,0.023459434509277344,38.40098237991333,2000,"Failed to reach goal (reached 1/6 waypoints, dist=164)"
-5,dijkstra,reactive_bfs,0,True,225,76,4.602067470550537,4.313127040863037,224,
-5,dijkstra,reactive_dfs,0,False,0,0,4.6171064376831055,38.32201027870178,2000,"Failed to reach goal (reached 1/6 waypoints, dist=195)"
-5,dijkstra,potential_field,0,True,235,9,9.084736087414058,9.069957494735718,233,
-5,dijkstra,greedy,0,False,0,0,4.6138269901275635,38.41553235054016,2000,"Failed to reach goal (reached 1/6 waypoints, dist=164)"
-5,grid_bfs,reactive_bfs,50,True,255,120,0.039076805114746094,4.935043573379517,254,
-5,grid_bfs,reactive_dfs,50,False,0,0,0.03867816925048828,38.75042486190796,2000,"Failed to reach goal (reached 1/6 waypoints, dist=191)"
-5,grid_bfs,potential_field,50,True,237,13,0.06250406949402532,4.6188743114471436,235,
-5,grid_bfs,greedy,50,False,0,0,0.03899526596069336,38.74767208099365,2000,"Failed to reach goal (reached 1/6 waypoints, dist=164)"
-5,grid_dfs,reactive_bfs,50,True,359,85,0.05928375044823042,6.952271461486816,357,
-5,grid_dfs,reactive_dfs,50,False,0,0,0.03687405586242676,100.0000410079956,849,"Failed to reach goal (reached 4/4 waypoints, dist=192)"
-5,grid_dfs,potential_field,50,True,275,10,0.05268378695109277,5.3563337326049805,273,
-5,grid_dfs,greedy,50,False,0,0,0.03654313087463379,38.80277109146118,2000,"Failed to reach goal (reached 2/4 waypoints, dist=50)"
-5,astar,reactive_bfs,50,True,233,99,0.023154497146606445,4.507535696029663,232,
-5,astar,reactive_dfs,50,False,0,0,0.023485660552978516,38.928038597106934,2000,"Failed to reach goal (reached 1/6 waypoints, dist=197)"
-5,astar,potential_field,50,True,235,10,0.029500153115805006,4.5367865562438965,233,
-5,astar,greedy,50,True,1090,883,0.02329230308532715,21.13633680343628,1089,
-5,dijkstra,reactive_bfs,50,True,238,102,4.463424921035767,4.613837480545044,237,
-5,dijkstra,reactive_dfs,50,False,0,0,4.4388861656188965,38.76551103591919,2000,"Failed to reach goal (reached 1/6 waypoints, dist=195)"
-5,dijkstra,potential_field,50,True,235,11,9.07618781103156,9.070008993148804,233,
-5,dijkstra,greedy,50,True,1090,873,4.571434020996094,21.06660270690918,1089,
-5,grid_bfs,reactive_bfs,100,True,229,87,0.039116621017456055,4.3208324909210205,228,
-5,grid_bfs,reactive_dfs,100,False,0,0,0.03697681427001953,100.00002765655518,769,"Failed to reach goal (reached 6/6 waypoints, dist=192)"
-5,grid_bfs,potential_field,100,True,237,11,0.05901158454071265,4.40684700012207,235,
-5,grid_bfs,greedy,100,False,0,0,0.0370023250579834,100.00005006790161,679,"Failed to reach goal (reached 6/6 waypoints, dist=163)"
-5,grid_dfs,reactive_bfs,100,True,377,126,0.056459592251485446,7.000261068344116,375,
-5,grid_dfs,reactive_dfs,100,False,0,0,0.04690694808959961,100.00002884864807,1114,"Failed to reach goal (reached 4/4 waypoints, dist=193)"
-5,grid_dfs,potential_field,100,True,279,10,0.04966690961737186,5.179854393005371,277,
-5,grid_dfs,greedy,100,False,0,0,0.03469061851501465,100.00005722045898,25,"Failed to reach goal (reached 4/4 waypoints, dist=165)"
-5,astar,reactive_bfs,100,True,243,98,0.022197961807250977,4.4988954067230225,242,
-5,astar,reactive_dfs,100,False,0,0,0.02203965187072754,37.15004825592041,2000,"Failed to reach goal (reached 1/6 waypoints, dist=195)"
-5,astar,potential_field,100,True,236,10,0.04021719315642258,4.364166021347046,234,
-5,astar,greedy,100,True,306,110,0.022100210189819336,5.6467461585998535,305,
-5,dijkstra,reactive_bfs,100,True,278,105,8.205303172562708,8.936291933059692,276,
-5,dijkstra,reactive_dfs,100,False,0,0,4.473024129867554,37.1133496761322,2000,"Failed to reach goal (reached 1/6 waypoints, dist=201)"
-5,dijkstra,potential_field,100,True,237,11,9.051963270121632,8.91008186340332,235,
-5,dijkstra,greedy,100,True,1820,1620,4.4720776081085205,33.71251654624939,1819,
-5,grid_bfs,reactive_bfs,200,True,270,116,0.03675055503845215,5.056841611862183,269,
-5,grid_bfs,reactive_dfs,200,False,0,0,0.03689289093017578,37.63819742202759,2000,"Failed to reach goal (reached 1/6 waypoints, dist=195)"
-5,grid_bfs,potential_field,200,True,237,15,0.05914247717009857,4.471770286560059,235,
-5,grid_bfs,greedy,200,True,322,128,0.037076711654663086,6.014796495437622,321,
-5,grid_dfs,reactive_bfs,200,True,401,138,0.06909606107001309,7.530123472213745,399,
-5,grid_dfs,reactive_dfs,200,False,0,0,0.03484392166137695,37.743059158325195,2000,"Failed to reach goal (reached 1/4 waypoints, dist=194)"
-5,grid_dfs,potential_field,200,False,0,0,0.0349276065826416,100.0000069141388,48,"Failed to reach goal (reached 4/4 waypoints, dist=164)"
-5,grid_dfs,greedy,200,False,0,0,0.0349118709564209,100.00004696846008,37,"Failed to reach goal (reached 4/4 waypoints, dist=163)"
-5,astar,reactive_bfs,200,True,258,104,0.022153377532958984,4.876319885253906,257,
-5,astar,reactive_dfs,200,False,0,0,0.021932363510131836,100.00001096725464,1297,"Failed to reach goal (reached 6/6 waypoints, dist=192)"
-5,astar,potential_field,200,True,237,20,0.02796037735970458,4.4525439739227295,235,
-5,astar,greedy,200,True,290,95,0.022098302841186523,5.446042776107788,289,
-5,dijkstra,reactive_bfs,200,True,291,139,4.543211221694946,5.439802646636963,290,
-5,dijkstra,reactive_dfs,200,False,0,0,4.519260883331299,37.58650779724121,2000,"Failed to reach goal (reached 1/6 waypoints, dist=199)"
-5,dijkstra,potential_field,200,True,223,17,4.463932991027832,4.193760395050049,222,
-5,dijkstra,greedy,200,False,0,0,4.519497871398926,100.00004053115845,49,"Failed to reach goal (reached 6/6 waypoints, dist=161)"
-6,grid_bfs,reactive_bfs,0,True,225,66,0.04619002342224121,1.594543695449829,224,
-6,grid_bfs,reactive_dfs,0,False,0,0,0.046010732650756836,14.174493312835693,2000,"Failed to reach goal (reached 1/6 waypoints, dist=227)"
-6,grid_bfs,potential_field,0,True,219,10,0.04668140411376953,1.555474042892456,218,
-6,grid_bfs,greedy,0,True,222,21,0.04731488227844238,1.5561785697937012,221,
-6,grid_dfs,reactive_bfs,0,False,0,0,0.08727404685123474,6.420425176620483,891,"Failed to reach goal (reached 0/10 waypoints, dist=140)"
-6,grid_dfs,reactive_dfs,0,False,0,0,0.036889076232910156,14.133269786834717,2000,"Failed to reach goal (reached 1/13 waypoints, dist=227)"
-6,grid_dfs,potential_field,0,False,0,0,0.09945486812284798,6.21729588508606,856,"Failed to reach goal (reached 0/10 waypoints, dist=140)"
-6,grid_dfs,greedy,0,False,0,0,0.03679680824279785,14.142866849899292,2000,"Failed to reach goal (reached 4/13 waypoints, dist=122)"
-6,astar,reactive_bfs,0,True,223,56,0.041610002517700195,1.5769548416137695,222,
-6,astar,reactive_dfs,0,False,0,0,0.0417478084564209,14.088436841964722,2000,"Failed to reach goal (reached 1/6 waypoints, dist=227)"
-6,astar,potential_field,0,True,221,14,0.04142141342163086,1.5715880393981934,220,
-6,astar,greedy,0,True,226,22,0.041825294494628906,1.5745909214019775,225,
-6,dijkstra,reactive_bfs,0,True,223,70,9.763719081878662,1.5743515491485596,222,
-6,dijkstra,reactive_dfs,0,False,0,0,10.02000093460083,14.18569278717041,2000,"Failed to reach goal (reached 1/6 waypoints, dist=227)"
-6,dijkstra,potential_field,0,True,219,10,9.969236373901367,1.566321849822998,218,
-6,dijkstra,greedy,0,True,222,21,9.959359645843506,1.556974172592163,221,
-6,grid_bfs,reactive_bfs,50,True,237,77,0.04673266410827637,1.704101324081421,236,
-6,grid_bfs,reactive_dfs,50,False,0,0,0.05713534355163574,100.00001978874207,1433,"Failed to reach goal (reached 6/6 waypoints, dist=224)"
-6,grid_bfs,potential_field,50,True,219,16,0.046784162521362305,1.5812442302703857,218,
-6,grid_bfs,greedy,50,True,226,28,0.046013832092285156,1.6027729511260986,225,
-6,grid_dfs,reactive_bfs,50,False,0,0,0.06223154698818689,100.00002813339233,628,"Failed to reach goal (reached 10/10 waypoints, dist=120)"
-6,grid_dfs,reactive_dfs,50,False,0,0,0.03632354736328125,14.361655712127686,2000,"Failed to reach goal (reached 1/13 waypoints, dist=211)"
-6,grid_dfs,potential_field,50,True,1154,238,0.07466911209121463,8.405548572540283,1150,
-6,grid_dfs,greedy,50,True,801,307,0.03636598587036133,5.715467214584351,800,
-6,astar,reactive_bfs,50,True,233,75,0.05234026908874512,1.6654913425445557,232,
-6,astar,reactive_dfs,50,False,0,0,0.04174613952636719,14.397060871124268,2000,"Failed to reach goal (reached 1/6 waypoints, dist=227)"
-6,astar,potential_field,50,True,221,18,0.04140019416809082,1.5955824851989746,220,
-6,astar,greedy,50,True,232,35,0.04209709167480469,1.642690658569336,231,
-6,dijkstra,reactive_bfs,50,True,227,78,9.939391136169434,1.6261179447174072,226,
-6,dijkstra,reactive_dfs,50,False,0,0,9.93513298034668,100.00003170967102,75,"Failed to reach goal (reached 6/6 waypoints, dist=226)"
-6,dijkstra,potential_field,50,True,221,14,9.949054479598999,1.5936248302459717,220,
-6,dijkstra,greedy,50,True,222,23,9.931743621826172,1.5782413482666016,221,
-6,grid_bfs,reactive_bfs,100,False,0,0,0.05840611457824707,100.0000147819519,42,"Failed to reach goal (reached 6/6 waypoints, dist=183)"
-6,grid_bfs,reactive_dfs,100,False,0,0,0.04700183868408203,100.0000307559967,1133,"Failed to reach goal (reached 6/6 waypoints, dist=222)"
-6,grid_bfs,potential_field,100,True,219,14,0.04612326622009277,1.6110467910766602,218,
-6,grid_bfs,greedy,100,True,224,28,0.046164512634277344,1.6256093978881836,223,
-6,grid_dfs,reactive_bfs,100,False,0,0,0.04760384559631348,100.00000882148743,154,"Failed to reach goal (reached 13/13 waypoints, dist=110)"
-6,grid_dfs,reactive_dfs,100,False,0,0,0.03649449348449707,14.6396484375,2000,"Failed to reach goal (reached 1/13 waypoints, dist=215)"
-6,grid_dfs,potential_field,100,False,0,0,0.08694666958399466,6.480363368988037,869,"Failed to reach goal (reached 0/10 waypoints, dist=140)"
-6,grid_dfs,greedy,100,False,0,0,0.0363163948059082,100.00002193450928,96,"Failed to reach goal (reached 13/13 waypoints, dist=148)"
-6,astar,reactive_bfs,100,True,227,57,0.05273127555847168,1.6485941410064697,226,
-6,astar,reactive_dfs,100,False,0,0,0.041573524475097656,14.5977144241333,2000,"Failed to reach goal (reached 1/6 waypoints, dist=213)"
-6,astar,potential_field,100,True,221,16,0.04144120216369629,1.6146628856658936,220,
-6,astar,greedy,100,True,268,69,0.04147648811340332,1.9429421424865723,267,
-6,dijkstra,reactive_bfs,100,True,243,94,9.931342601776123,1.7748091220855713,242,
-6,dijkstra,reactive_dfs,100,False,0,0,9.983052015304565,14.620528221130371,2000,"Failed to reach goal (reached 1/6 waypoints, dist=227)"
-6,dijkstra,potential_field,100,True,219,26,9.929593086242676,1.6018893718719482,218,
-6,dijkstra,greedy,100,True,242,46,9.897884845733643,1.7508857250213623,241,
-6,grid_bfs,reactive_bfs,200,True,269,112,0.0573878288269043,2.0300686359405518,268,
-6,grid_bfs,reactive_dfs,200,False,0,0,0.046180009841918945,100.0000364780426,515,"Failed to reach goal (reached 6/6 waypoints, dist=222)"
-6,grid_bfs,potential_field,200,True,219,16,0.04600095748901367,1.6563799381256104,218,
-6,grid_bfs,greedy,200,False,0,0,0.04601430892944336,100.00001788139343,42,"Failed to reach goal (reached 6/6 waypoints, dist=202)"
-6,grid_dfs,reactive_bfs,200,False,0,0,0.04708147048950195,100.00002121925354,117,"Failed to reach goal (reached 13/13 waypoints, dist=148)"
-6,grid_dfs,reactive_dfs,200,False,0,0,0.036406755447387695,100.00002551078796,646,"Failed to reach goal (reached 13/13 waypoints, dist=223)"
-6,grid_dfs,potential_field,200,True,624,135,0.03648972511291504,4.757294178009033,623,
-6,grid_dfs,greedy,200,False,0,0,0.036429643630981445,100.0000467300415,640,"Failed to reach goal (reached 13/13 waypoints, dist=120)"
-6,astar,reactive_bfs,200,False,0,0,0.04168891906738281,100.00000619888306,82,"Failed to reach goal (reached 6/6 waypoints, dist=166)"
-6,astar,reactive_dfs,200,False,0,0,0.04187488555908203,15.071012258529663,2000,"Failed to reach goal (reached 1/6 waypoints, dist=207)"
-6,astar,potential_field,200,True,221,16,0.04138898849487305,1.6679766178131104,220,
-6,astar,greedy,200,True,250,52,0.041965484619140625,1.8598964214324951,249,
-6,dijkstra,reactive_bfs,200,True,245,86,9.932079076766968,1.84588623046875,244,
-6,dijkstra,reactive_dfs,200,False,0,0,9.96157169342041,100.00003862380981,23,"Failed to reach goal (reached 6/6 waypoints, dist=226)"
-6,dijkstra,potential_field,200,True,219,16,10.023431062698364,1.6510286331176758,218,
-6,dijkstra,greedy,200,True,241,59,9.958845138549805,1.795276403427124,240,
-7,grid_bfs,reactive_bfs,0,True,216,49,0.051944240723969415,3.439732789993286,214,
-7,grid_bfs,reactive_dfs,0,False,0,0,0.05120220636308659,32.19989252090454,2000,"Failed to reach goal (reached 1/7 waypoints, dist=196)"
-7,grid_bfs,potential_field,0,True,205,14,0.04160183869316825,3.2723028659820557,203,
-7,grid_bfs,greedy,0,False,0,0,0.03313589096069336,32.072848081588745,2000,"Failed to reach goal (reached 4/6 waypoints, dist=55)"
-7,grid_dfs,reactive_bfs,0,True,270,58,0.0265047550201416,4.292731761932373,269,
-7,grid_dfs,reactive_dfs,0,False,0,0,0.03858951196889393,32.171183824539185,2000,"Failed to reach goal (reached 1/9 waypoints, dist=196)"
-7,grid_dfs,potential_field,0,True,254,18,0.026554584503173828,4.0562779903411865,253,
-7,grid_dfs,greedy,0,True,263,27,0.026739835739135742,4.152985334396362,262,
-7,astar,reactive_bfs,0,True,180,49,0.01941704750061035,2.854576349258423,179,
-7,astar,reactive_dfs,0,False,0,0,0.025640922165621305,32.030754804611206,2000,"Failed to reach goal (reached 1/6 waypoints, dist=196)"
-7,astar,potential_field,0,True,178,13,0.0198056697845459,2.8330798149108887,177,
-7,astar,greedy,0,True,181,13,0.019640207290649414,2.86411452293396,180,
-7,dijkstra,reactive_bfs,0,True,218,62,7.855024740423687,6.423814535140991,216,
-7,dijkstra,reactive_dfs,0,False,0,0,9.873364708360896,36.911152362823486,2000,"Failed to reach goal (reached 1/7 waypoints, dist=196)"
-7,dijkstra,potential_field,0,True,205,14,7.5483184910299315,5.84684157371521,203,
-7,dijkstra,greedy,0,False,0,0,4.928078651428223,32.01329517364502,2000,"Failed to reach goal (reached 4/6 waypoints, dist=55)"
-7,grid_bfs,reactive_bfs,50,True,224,73,0.042001962963695405,3.598602056503296,222,
-7,grid_bfs,reactive_dfs,50,False,0,0,0.051100527751259506,100.0000171661377,1622,"Failed to reach goal (reached 7/7 waypoints, dist=183)"
-7,grid_bfs,potential_field,50,True,205,14,0.05347733747839811,3.3061554431915283,203,
-7,grid_bfs,greedy,50,False,0,0,0.033469200134277344,100.00000953674316,466,"Failed to reach goal (reached 6/6 waypoints, dist=55)"
-7,grid_dfs,reactive_bfs,50,True,276,66,0.026339054107666016,4.3997087478637695,275,
-7,grid_dfs,reactive_dfs,50,False,0,0,0.038290682725346414,32.248589754104614,2000,"Failed to reach goal (reached 1/9 waypoints, dist=200)"
-7,grid_dfs,potential_field,50,True,254,22,0.026394128799438477,4.0959179401397705,253,
-7,grid_dfs,greedy,50,True,266,36,0.03862595558166504,4.247578144073486,265,
-7,astar,reactive_bfs,50,False,0,0,0.019578933715820312,100.00000596046448,93,"Failed to reach goal (reached 6/6 waypoints, dist=89)"
-7,astar,reactive_dfs,50,False,0,0,0.02535505847481545,100.00002264976501,108,"Failed to reach goal (reached 6/6 waypoints, dist=196)"
-7,astar,potential_field,50,True,178,13,0.019850492477416992,2.8568103313446045,177,
-7,astar,greedy,50,False,0,0,0.019564390182495117,100.0000388622284,94,"Failed to reach goal (reached 6/6 waypoints, dist=104)"
-7,dijkstra,reactive_bfs,50,True,188,54,4.837080955505371,3.0088906288146973,187,
-7,dijkstra,reactive_dfs,50,False,0,0,9.891150445077074,100.00003743171692,1278,"Failed to reach goal (reached 7/7 waypoints, dist=184)"
-7,dijkstra,potential_field,50,True,205,14,7.564987199672032,5.876492500305176,203,
-7,dijkstra,greedy,50,False,0,0,4.917639493942261,100.00005841255188,514,"Failed to reach goal (reached 6/6 waypoints, dist=55)"
-7,grid_bfs,reactive_bfs,100,True,196,58,0.033255577087402344,3.1537303924560547,195,
-7,grid_bfs,reactive_dfs,100,False,0,0,0.05109290776090347,100.00002813339233,347,"Failed to reach goal (reached 8/8 waypoints, dist=195)"
-7,grid_bfs,potential_field,100,True,205,15,0.04160922770824982,3.317300796508789,203,
-7,grid_bfs,greedy,100,False,0,0,0.033217430114746094,100.00005269050598,140,"Failed to reach goal (reached 6/6 waypoints, dist=54)"
-7,grid_dfs,reactive_bfs,100,False,0,0,0.0265350341796875,100.00002360343933,248,"Failed to reach goal (reached 9/9 waypoints, dist=40)"
-7,grid_dfs,reactive_dfs,100,False,0,0,0.038215912518353434,100.00002813339233,478,"Failed to reach goal (reached 9/9 waypoints, dist=200)"
-7,grid_dfs,potential_field,100,True,258,20,0.02678513526916504,4.178351879119873,257,
-7,grid_dfs,greedy,100,False,0,0,0.026364564895629883,100.00003957748413,87,"Failed to reach goal (reached 9/9 waypoints, dist=108)"
-7,astar,reactive_bfs,100,False,0,0,0.019498109817504883,100.00000524520874,119,"Failed to reach goal (reached 6/6 waypoints, dist=72)"
-7,astar,reactive_dfs,100,False,0,0,0.01957535743713379,100.00000548362732,56,"Failed to reach goal (reached 6/6 waypoints, dist=198)"
-7,astar,potential_field,100,True,178,13,0.019426345825195312,2.8767614364624023,177,
-7,astar,greedy,100,True,235,67,0.019683361053466797,3.7766847610473633,234,
-7,dijkstra,reactive_bfs,100,True,219,62,7.86919667233451,6.507431983947754,217,
-7,dijkstra,reactive_dfs,100,False,0,0,9.886508003670315,100.00005292892456,828,"Failed to reach goal (reached 7/7 waypoints, dist=188)"
-7,dijkstra,potential_field,100,True,204,14,7.5632687703218835,5.8933796882629395,202,
-7,dijkstra,greedy,100,False,0,0,4.930553913116455,100.00003004074097,1684,"Failed to reach goal (reached 6/6 waypoints, dist=55)"
-7,grid_bfs,reactive_bfs,200,False,0,0,0.04218496069734101,100.0000250339508,227,"Failed to reach goal (reached 4/4 waypoints, dist=21)"
-7,grid_bfs,reactive_dfs,200,False,0,0,0.03292441368103027,100.00003266334534,0,"Failed to reach goal (reached 6/6 waypoints, dist=173)"
-7,grid_bfs,potential_field,200,True,209,19,0.04181840195451514,3.4391424655914307,207,
-7,grid_bfs,greedy,200,False,0,0,0.03297710418701172,100.00000548362732,186,"Failed to reach goal (reached 6/6 waypoints, dist=61)"
-7,grid_dfs,reactive_bfs,200,False,0,0,0.026462316513061523,100.00003433227539,92,"Failed to reach goal (reached 9/9 waypoints, dist=116)"
-7,grid_dfs,reactive_dfs,200,False,0,0,0.026649951934814453,100.00001835823059,1349,"Failed to reach goal (reached 9/9 waypoints, dist=204)"
-7,grid_dfs,potential_field,200,True,257,28,0.0266420841217041,4.221085548400879,256,
-7,grid_dfs,greedy,200,False,0,0,0.026477813720703125,100.0000307559967,73,"Failed to reach goal (reached 9/9 waypoints, dist=120)"
-7,astar,reactive_bfs,200,True,251,90,0.01963663101196289,4.107999801635742,250,
-7,astar,reactive_dfs,200,False,0,0,0.025626382968766848,100.00001430511475,790,"Failed to reach goal (reached 6/6 waypoints, dist=184)"
-7,astar,potential_field,200,True,178,17,0.019605159759521484,2.923168659210205,177,
-7,astar,greedy,200,False,0,0,0.019385814666748047,100.00001883506775,97,"Failed to reach goal (reached 6/6 waypoints, dist=92)"
-7,dijkstra,reactive_bfs,200,True,236,78,7.891841839733388,6.8355488777160645,234,
-7,dijkstra,reactive_dfs,200,False,0,0,9.876827770476666,100.00000476837158,819,"Failed to reach goal (reached 8/8 waypoints, dist=187)"
-7,dijkstra,potential_field,200,True,215,26,7.980142476848414,6.508023977279663,213,
-7,dijkstra,greedy,200,False,0,0,4.940118789672852,100.00003385543823,395,"Failed to reach goal (reached 6/6 waypoints, dist=20)"
+1,grid_bfs,reactive_bfs,0,True,482,141,0.1021256812964566,6.160716533660889,479,
+1,grid_bfs,reactive_dfs,0,False,0,0,0.04669022560119629,25.43079447746277,2000,"Failed to reach goal (reached 1/10 waypoints, dist=118)"
+1,grid_bfs,potential_field,0,True,444,44,0.0685678340960294,5.688188076019287,442,
+1,grid_bfs,greedy,0,False,0,0,0.04633045196533203,25.377578735351562,2000,"Failed to reach goal (reached 1/10 waypoints, dist=147)"
+1,grid_bfs,dwa,0,True,370,70,0.10166207276051864,4.750831365585327,367,
+1,grid_dfs,reactive_bfs,0,True,824,248,0.043359384522773325,10.438796520233154,822,
+1,grid_dfs,reactive_dfs,0,False,0,0,0.04132723808288574,24.961928844451904,2000,"Failed to reach goal (reached 1/23 waypoints, dist=118)"
+1,grid_dfs,potential_field,0,False,0,0,0.04564809345174581,5.066335678100586,402,"Failed to reach goal (reached 0/1 waypoints, dist=86)"
+1,grid_dfs,greedy,0,False,0,0,0.03192639350891113,24.782307624816895,2000,"Failed to reach goal (reached 1/23 waypoints, dist=103)"
+1,grid_dfs,dwa,0,False,0,0,0.12797943846089765,10.208707571029663,812,"Failed to reach goal (reached 0/10 waypoints, dist=44)"
+1,astar,reactive_bfs,0,True,432,112,0.057450294494628906,5.364151477813721,431,
+1,astar,reactive_dfs,0,False,0,0,0.0666353702545166,24.7692129611969,2000,"Failed to reach goal (reached 1/12 waypoints, dist=118)"
+1,astar,potential_field,0,True,418,50,0.05686593055725098,5.209324359893799,417,
+1,astar,greedy,0,True,427,56,0.056856393814086914,5.277814626693726,426,
+1,astar,dwa,0,True,331,64,0.056900978088378906,4.096904516220093,330,
+1,dijkstra,reactive_bfs,0,True,482,120,20.747266426857095,19.89286708831787,479,
+1,dijkstra,reactive_dfs,0,False,0,0,6.945849895477295,24.93945598602295,2000,"Failed to reach goal (reached 1/10 waypoints, dist=118)"
+1,dijkstra,potential_field,0,True,444,44,13.179350565653294,11.84676480293274,442,
+1,dijkstra,greedy,0,False,0,0,6.892075538635254,24.77363419532776,2000,"Failed to reach goal (reached 1/10 waypoints, dist=147)"
+1,dijkstra,dwa,0,True,370,70,20.781623556744307,18.547215461730957,367,
+1,grid_bfs,reactive_bfs,50,True,501,177,0.09979211137397215,6.345855951309204,498,
+1,grid_bfs,reactive_dfs,50,False,0,0,0.04520893096923828,25.095064163208008,2000,"Failed to reach goal (reached 1/10 waypoints, dist=120)"
+1,grid_bfs,potential_field,50,True,472,63,0.10366189887281507,5.969900369644165,469,
+1,grid_bfs,greedy,50,False,0,0,0.04539823532104492,24.924360752105713,2000,"Failed to reach goal (reached 1/10 waypoints, dist=147)"
+1,grid_bfs,dwa,50,True,370,85,0.08157505677081645,4.654081106185913,368,
+1,grid_dfs,reactive_bfs,50,True,747,256,0.03126716613769531,9.379889488220215,746,
+1,grid_dfs,reactive_dfs,50,False,0,0,0.03125905990600586,24.97844910621643,2000,"Failed to reach goal (reached 1/23 waypoints, dist=120)"
+1,grid_dfs,potential_field,50,False,0,0,0.055361369682941586,5.228853225708008,409,"Failed to reach goal (reached 0/1 waypoints, dist=86)"
+1,grid_dfs,greedy,50,False,0,0,0.03127336502075195,100.00003814697266,1118,"Failed to reach goal (reached 23/23 waypoints, dist=103)"
+1,grid_dfs,dwa,50,False,0,0,0.04224115965189412,100.00001430511475,453,"Failed to reach goal (reached 17/17 waypoints, dist=44)"
+1,astar,reactive_bfs,50,True,463,147,0.05708742141723633,5.809263467788696,462,
+1,astar,reactive_dfs,50,False,0,0,0.056853532791137695,25.016155004501343,2000,"Failed to reach goal (reached 1/12 waypoints, dist=118)"
+1,astar,potential_field,50,True,432,61,0.05675482749938965,5.429096221923828,431,
+1,astar,greedy,50,True,433,65,0.05671048164367676,5.402181386947632,432,
+1,astar,dwa,50,True,333,66,0.05657815933227539,4.159030199050903,332,
+1,dijkstra,reactive_bfs,50,True,489,136,20.71661213587504,20.036851167678833,486,
+1,dijkstra,reactive_dfs,50,False,0,0,6.947620630264282,24.941287755966187,2000,"Failed to reach goal (reached 1/10 waypoints, dist=120)"
+1,dijkstra,potential_field,50,True,446,46,13.267765371187124,11.964125871658325,444,
+1,dijkstra,greedy,50,True,1967,1582,6.997395038604736,24.576557159423828,1966,
+1,dijkstra,dwa,50,True,373,84,21.069684250920545,18.73229479789734,370,
+1,grid_bfs,reactive_bfs,100,False,0,0,0.07328892074292526,100.00003170967102,92,"Failed to reach goal (reached 11/11 waypoints, dist=160)"
+1,grid_bfs,reactive_dfs,100,False,0,0,0.0544431209564209,100.00000953674316,122,"Failed to reach goal (reached 10/10 waypoints, dist=121)"
+1,grid_bfs,potential_field,100,True,467,54,0.06780332798371091,5.958752632141113,465,
+1,grid_bfs,greedy,100,False,0,0,0.04537796974182129,100.00004959106445,212,"Failed to reach goal (reached 10/10 waypoints, dist=148)"
+1,grid_bfs,dwa,100,True,401,90,0.09974041703389958,5.12024998664856,398,
+1,grid_dfs,reactive_bfs,100,True,942,358,0.04228139610495418,11.90474271774292,940,
+1,grid_dfs,reactive_dfs,100,False,0,0,0.04069852828979492,100.00002408027649,1205,"Failed to reach goal (reached 23/23 waypoints, dist=123)"
+1,grid_dfs,potential_field,100,False,0,0,0.044735158793628216,5.252302169799805,404,"Failed to reach goal (reached 0/1 waypoints, dist=86)"
+1,grid_dfs,greedy,100,False,0,0,0.0312044620513916,100.00005006790161,506,"Failed to reach goal (reached 23/23 waypoints, dist=103)"
+1,grid_dfs,dwa,100,False,0,0,0.14128840068588033,9.465514898300171,731,"Failed to reach goal (reached 0/10 waypoints, dist=44)"
+1,astar,reactive_bfs,100,False,0,0,0.05699944496154785,100.00001978874207,186,"Failed to reach goal (reached 12/12 waypoints, dist=158)"
+1,astar,reactive_dfs,100,False,0,0,0.06610774993896484,25.31840682029724,2000,"Failed to reach goal (reached 1/12 waypoints, dist=128)"
+1,astar,potential_field,100,False,0,0,0.05677533149719238,100.0000422000885,84,"Failed to reach goal (reached 12/12 waypoints, dist=154)"
+1,astar,greedy,100,False,0,0,0.057015180587768555,25.302634954452515,2000,"Failed to reach goal (reached 6/12 waypoints, dist=122)"
+1,astar,dwa,100,True,343,98,0.05699443817138672,4.334569215774536,342,
+1,dijkstra,reactive_bfs,100,False,0,0,13.916541101352777,100.00003671646118,447,"Failed to reach goal (reached 8/8 waypoints, dist=75)"
+1,dijkstra,reactive_dfs,100,False,0,0,6.949290752410889,25.247519493103027,2000,"Failed to reach goal (reached 1/10 waypoints, dist=122)"
+1,dijkstra,potential_field,100,True,444,46,13.23085788579192,11.964261054992676,442,
+1,dijkstra,greedy,100,False,0,0,6.919747829437256,100.00001978874207,1355,"Failed to reach goal (reached 10/10 waypoints, dist=144)"
+1,dijkstra,dwa,100,True,381,102,14.069205680163577,11.907920122146606,379,
+1,grid_bfs,reactive_bfs,200,False,0,0,0.07256833871360868,100.00000548362732,322,"Failed to reach goal (reached 11/11 waypoints, dist=130)"
+1,grid_bfs,reactive_dfs,200,False,0,0,0.05462908744812012,100.00001931190491,1471,"Failed to reach goal (reached 10/10 waypoints, dist=139)"
+1,grid_bfs,potential_field,200,True,461,69,0.07254536880645901,6.0024940967559814,459,
+1,grid_bfs,greedy,200,True,473,110,0.04542851448059082,6.02369499206543,472,
+1,grid_bfs,dwa,200,True,438,135,0.06113911367719993,5.674185276031494,436,
+1,grid_dfs,reactive_bfs,200,False,0,0,0.031456708908081055,100.00001740455627,287,"Failed to reach goal (reached 23/23 waypoints, dist=141)"
+1,grid_dfs,reactive_dfs,200,False,0,0,0.031246423721313477,100.00003385543823,1276,"Failed to reach goal (reached 23/23 waypoints, dist=132)"
+1,grid_dfs,potential_field,200,False,0,0,0.04480362171307206,5.402037143707275,412,"Failed to reach goal (reached 0/1 waypoints, dist=86)"
+1,grid_dfs,greedy,200,False,0,0,0.031098365783691406,100.00005316734314,1782,"Failed to reach goal (reached 23/23 waypoints, dist=138)"
+1,grid_dfs,dwa,200,False,0,0,0.05081996216904372,100.00001430511475,368,"Failed to reach goal (reached 17/17 waypoints, dist=114)"
+1,astar,reactive_bfs,200,False,0,0,0.05734872817993164,100.00002145767212,49,"Failed to reach goal (reached 12/12 waypoints, dist=145)"
+1,astar,reactive_dfs,200,False,0,0,0.0569148063659668,100.00002574920654,444,"Failed to reach goal (reached 12/12 waypoints, dist=134)"
+1,astar,potential_field,200,False,0,0,0.057004451751708984,100.00004053115845,103,"Failed to reach goal (reached 12/12 waypoints, dist=149)"
+1,astar,greedy,200,False,0,0,0.05708956718444824,100.0000684261322,1439,"Failed to reach goal (reached 12/12 waypoints, dist=121)"
+1,astar,dwa,200,True,461,114,0.08909543533809483,5.9527082443237305,459,
+1,dijkstra,reactive_bfs,200,True,547,192,20.95652967802016,21.14883780479431,544,
+1,dijkstra,reactive_dfs,200,False,0,0,7.083963394165039,100.00002074241638,1389,"Failed to reach goal (reached 10/10 waypoints, dist=135)"
+1,dijkstra,potential_field,200,False,0,0,13.336566124577075,100.00004291534424,419,"Failed to reach goal (reached 7/7 waypoints, dist=51)"
+1,dijkstra,greedy,200,False,0,0,7.070318222045898,100.00006246566772,443,"Failed to reach goal (reached 10/10 waypoints, dist=81)"
+1,dijkstra,dwa,200,False,0,0,14.030673212429974,100.00006604194641,345,"Failed to reach goal (reached 8/8 waypoints, dist=49)"
+2,grid_bfs,reactive_bfs,0,True,321,126,0.032853126525878906,6.467367172241211,320,
+2,grid_bfs,reactive_dfs,0,False,0,0,0.03273129463195801,40.51535606384277,2000,"Failed to reach goal (reached 1/10 waypoints, dist=113)"
+2,grid_bfs,potential_field,0,True,309,80,0.055892348289489746,6.247497797012329,307,
+2,grid_bfs,greedy,0,False,0,0,0.03288722038269043,40.43572974205017,2000,"Failed to reach goal (reached 2/10 waypoints, dist=116)"
+2,grid_bfs,dwa,0,True,205,27,0.03275299072265625,4.140944242477417,204,
+2,grid_dfs,reactive_bfs,0,True,365,145,0.024676799774169922,7.403805255889893,364,
+2,grid_dfs,reactive_dfs,0,False,0,0,0.02464437484741211,40.38866972923279,2000,"Failed to reach goal (reached 1/10 waypoints, dist=113)"
+2,grid_dfs,potential_field,0,True,323,81,0.0385911192279309,6.5700390338897705,321,
+2,grid_dfs,greedy,0,False,0,0,0.024721860885620117,40.44546175003052,2000,"Failed to reach goal (reached 2/10 waypoints, dist=110)"
+2,grid_dfs,dwa,0,True,225,44,0.02455902099609375,4.564188718795776,224,
+2,astar,reactive_bfs,0,True,319,142,0.04129385948181152,6.431877136230469,318,
+2,astar,reactive_dfs,0,False,0,0,0.04127025604248047,40.70553636550903,2000,"Failed to reach goal (reached 1/10 waypoints, dist=113)"
+2,astar,potential_field,0,True,309,80,0.048362253641244024,6.273838043212891,307,
+2,astar,greedy,0,False,0,0,0.04112863540649414,40.446892738342285,2000,"Failed to reach goal (reached 2/10 waypoints, dist=116)"
+2,astar,dwa,0,True,205,40,0.05185556411743164,4.08231520652771,204,
+2,dijkstra,reactive_bfs,0,True,317,122,3.332987070083618,6.385081052780151,316,
+2,dijkstra,reactive_dfs,0,False,0,0,3.433624029159546,40.367921113967896,2000,"Failed to reach goal (reached 1/10 waypoints, dist=113)"
+2,dijkstra,potential_field,0,True,309,80,6.389566423371434,9.244087934494019,307,
+2,dijkstra,greedy,0,False,0,0,3.426290512084961,40.41288113594055,2000,"Failed to reach goal (reached 2/10 waypoints, dist=116)"
+2,dijkstra,dwa,0,True,204,41,3.3487818241119385,4.077371835708618,203,
+2,grid_bfs,reactive_bfs,50,False,0,0,0.03274989128112793,100.00002932548523,248,"Failed to reach goal (reached 10/10 waypoints, dist=55)"
+2,grid_bfs,reactive_dfs,50,False,0,0,0.03285074234008789,100.00002074241638,442,"Failed to reach goal (reached 10/10 waypoints, dist=113)"
+2,grid_bfs,potential_field,50,True,316,84,0.04511778958840296,6.440719127655029,314,
+2,grid_bfs,greedy,50,True,1400,1168,0.03271055221557617,28.375683546066284,1399,
+2,grid_bfs,dwa,50,True,237,47,0.03287911415100098,4.7965309619903564,236,
+2,grid_dfs,reactive_bfs,50,False,0,0,0.02470707893371582,100.00001454353333,373,"Failed to reach goal (reached 10/10 waypoints, dist=20)"
+2,grid_dfs,reactive_dfs,50,False,0,0,0.02474069595336914,40.66199851036072,2000,"Failed to reach goal (reached 1/10 waypoints, dist=113)"
+2,grid_dfs,potential_field,50,True,322,82,0.0380939765018411,6.546337604522705,320,
+2,grid_dfs,greedy,50,True,1211,968,0.024652957916259766,24.524689435958862,1210,
+2,grid_dfs,dwa,50,True,224,42,0.02463817596435547,4.560850381851196,223,
+2,astar,reactive_bfs,50,True,363,131,0.04131627082824707,7.3848817348480225,362,
+2,astar,reactive_dfs,50,False,0,0,0.05177426338195801,100.00003719329834,1001,"Failed to reach goal (reached 10/10 waypoints, dist=119)"
+2,astar,potential_field,50,True,309,80,0.048145979875698686,6.286592483520508,307,
+2,astar,greedy,50,True,879,663,0.041512489318847656,17.836344242095947,878,
+2,astar,dwa,50,True,207,48,0.04137873649597168,4.1767897605896,206,
+2,dijkstra,reactive_bfs,50,True,384,182,3.359553337097168,7.812273025512695,383,
+2,dijkstra,reactive_dfs,50,False,0,0,3.4335720539093018,100.00000429153442,83,"Failed to reach goal (reached 10/10 waypoints, dist=116)"
+2,dijkstra,potential_field,50,True,317,90,6.386623093276285,9.434453248977661,315,
+2,dijkstra,greedy,50,False,0,0,3.3892738819122314,40.54158544540405,2000,"Failed to reach goal (reached 2/10 waypoints, dist=116)"
+2,dijkstra,dwa,50,True,211,46,3.448089361190796,4.279075384140015,210,
+2,grid_bfs,reactive_bfs,100,False,0,0,0.03286314010620117,100.00004243850708,259,"Failed to reach goal (reached 10/10 waypoints, dist=52)"
+2,grid_bfs,reactive_dfs,100,False,0,0,0.03280234336853027,41.001222133636475,2000,"Failed to reach goal (reached 1/10 waypoints, dist=119)"
+2,grid_bfs,potential_field,100,True,309,84,0.04515339946374297,6.3310019969940186,307,
+2,grid_bfs,greedy,100,True,628,403,0.04324030876159668,12.708070755004883,627,
+2,grid_bfs,dwa,100,True,219,53,0.03279232978820801,4.436146974563599,218,
+2,grid_dfs,reactive_bfs,100,False,0,0,0.02468252182006836,100.00001525878906,154,"Failed to reach goal (reached 10/10 waypoints, dist=131)"
+2,grid_dfs,reactive_dfs,100,False,0,0,0.0246279239654541,100.0000524520874,980,"Failed to reach goal (reached 10/10 waypoints, dist=116)"
+2,grid_dfs,potential_field,100,True,327,83,0.03828922985121608,6.679128646850586,325,
+2,grid_dfs,greedy,100,False,0,0,0.024683237075805664,100.00002551078796,62,"Failed to reach goal (reached 10/10 waypoints, dist=131)"
+2,grid_dfs,dwa,100,True,264,78,0.024762392044067383,5.392348289489746,263,
+2,astar,reactive_bfs,100,False,0,0,0.04117846488952637,100.00001430511475,291,"Failed to reach goal (reached 10/10 waypoints, dist=37)"
+2,astar,reactive_dfs,100,False,0,0,0.04141521453857422,100.00002145767212,1010,"Failed to reach goal (reached 10/10 waypoints, dist=115)"
+2,astar,potential_field,100,True,309,80,0.048343546921387315,6.339807033538818,307,
+2,astar,greedy,100,True,1275,1060,0.0413966178894043,26.044942140579224,1274,
+2,astar,dwa,100,True,216,57,0.04114341735839844,4.4005067348480225,215,
+2,dijkstra,reactive_bfs,100,False,0,0,3.4383950233459473,100.00001192092896,175,"Failed to reach goal (reached 10/10 waypoints, dist=110)"
+2,dijkstra,reactive_dfs,100,False,0,0,3.391730546951294,100.00000500679016,554,"Failed to reach goal (reached 10/10 waypoints, dist=115)"
+2,dijkstra,potential_field,100,True,317,82,3.4379446506500244,6.473307132720947,316,
+2,dijkstra,greedy,100,True,743,527,3.4069035053253174,15.168550491333008,742,
+2,dijkstra,dwa,100,True,204,51,3.4317209720611572,4.160515546798706,203,
+2,grid_bfs,reactive_bfs,200,True,383,186,0.03266000747680664,7.936642646789551,382,
+2,grid_bfs,reactive_dfs,200,False,0,0,0.03523516654968262,100.00002193450928,674,"Failed to reach goal (reached 10/10 waypoints, dist=120)"
+2,grid_bfs,potential_field,200,True,318,86,0.045243695261888206,6.604785203933716,316,
+2,grid_bfs,greedy,200,True,399,174,0.04394125938415527,8.244110822677612,398,
+2,grid_bfs,dwa,200,False,0,0,0.03278923034667969,100.00000882148743,222,"Failed to reach goal (reached 10/10 waypoints, dist=28)"
+2,grid_dfs,reactive_bfs,200,False,0,0,0.024736881256103516,100.00000429153442,128,"Failed to reach goal (reached 10/10 waypoints, dist=133)"
+2,grid_dfs,reactive_dfs,200,False,0,0,0.024636268615722656,100.00002121925354,330,"Failed to reach goal (reached 10/10 waypoints, dist=120)"
+2,grid_dfs,potential_field,200,True,325,83,0.03834936558268964,6.737086296081543,323,
+2,grid_dfs,greedy,200,True,445,203,0.024736881256103516,9.174500703811646,444,
+2,grid_dfs,dwa,200,False,0,0,0.05218389356741682,100.00005221366882,241,"Failed to reach goal (reached 9/9 waypoints, dist=74)"
+2,astar,reactive_bfs,200,False,0,0,0.051941633224487305,100.00002098083496,60,"Failed to reach goal (reached 10/10 waypoints, dist=133)"
+2,astar,reactive_dfs,200,False,0,0,0.04152512550354004,100.0000352859497,941,"Failed to reach goal (reached 10/10 waypoints, dist=125)"
+2,astar,potential_field,200,True,401,135,0.04834563913755119,8.314207553863525,399,
+2,astar,greedy,200,False,0,0,0.041529178619384766,100.00000810623169,671,"Failed to reach goal (reached 10/10 waypoints, dist=36)"
+2,astar,dwa,200,True,261,104,0.04123663902282715,5.37917160987854,260,
+2,dijkstra,reactive_bfs,200,True,352,160,3.434558629989624,7.2723000049591064,351,
+2,dijkstra,reactive_dfs,200,False,0,0,3.3832614421844482,100.00000619888306,248,"Failed to reach goal (reached 10/10 waypoints, dist=116)"
+2,dijkstra,potential_field,200,True,309,90,6.363437793799676,9.508040428161621,307,
+2,dijkstra,greedy,200,True,370,160,3.4454503059387207,7.630764007568359,369,
+2,dijkstra,dwa,200,False,0,0,3.3895046710968018,100.00001788139343,59,"Failed to reach goal (reached 10/10 waypoints, dist=132)"
+3,grid_bfs,reactive_bfs,0,True,241,38,0.04965043067932129,2.2335729598999023,240,
+3,grid_bfs,reactive_dfs,0,False,0,0,0.049397945404052734,18.811302661895752,2000,"Failed to reach goal (reached 1/5 waypoints, dist=233)"
+3,grid_bfs,potential_field,0,True,237,21,0.0579683780670166,2.193373203277588,236,
+3,grid_bfs,greedy,0,True,248,27,0.04950451850891113,2.292717218399048,247,
+3,grid_bfs,dwa,0,True,211,19,0.049390554428100586,1.9609036445617676,210,
+3,grid_dfs,reactive_bfs,0,True,245,20,0.022093534469604492,2.268871307373047,244,
+3,grid_dfs,reactive_dfs,0,False,0,0,0.021926164627075195,18.58734369277954,2000,"Failed to reach goal (reached 1/4 waypoints, dist=233)"
+3,grid_dfs,potential_field,0,True,241,7,0.0219724178314209,2.2650599479675293,240,
+3,grid_dfs,greedy,0,True,244,18,0.021826744079589844,2.2500085830688477,243,
+3,grid_dfs,dwa,0,True,233,16,0.030864238739013672,2.1708903312683105,232,
+3,astar,reactive_bfs,0,True,247,37,0.08201217651367188,2.287295341491699,246,
+3,astar,reactive_dfs,0,False,0,0,0.08177661895751953,18.674830436706543,2000,"Failed to reach goal (reached 1/5 waypoints, dist=233)"
+3,astar,potential_field,0,True,235,6,0.09139752388000488,2.2031331062316895,234,
+3,astar,greedy,0,True,242,17,0.08178377151489258,2.2368619441986084,241,
+3,astar,dwa,0,True,219,21,0.08159685134887695,2.031153917312622,218,
+3,dijkstra,reactive_bfs,0,True,239,40,8.646859884262085,2.2055931091308594,238,
+3,dijkstra,reactive_dfs,0,False,0,0,8.734593152999878,18.763274669647217,2000,"Failed to reach goal (reached 1/5 waypoints, dist=233)"
+3,dijkstra,potential_field,0,True,237,21,8.694887161254883,2.215846538543701,236,
+3,dijkstra,greedy,0,True,248,27,8.820625066757202,2.287421703338623,247,
+3,dijkstra,dwa,0,True,211,19,8.647788047790527,1.9613358974456787,210,
+3,grid_bfs,reactive_bfs,50,True,273,68,0.04967951774597168,2.5714948177337646,272,
+3,grid_bfs,reactive_dfs,50,False,0,0,0.058808088302612305,18.999786853790283,2000,"Failed to reach goal (reached 1/5 waypoints, dist=233)"
+3,grid_bfs,potential_field,50,True,237,21,0.04964256286621094,2.24833083152771,236,
+3,grid_bfs,greedy,50,True,256,44,0.04952359199523926,2.389960765838623,255,
+3,grid_bfs,dwa,50,True,211,19,0.058691978454589844,1.9808177947998047,210,
+3,grid_dfs,reactive_bfs,50,True,255,39,0.02187490463256836,2.4123799800872803,254,
+3,grid_dfs,reactive_dfs,50,False,0,0,0.02186870574951172,18.905366897583008,2000,"Failed to reach goal (reached 1/4 waypoints, dist=223)"
+3,grid_dfs,potential_field,50,True,241,7,0.02187347412109375,2.273585557937622,240,
+3,grid_dfs,greedy,50,False,0,0,0.0219419002532959,100.00001859664917,188,"Failed to reach goal (reached 4/4 waypoints, dist=72)"
+3,grid_dfs,dwa,50,True,233,20,0.022078990936279297,2.1930835247039795,232,
+3,astar,reactive_bfs,50,True,259,60,0.08173203468322754,2.4334163665771484,258,
+3,astar,reactive_dfs,50,False,0,0,0.0819251537322998,18.825010538101196,2000,"Failed to reach goal (reached 1/5 waypoints, dist=231)"
+3,astar,potential_field,50,True,237,8,0.08183097839355469,2.241156816482544,236,
+3,astar,greedy,50,True,252,31,0.08242440223693848,2.3492372035980225,251,
+3,astar,dwa,50,True,232,43,0.09065413475036621,2.175753593444824,231,
+3,dijkstra,reactive_bfs,50,True,243,47,8.65164065361023,2.2838902473449707,242,
+3,dijkstra,reactive_dfs,50,False,0,0,8.599663734436035,19.01917576789856,2000,"Failed to reach goal (reached 1/5 waypoints, dist=229)"
+3,dijkstra,potential_field,50,True,237,21,8.839564800262451,2.2492854595184326,236,
+3,dijkstra,greedy,50,True,250,32,8.63691520690918,2.332406997680664,249,
+3,dijkstra,dwa,50,True,239,39,8.681151866912842,2.247422695159912,238,
+3,grid_bfs,reactive_bfs,100,True,267,66,0.04964447021484375,2.5393173694610596,266,
+3,grid_bfs,reactive_dfs,100,False,0,0,0.04956626892089844,100.00001430511475,1526,"Failed to reach goal (reached 5/5 waypoints, dist=219)"
+3,grid_bfs,potential_field,100,False,0,0,0.04967784881591797,100.00001835823059,160,"Failed to reach goal (reached 5/5 waypoints, dist=79)"
+3,grid_bfs,greedy,100,False,0,0,0.05871891975402832,100.00002193450928,64,"Failed to reach goal (reached 5/5 waypoints, dist=172)"
+3,grid_bfs,dwa,100,True,212,29,0.049570322036743164,2.0368990898132324,211,
+3,grid_dfs,reactive_bfs,100,True,275,57,0.021854400634765625,2.621793508529663,274,
+3,grid_dfs,reactive_dfs,100,False,0,0,0.02187061309814453,19.130423545837402,2000,"Failed to reach goal (reached 1/4 waypoints, dist=231)"
+3,grid_dfs,potential_field,100,True,241,9,0.021907329559326172,2.3170166015625,240,
+3,grid_dfs,greedy,100,True,279,63,0.0218355655670166,2.6422557830810547,278,
+3,grid_dfs,dwa,100,True,257,62,0.021874427795410156,2.452920436859131,256,
+3,astar,reactive_bfs,100,True,269,68,0.08163022994995117,2.565264940261841,268,
+3,astar,reactive_dfs,100,False,0,0,0.08222436904907227,100.00002837181091,679,"Failed to reach goal (reached 5/5 waypoints, dist=223)"
+3,astar,potential_field,100,True,237,8,0.08186745643615723,2.272286891937256,236,
+3,astar,greedy,100,False,0,0,0.09034895896911621,100.00005984306335,248,"Failed to reach goal (reached 5/5 waypoints, dist=10)"
+3,astar,dwa,100,False,0,0,0.08198142051696777,100.00005030632019,193,"Failed to reach goal (reached 5/5 waypoints, dist=38)"
+3,dijkstra,reactive_bfs,100,True,257,58,8.534584760665894,2.4810585975646973,256,
+3,dijkstra,reactive_dfs,100,False,0,0,8.797298431396484,19.2195143699646,2000,"Failed to reach goal (reached 1/5 waypoints, dist=233)"
+3,dijkstra,potential_field,100,True,237,25,8.788001537322998,2.271496295928955,236,
+3,dijkstra,greedy,100,False,0,0,8.749428749084473,100.00006198883057,179,"Failed to reach goal (reached 5/5 waypoints, dist=113)"
+3,dijkstra,dwa,100,True,211,31,8.868527173995972,2.007411003112793,210,
+3,grid_bfs,reactive_bfs,200,False,0,0,0.04948711395263672,100.00002717971802,10,"Failed to reach goal (reached 5/5 waypoints, dist=219)"
+3,grid_bfs,reactive_dfs,200,False,0,0,0.049681663513183594,100.00004196166992,260,"Failed to reach goal (reached 5/5 waypoints, dist=231)"
+3,grid_bfs,potential_field,200,True,231,25,0.05859088897705078,2.2768166065216064,230,
+3,grid_bfs,greedy,200,True,267,49,0.04939889907836914,2.594486713409424,266,
+3,grid_bfs,dwa,200,True,228,49,0.04930996894836426,2.2359697818756104,227,
+3,grid_dfs,reactive_bfs,200,False,0,0,0.02195906639099121,100.00001502037048,165,"Failed to reach goal (reached 4/4 waypoints, dist=114)"
+3,grid_dfs,reactive_dfs,200,False,0,0,0.021841764450073242,100.0000307559967,259,"Failed to reach goal (reached 4/4 waypoints, dist=240)"
+3,grid_dfs,potential_field,200,True,288,17,0.024588988220784813,2.8460588455200195,286,
+3,grid_dfs,greedy,200,False,0,0,0.02181386947631836,100.00002121925354,125,"Failed to reach goal (reached 4/4 waypoints, dist=118)"
+3,grid_dfs,dwa,200,False,0,0,0.02207350730895996,100.00005960464478,238,"Failed to reach goal (reached 4/4 waypoints, dist=32)"
+3,astar,reactive_bfs,200,False,0,0,0.08179831504821777,100.0000114440918,43,"Failed to reach goal (reached 5/5 waypoints, dist=199)"
+3,astar,reactive_dfs,200,False,0,0,0.08196663856506348,19.704774856567383,2000,"Failed to reach goal (reached 1/5 waypoints, dist=238)"
+3,astar,potential_field,200,True,238,14,0.0911111831665039,2.3668017387390137,237,
+3,astar,greedy,200,True,258,32,0.08173346519470215,2.5160117149353027,257,
+3,astar,dwa,200,True,292,70,0.09462522913236171,2.8687856197357178,290,
+3,dijkstra,reactive_bfs,200,True,280,86,8.795156478881836,2.7382824420928955,279,
+3,dijkstra,reactive_dfs,200,False,0,0,8.74097752571106,100.00004196166992,1273,"Failed to reach goal (reached 5/5 waypoints, dist=206)"
+3,dijkstra,potential_field,200,False,0,0,8.752411842346191,100.00005388259888,163,"Failed to reach goal (reached 5/5 waypoints, dist=108)"
+3,dijkstra,greedy,200,False,0,0,8.81555700302124,100.00002908706665,31,"Failed to reach goal (reached 5/5 waypoints, dist=211)"
+3,dijkstra,dwa,200,True,248,99,8.763122797012329,2.43017578125,247,
+4,grid_bfs,reactive_bfs,0,True,180,71,0.04782891273498535,3.2887606620788574,179,
+4,grid_bfs,reactive_dfs,0,False,0,0,0.04851675033569336,36.74858379364014,2000,"Failed to reach goal (reached 1/6 waypoints, dist=70)"
+4,grid_bfs,potential_field,0,True,204,51,0.03898262977600098,3.7274155616760254,203,
+4,grid_bfs,greedy,0,True,187,28,0.03870820999145508,3.386129140853882,186,
+4,grid_bfs,dwa,0,True,108,15,0.038687705993652344,1.9528601169586182,107,
+4,grid_dfs,reactive_bfs,0,False,0,0,0.0227813720703125,36.64236783981323,2000,"Failed to reach goal (reached 4/10 waypoints, dist=36)"
+4,grid_dfs,reactive_dfs,0,False,0,0,0.027910274046007544,36.73775768280029,2000,"Failed to reach goal (reached 1/10 waypoints, dist=70)"
+4,grid_dfs,potential_field,0,False,0,0,0.022935152053833008,36.944960594177246,2000,"Failed to reach goal (reached 2/10 waypoints, dist=70)"
+4,grid_dfs,greedy,0,False,0,0,0.022850513458251953,36.606717348098755,2000,"Failed to reach goal (reached 4/10 waypoints, dist=35)"
+4,grid_dfs,dwa,0,False,0,0,0.022827863693237305,36.74189782142639,2000,"Failed to reach goal (reached 4/10 waypoints, dist=34)"
+4,astar,reactive_bfs,0,True,182,93,0.049745798110961914,3.338038921356201,181,
+4,astar,reactive_dfs,0,False,0,0,0.04993295669555664,36.72138428688049,2000,"Failed to reach goal (reached 1/6 waypoints, dist=70)"
+4,astar,potential_field,0,True,204,49,0.04958820343017578,3.697876214981079,203,
+4,astar,greedy,0,True,187,26,0.0494234561920166,3.386319398880005,186,
+4,astar,dwa,0,True,108,13,0.0497133731842041,1.948068380355835,107,
+4,dijkstra,reactive_bfs,0,True,182,77,4.688459396362305,3.3119919300079346,181,
+4,dijkstra,reactive_dfs,0,False,0,0,4.634488582611084,36.622416734695435,2000,"Failed to reach goal (reached 1/6 waypoints, dist=70)"
+4,dijkstra,potential_field,0,True,204,51,4.637779951095581,3.7296433448791504,203,
+4,dijkstra,greedy,0,True,187,28,4.705713748931885,3.3954765796661377,186,
+4,dijkstra,dwa,0,True,108,15,4.626699209213257,1.958646297454834,107,
+4,grid_bfs,reactive_bfs,50,False,0,0,0.03893399238586426,100.00002646446228,94,"Failed to reach goal (reached 6/6 waypoints, dist=47)"
+4,grid_bfs,reactive_dfs,50,False,0,0,0.038831233978271484,36.98260736465454,2000,"Failed to reach goal (reached 1/6 waypoints, dist=64)"
+4,grid_bfs,potential_field,50,True,204,52,0.04935002326965332,3.7358288764953613,203,
+4,grid_bfs,greedy,50,True,192,34,0.03879666328430176,3.5104973316192627,191,
+4,grid_bfs,dwa,50,True,109,19,0.03879404067993164,1.983199119567871,108,
+4,grid_dfs,reactive_bfs,50,False,0,0,0.0226900577545166,100.00003027915955,1400,"Failed to reach goal (reached 10/10 waypoints, dist=35)"
+4,grid_dfs,reactive_dfs,50,False,0,0,0.028050819819327444,100.0000479221344,170,"Failed to reach goal (reached 10/10 waypoints, dist=72)"
+4,grid_dfs,potential_field,50,False,0,0,0.033197879791259766,36.77275228500366,2000,"Failed to reach goal (reached 2/10 waypoints, dist=70)"
+4,grid_dfs,greedy,50,False,0,0,0.0227658748626709,100.00003552436829,1988,"Failed to reach goal (reached 10/10 waypoints, dist=35)"
+4,grid_dfs,dwa,50,False,0,0,0.04952757997671142,13.316269636154175,716,"Failed to reach goal (reached 0/11 waypoints, dist=103)"
+4,astar,reactive_bfs,50,True,191,95,0.049620628356933594,3.509357213973999,190,
+4,astar,reactive_dfs,50,False,0,0,0.04946279525756836,100.00000810623169,1507,"Failed to reach goal (reached 6/6 waypoints, dist=71)"
+4,astar,potential_field,50,True,204,51,0.04965782165527344,3.7453064918518066,203,
+4,astar,greedy,50,True,187,28,0.04959869384765625,3.4214706420898438,186,
+4,astar,dwa,50,True,108,13,0.04963803291320801,1.9707341194152832,107,
+4,dijkstra,reactive_bfs,50,True,186,80,4.698329448699951,3.427018404006958,185,
+4,dijkstra,reactive_dfs,50,False,0,0,4.694647789001465,100.00001955032349,1356,"Failed to reach goal (reached 6/6 waypoints, dist=70)"
+4,dijkstra,potential_field,50,True,206,49,4.622192621231079,3.8000688552856445,205,
+4,dijkstra,greedy,50,True,193,36,4.66046929359436,3.5195891857147217,192,
+4,dijkstra,dwa,50,True,114,20,4.632988214492798,2.0868210792541504,113,
+4,grid_bfs,reactive_bfs,100,True,184,81,0.03890728950500488,3.4016923904418945,183,
+4,grid_bfs,reactive_dfs,100,False,0,0,0.03887343406677246,100.00001525878906,415,"Failed to reach goal (reached 6/6 waypoints, dist=63)"
+4,grid_bfs,potential_field,100,True,204,51,0.049141883850097656,3.779099464416504,203,
+4,grid_bfs,greedy,100,True,189,34,0.03906750679016113,3.4699854850769043,188,
+4,grid_bfs,dwa,100,True,114,32,0.03892683982849121,2.0917906761169434,113,
+4,grid_dfs,reactive_bfs,100,False,0,0,0.022803544998168945,100.000004529953,927,"Failed to reach goal (reached 10/10 waypoints, dist=35)"
+4,grid_dfs,reactive_dfs,100,False,0,0,0.03926983801648021,37.168782234191895,2000,"Failed to reach goal (reached 1/11 waypoints, dist=87)"
+4,grid_dfs,potential_field,100,False,0,0,0.033128976821899414,100.00004386901855,73,"Failed to reach goal (reached 10/10 waypoints, dist=75)"
+4,grid_dfs,greedy,100,False,0,0,0.0229952335357666,100.00002360343933,452,"Failed to reach goal (reached 10/10 waypoints, dist=36)"
+4,grid_dfs,dwa,100,False,0,0,0.022673368453979492,100.00007438659668,169,"Failed to reach goal (reached 10/10 waypoints, dist=32)"
+4,astar,reactive_bfs,100,False,0,0,0.04948854446411133,100.00004243850708,181,"Failed to reach goal (reached 6/6 waypoints, dist=11)"
+4,astar,reactive_dfs,100,False,0,0,0.07317218335811049,37.29391050338745,2000,"Failed to reach goal (reached 1/5 waypoints, dist=99)"
+4,astar,potential_field,100,True,204,49,0.06011152267456055,3.755354642868042,203,
+4,astar,greedy,100,True,187,26,0.049608707427978516,3.429664373397827,186,
+4,astar,dwa,100,True,155,36,0.049711559782736,2.8452019691467285,153,
+4,dijkstra,reactive_bfs,100,True,186,87,4.670703172683716,3.438748359680176,185,
+4,dijkstra,reactive_dfs,100,False,0,0,4.695280075073242,100.00001406669617,210,"Failed to reach goal (reached 6/6 waypoints, dist=70)"
+4,dijkstra,potential_field,100,True,202,50,4.648591041564941,3.7401645183563232,201,
+4,dijkstra,greedy,100,True,205,42,4.615323781967163,3.8169939517974854,204,
+4,dijkstra,dwa,100,True,108,15,4.637465238571167,1.986009120941162,107,
+4,grid_bfs,reactive_bfs,200,True,197,73,0.0390315055847168,3.698699712753296,196,
+4,grid_bfs,reactive_dfs,200,False,0,0,0.03885674476623535,100.00002360343933,6,"Failed to reach goal (reached 6/6 waypoints, dist=54)"
+4,grid_bfs,potential_field,200,True,232,77,0.049190521240234375,4.35959267616272,231,
+4,grid_bfs,greedy,200,True,220,61,0.04120302200317383,4.108484983444214,219,
+4,grid_bfs,dwa,200,False,0,0,0.03875231742858887,100.00001311302185,110,"Failed to reach goal (reached 6/6 waypoints, dist=25)"
+4,grid_dfs,reactive_bfs,200,False,0,0,0.022846460342407227,100.00000882148743,234,"Failed to reach goal (reached 10/10 waypoints, dist=55)"
+4,grid_dfs,reactive_dfs,200,False,0,0,0.02806353208143264,100.00001287460327,451,"Failed to reach goal (reached 10/10 waypoints, dist=67)"
+4,grid_dfs,potential_field,200,False,0,0,0.033737897872924805,100.00003337860107,167,"Failed to reach goal (reached 10/10 waypoints, dist=71)"
+4,grid_dfs,greedy,200,False,0,0,0.022830724716186523,100.0000205039978,1179,"Failed to reach goal (reached 10/10 waypoints, dist=35)"
+4,grid_dfs,dwa,200,False,0,0,0.02280902862548828,100.000009059906,76,"Failed to reach goal (reached 10/10 waypoints, dist=54)"
+4,astar,reactive_bfs,200,True,194,90,0.04981279373168945,3.6276750564575195,193,
+4,astar,reactive_dfs,200,False,0,0,0.04941821098327637,37.695563554763794,2000,"Failed to reach goal (reached 1/6 waypoints, dist=64)"
+4,astar,potential_field,200,True,210,55,0.05989837646484375,3.9311110973358154,209,
+4,astar,greedy,200,True,229,75,0.04974842071533203,4.255977630615234,228,
+4,astar,dwa,200,True,189,69,0.08267708751372993,3.5629806518554688,187,
+4,dijkstra,reactive_bfs,200,False,0,0,4.65664005279541,100.00000929832458,49,"Failed to reach goal (reached 6/6 waypoints, dist=50)"
+4,dijkstra,reactive_dfs,200,False,0,0,8.988820543978363,100.00000953674316,686,"Failed to reach goal (reached 6/6 waypoints, dist=92)"
+4,dijkstra,potential_field,200,True,208,55,4.652505159378052,3.8935294151306152,207,
+4,dijkstra,greedy,200,False,0,0,4.660327911376953,100.00001645088196,119,"Failed to reach goal (reached 6/6 waypoints, dist=46)"
+4,dijkstra,dwa,200,True,122,21,4.649880886077881,2.272814989089966,121,
+5,grid_bfs,reactive_bfs,0,True,225,87,0.04244565963745117,4.392751216888428,224,
+5,grid_bfs,reactive_dfs,0,False,0,0,0.04238772392272949,38.71707773208618,2000,"Failed to reach goal (reached 1/6 waypoints, dist=195)"
+5,grid_bfs,potential_field,0,True,235,9,0.0670430107275024,4.611298322677612,233,
+5,grid_bfs,greedy,0,False,0,0,0.04250979423522949,39.17037487030029,2000,"Failed to reach goal (reached 1/6 waypoints, dist=164)"
+5,grid_bfs,dwa,0,True,153,21,0.042608022689819336,2.968675374984741,152,
+5,grid_dfs,reactive_bfs,0,True,347,87,0.06353367678821087,6.79502010345459,345,
+5,grid_dfs,reactive_dfs,0,False,0,0,0.04000401496887207,38.87449932098389,2000,"Failed to reach goal (reached 1/4 waypoints, dist=195)"
+5,grid_dfs,potential_field,0,True,275,8,0.056245067389681935,5.380587100982666,273,
+5,grid_dfs,greedy,0,False,0,0,0.05035710334777832,39.06286907196045,2000,"Failed to reach goal (reached 1/4 waypoints, dist=164)"
+5,grid_dfs,dwa,0,True,460,44,0.11202493705786765,9.056021690368652,456,
+5,astar,reactive_bfs,0,True,225,76,0.03684735298156738,4.364077568054199,224,
+5,astar,reactive_dfs,0,False,0,0,0.02580404281616211,39.03428053855896,2000,"Failed to reach goal (reached 1/6 waypoints, dist=195)"
+5,astar,potential_field,0,True,235,10,0.032357673975639045,4.586687803268433,233,
+5,astar,greedy,0,False,0,0,0.025783300399780273,38.95780158042908,2000,"Failed to reach goal (reached 1/6 waypoints, dist=164)"
+5,astar,dwa,0,True,152,20,0.025825977325439453,2.9522616863250732,151,
+5,dijkstra,reactive_bfs,0,True,223,66,4.556074857711792,4.361270189285278,222,
+5,dijkstra,reactive_dfs,0,False,0,0,4.483814239501953,39.193583965301514,2000,"Failed to reach goal (reached 1/6 waypoints, dist=195)"
+5,dijkstra,potential_field,0,True,235,9,9.060102911142167,9.119734048843384,233,
+5,dijkstra,greedy,0,False,0,0,4.56430196762085,39.07103681564331,2000,"Failed to reach goal (reached 1/6 waypoints, dist=164)"
+5,dijkstra,dwa,0,True,153,21,4.47724986076355,2.9686989784240723,152,
+5,grid_bfs,reactive_bfs,50,True,248,107,0.04242253303527832,4.837579011917114,247,
+5,grid_bfs,reactive_dfs,50,False,0,0,0.04236006736755371,39.26359176635742,2000,"Failed to reach goal (reached 1/6 waypoints, dist=201)"
+5,grid_bfs,potential_field,50,True,235,11,0.07748009101487696,4.6386778354644775,233,
+5,grid_bfs,greedy,50,False,0,0,0.04253792762756348,39.25117373466492,2000,"Failed to reach goal (reached 1/6 waypoints, dist=164)"
+5,grid_bfs,dwa,50,True,162,34,0.052771806716918945,3.1736602783203125,161,
+5,grid_dfs,reactive_bfs,50,True,357,94,0.06393982673762366,7.041871070861816,355,
+5,grid_dfs,reactive_dfs,50,False,0,0,0.0400545597076416,39.240673303604126,2000,"Failed to reach goal (reached 1/4 waypoints, dist=207)"
+5,grid_dfs,potential_field,50,True,275,8,0.05623648699838668,5.430048704147339,273,
+5,grid_dfs,greedy,50,False,0,0,0.04007887840270996,39.315677881240845,2000,"Failed to reach goal (reached 2/4 waypoints, dist=50)"
+5,grid_dfs,dwa,50,True,471,66,0.11115231894655153,9.322183847427368,467,
+5,astar,reactive_bfs,50,True,235,76,0.0257418155670166,4.621841192245483,234,
+5,astar,reactive_dfs,50,False,0,0,0.02575087547302246,39.27488160133362,2000,"Failed to reach goal (reached 1/6 waypoints, dist=195)"
+5,astar,potential_field,50,True,235,10,0.03229613124858588,4.613078594207764,233,
+5,astar,greedy,50,True,567,355,0.025653839111328125,11.087059259414673,566,
+5,astar,dwa,50,True,187,24,0.04324550018645823,3.682072877883911,185,
+5,dijkstra,reactive_bfs,50,True,258,83,8.197607839014381,8.87000560760498,256,
+5,dijkstra,reactive_dfs,50,False,0,0,4.491899490356445,100.00003910064697,1588,"Failed to reach goal (reached 6/6 waypoints, dist=191)"
+5,dijkstra,potential_field,50,True,235,9,9.076797499903478,9.127410173416138,233,
+5,dijkstra,greedy,50,True,1698,1486,4.559282541275024,33.31848740577698,1697,
+5,dijkstra,dwa,50,True,206,31,7.813848546065856,7.368622064590454,204,
+5,grid_bfs,reactive_bfs,100,False,0,0,0.042581796646118164,100.00003719329834,234,"Failed to reach goal (reached 6/6 waypoints, dist=15)"
+5,grid_bfs,reactive_dfs,100,False,0,0,0.042749881744384766,39.47995042800903,2000,"Failed to reach goal (reached 1/6 waypoints, dist=196)"
+5,grid_bfs,potential_field,100,True,235,11,0.07792555773630738,4.649869203567505,233,
+5,grid_bfs,greedy,100,False,0,0,0.04239797592163086,100.0000216960907,558,"Failed to reach goal (reached 6/6 waypoints, dist=164)"
+5,grid_bfs,dwa,100,True,155,31,0.05338144302368164,3.0392258167266846,154,
+5,grid_dfs,reactive_bfs,100,False,0,0,0.0638990672887303,100.00002098083496,381,"Failed to reach goal (reached 4/4 waypoints, dist=5)"
+5,grid_dfs,reactive_dfs,100,False,0,0,0.040033578872680664,39.547078371047974,2000,"Failed to reach goal (reached 1/4 waypoints, dist=203)"
+5,grid_dfs,potential_field,100,True,275,8,0.05603674828307703,5.439364910125732,273,
+5,grid_dfs,greedy,100,True,511,247,0.040053367614746094,10.048941373825073,510,
+5,grid_dfs,dwa,100,True,478,69,0.11098233266966417,9.501652240753174,474,
+5,astar,reactive_bfs,100,True,241,88,0.02568221092224121,4.7482781410217285,240,
+5,astar,reactive_dfs,100,False,0,0,0.025699377059936523,39.54605054855347,2000,"Failed to reach goal (reached 1/6 waypoints, dist=200)"
+5,astar,potential_field,100,True,237,14,0.03218183951685205,4.691164255142212,235,
+5,astar,greedy,100,False,0,0,0.03630876541137695,100.0000638961792,1167,"Failed to reach goal (reached 6/6 waypoints, dist=163)"
+5,astar,dwa,100,True,154,28,0.025806903839111328,3.021576404571533,153,
+5,dijkstra,reactive_bfs,100,True,227,93,4.413488149642944,4.4828667640686035,226,
+5,dijkstra,reactive_dfs,100,False,0,0,4.484974145889282,100.00004506111145,946,"Failed to reach goal (reached 6/6 waypoints, dist=191)"
+5,dijkstra,potential_field,100,True,237,11,9.086062694666907,9.16590690612793,235,
+5,dijkstra,greedy,100,True,248,41,4.5091025829315186,4.891862392425537,247,
+5,dijkstra,dwa,100,True,153,30,4.53616738319397,3.0128543376922607,152,
+5,grid_bfs,reactive_bfs,200,True,256,113,0.04333090782165527,5.113816976547241,255,
+5,grid_bfs,reactive_dfs,200,False,0,0,0.04253864288330078,100.00002884864807,1720,"Failed to reach goal (reached 6/6 waypoints, dist=202)"
+5,grid_bfs,potential_field,200,True,223,13,0.04249715805053711,4.453948974609375,222,
+5,grid_bfs,greedy,200,False,0,0,0.04254865646362305,100.00006246566772,277,"Failed to reach goal (reached 6/6 waypoints, dist=164)"
+5,grid_bfs,dwa,200,True,158,30,0.0482701490400359,3.1465702056884766,156,
+5,grid_dfs,reactive_bfs,200,False,0,0,0.050445556640625,100.00003266334534,65,"Failed to reach goal (reached 4/4 waypoints, dist=178)"
+5,grid_dfs,reactive_dfs,200,False,0,0,0.04014420509338379,100.00002408027649,892,"Failed to reach goal (reached 4/4 waypoints, dist=189)"
+5,grid_dfs,potential_field,200,True,277,8,0.05614082148531452,5.553415775299072,275,
+5,grid_dfs,greedy,200,False,0,0,0.0400087833404541,100.00003814697266,1504,"Failed to reach goal (reached 4/4 waypoints, dist=50)"
+5,grid_dfs,dwa,200,True,300,66,0.06373970775166526,6.005844593048096,298,
+5,astar,reactive_bfs,200,True,247,99,0.025962114334106445,4.935797214508057,246,
+5,astar,reactive_dfs,200,False,0,0,0.025801897048950195,40.103885889053345,2000,"Failed to reach goal (reached 1/6 waypoints, dist=216)"
+5,astar,potential_field,200,True,244,22,0.03221680014394224,4.877798080444336,242,
+5,astar,greedy,200,True,243,54,0.02583146095275879,4.8363447189331055,242,
+5,astar,dwa,200,True,168,52,0.025715351104736328,3.3407442569732666,167,
+5,dijkstra,reactive_bfs,200,True,260,96,4.550130367279053,5.204922914505005,259,
+5,dijkstra,reactive_dfs,200,False,0,0,4.510267496109009,100.00002360343933,854,"Failed to reach goal (reached 6/6 waypoints, dist=199)"
+5,dijkstra,potential_field,200,True,237,15,8.974280807131436,9.236730813980103,235,
+5,dijkstra,greedy,200,False,0,0,4.5485217571258545,100.00002717971802,64,"Failed to reach goal (reached 6/6 waypoints, dist=164)"
+5,dijkstra,dwa,200,True,213,46,8.985740251548123,8.754954099655151,211,
+6,grid_bfs,reactive_bfs,0,True,223,74,0.05257081985473633,1.6971080303192139,222,
+6,grid_bfs,reactive_dfs,0,False,0,0,0.05235552787780762,15.012688875198364,2000,"Failed to reach goal (reached 1/6 waypoints, dist=227)"
+6,grid_bfs,potential_field,0,True,219,10,0.05252861976623535,1.6601557731628418,218,
+6,grid_bfs,greedy,0,True,222,21,0.06287741661071777,1.6410768032073975,221,
+6,grid_bfs,dwa,0,True,161,15,0.05231332778930664,1.2009437084197998,160,
+6,grid_dfs,reactive_bfs,0,False,0,0,0.09659517154796049,6.865724325180054,893,"Failed to reach goal (reached 0/10 waypoints, dist=140)"
+6,grid_dfs,reactive_dfs,0,False,0,0,0.04169344902038574,15.022673606872559,2000,"Failed to reach goal (reached 1/13 waypoints, dist=227)"
+6,grid_dfs,potential_field,0,False,0,0,0.10625335579970852,6.588094472885132,856,"Failed to reach goal (reached 0/10 waypoints, dist=140)"
+6,grid_dfs,greedy,0,False,0,0,0.041565656661987305,15.036072492599487,2000,"Failed to reach goal (reached 4/13 waypoints, dist=122)"
+6,grid_dfs,dwa,0,False,0,0,0.09686617268016562,5.310447692871094,692,"Failed to reach goal (reached 0/10 waypoints, dist=140)"
+6,astar,reactive_bfs,0,True,223,51,0.047727108001708984,1.696204662322998,222,
+6,astar,reactive_dfs,0,False,0,0,0.05729532241821289,15.052889347076416,2000,"Failed to reach goal (reached 1/6 waypoints, dist=227)"
+6,astar,potential_field,0,True,221,14,0.0468597412109375,1.6742777824401855,220,
+6,astar,greedy,0,True,226,22,0.04677319526672363,1.687056541442871,225,
+6,astar,dwa,0,True,241,33,0.07356733473716304,1.8378257751464844,239,
+6,dijkstra,reactive_bfs,0,True,227,73,9.950206756591797,1.7159712314605713,226,
+6,dijkstra,reactive_dfs,0,False,0,0,9.9596688747406,15.07448148727417,2000,"Failed to reach goal (reached 1/6 waypoints, dist=227)"
+6,dijkstra,potential_field,0,True,219,10,9.916677236557007,1.6567635536193848,218,
+6,dijkstra,greedy,0,True,222,21,9.85460376739502,1.6454229354858398,221,
+6,dijkstra,dwa,0,True,161,15,10.014391660690308,1.2078039646148682,160,
+6,grid_bfs,reactive_bfs,50,True,223,70,0.0524446964263916,1.7006549835205078,222,
+6,grid_bfs,reactive_dfs,50,False,0,0,0.052732229232788086,100.00001120567322,1248,"Failed to reach goal (reached 6/6 waypoints, dist=223)"
+6,grid_bfs,potential_field,50,True,219,10,0.06144094467163086,1.6816034317016602,218,
+6,grid_bfs,greedy,50,True,232,33,0.052321672439575195,1.7640020847320557,231,
+6,grid_bfs,dwa,50,True,166,24,0.05233049392700195,1.2646782398223877,165,
+6,grid_dfs,reactive_bfs,50,False,0,0,0.05541887285653502,100.00003147125244,451,"Failed to reach goal (reached 10/10 waypoints, dist=124)"
+6,grid_dfs,reactive_dfs,50,False,0,0,0.051303863525390625,15.333104372024536,2000,"Failed to reach goal (reached 1/13 waypoints, dist=229)"
+6,grid_dfs,potential_field,50,False,0,0,0.0965511305257678,6.718379497528076,856,"Failed to reach goal (reached 0/10 waypoints, dist=140)"
+6,grid_dfs,greedy,50,False,0,0,0.04159808158874512,15.27821397781372,2000,"Failed to reach goal (reached 4/13 waypoints, dist=122)"
+6,grid_dfs,dwa,50,False,0,0,0.09672012738883495,5.42012882232666,694,"Failed to reach goal (reached 0/10 waypoints, dist=140)"
+6,astar,reactive_bfs,50,True,242,71,0.04669666290283203,1.8607749938964844,241,
+6,astar,reactive_dfs,50,False,0,0,0.0468602180480957,15.28410005569458,2000,"Failed to reach goal (reached 1/6 waypoints, dist=227)"
+6,astar,potential_field,50,True,221,18,0.04732227325439453,1.7020323276519775,220,
+6,astar,greedy,50,True,232,32,0.04688692092895508,1.7545418739318848,231,
+6,astar,dwa,50,True,241,33,0.08272089477395639,1.870495319366455,239,
+6,dijkstra,reactive_bfs,50,True,227,76,9.833632946014404,1.7498340606689453,226,
+6,dijkstra,reactive_dfs,50,False,0,0,9.896482229232788,15.28519082069397,2000,"Failed to reach goal (reached 1/6 waypoints, dist=217)"
+6,dijkstra,potential_field,50,True,219,12,9.928902387619019,1.691603422164917,218,
+6,dijkstra,greedy,50,True,251,43,10.008662223815918,1.9046635627746582,250,
+6,dijkstra,dwa,50,True,161,19,9.914205551147461,1.2285079956054688,160,
+6,grid_bfs,reactive_bfs,100,True,240,71,0.052791595458984375,1.8633928298950195,239,
+6,grid_bfs,reactive_dfs,100,False,0,0,0.06141829490661621,100.00002241134644,1764,"Failed to reach goal (reached 6/6 waypoints, dist=223)"
+6,grid_bfs,potential_field,100,True,219,14,0.052587270736694336,1.7154321670532227,218,
+6,grid_bfs,greedy,100,True,241,50,0.052457571029663086,1.8562610149383545,240,
+6,grid_bfs,dwa,100,False,0,0,0.05243873596191406,100.0000524520874,55,"Failed to reach goal (reached 6/6 waypoints, dist=137)"
+6,grid_dfs,reactive_bfs,100,False,0,0,0.07886905019404367,100.00003838539124,540,"Failed to reach goal (reached 10/10 waypoints, dist=140)"
+6,grid_dfs,reactive_dfs,100,False,0,0,0.04251360893249512,15.566452980041504,2000,"Failed to reach goal (reached 1/13 waypoints, dist=217)"
+6,grid_dfs,potential_field,100,False,0,0,0.09704168181633577,6.923572063446045,870,"Failed to reach goal (reached 0/10 waypoints, dist=140)"
+6,grid_dfs,greedy,100,False,0,0,0.04236173629760742,100.00004959106445,378,"Failed to reach goal (reached 13/13 waypoints, dist=120)"
+6,grid_dfs,dwa,100,False,0,0,0.0418856143951416,100.00007200241089,168,"Failed to reach goal (reached 13/13 waypoints, dist=124)"
+6,astar,reactive_bfs,100,True,251,89,0.04707074165344238,1.9553520679473877,250,
+6,astar,reactive_dfs,100,False,0,0,0.047284603118896484,15.550894260406494,2000,"Failed to reach goal (reached 1/6 waypoints, dist=227)"
+6,astar,potential_field,100,True,221,18,0.055802106857299805,1.7309982776641846,220,
+6,astar,greedy,100,True,236,44,0.04966592788696289,1.8265635967254639,235,
+6,astar,dwa,100,True,178,33,0.04679989814758301,1.3821980953216553,177,
+6,dijkstra,reactive_bfs,100,True,240,77,9.855339765548706,1.8665292263031006,239,
+6,dijkstra,reactive_dfs,100,False,0,0,10.020799160003662,100.00001120567322,673,"Failed to reach goal (reached 6/6 waypoints, dist=224)"
+6,dijkstra,potential_field,100,True,219,14,9.936096906661987,1.7051823139190674,218,
+6,dijkstra,greedy,100,True,235,42,9.967572927474976,1.8104791641235352,234,
+6,dijkstra,dwa,100,True,164,35,10.047011852264404,1.268024206161499,163,
+6,grid_bfs,reactive_bfs,200,True,258,106,0.05272054672241211,2.0658085346221924,257,
+6,grid_bfs,reactive_dfs,200,False,0,0,0.052562713623046875,16.048194408416748,2000,"Failed to reach goal (reached 1/6 waypoints, dist=205)"
+6,grid_bfs,potential_field,200,True,219,16,0.052703142166137695,1.770024061203003,218,
+6,grid_bfs,greedy,200,True,249,68,0.05255413055419922,1.9918212890625,248,
+6,grid_bfs,dwa,200,False,0,0,0.052461862564086914,100.00001955032349,108,"Failed to reach goal (reached 6/6 waypoints, dist=73)"
+6,grid_dfs,reactive_bfs,200,True,896,364,0.05547500780085102,7.28000020980835,894,
+6,grid_dfs,reactive_dfs,200,False,0,0,0.05092930793762207,16.036096334457397,2000,"Failed to reach goal (reached 1/13 waypoints, dist=227)"
+6,grid_dfs,potential_field,200,True,826,197,0.05543760774889961,6.70746922492981,824,
+6,grid_dfs,greedy,200,False,0,0,0.04170656204223633,100.00004267692566,374,"Failed to reach goal (reached 13/13 waypoints, dist=121)"
+6,grid_dfs,dwa,200,False,0,0,0.09681076579727232,5.891739130020142,721,"Failed to reach goal (reached 0/10 waypoints, dist=140)"
+6,astar,reactive_bfs,200,True,251,90,0.05658125877380371,2.011916399002075,250,
+6,astar,reactive_dfs,200,False,0,0,0.046894073486328125,100.00001430511475,1081,"Failed to reach goal (reached 6/6 waypoints, dist=236)"
+6,astar,potential_field,200,True,227,26,0.04687333106994629,1.8341064453125,226,
+6,astar,greedy,200,True,262,62,0.04698538780212402,2.0770959854125977,261,
+6,astar,dwa,200,True,187,42,0.05627870559692383,1.4894680976867676,186,
+6,dijkstra,reactive_bfs,200,False,0,0,9.81527042388916,100.00002861022949,92,"Failed to reach goal (reached 6/6 waypoints, dist=147)"
+6,dijkstra,reactive_dfs,200,False,0,0,9.928835391998291,100.00001692771912,755,"Failed to reach goal (reached 6/6 waypoints, dist=214)"
+6,dijkstra,potential_field,200,True,226,17,9.981280088424683,1.82084321975708,225,
+6,dijkstra,greedy,200,False,0,0,10.025879383087158,100.00004529953003,216,"Failed to reach goal (reached 6/6 waypoints, dist=26)"
+6,dijkstra,dwa,200,True,165,39,9.970171451568604,1.3164222240447998,164,
+7,grid_bfs,reactive_bfs,0,True,184,47,0.04664468765258789,3.130580425262451,183,
+7,grid_bfs,reactive_dfs,0,False,0,0,0.05802948819473386,34.11306715011597,2000,"Failed to reach goal (reached 1/7 waypoints, dist=196)"
+7,grid_bfs,potential_field,0,True,205,14,0.04734887304948643,3.4926185607910156,203,
+7,grid_bfs,greedy,0,False,0,0,0.03802156448364258,34.07852005958557,2000,"Failed to reach goal (reached 4/6 waypoints, dist=55)"
+7,grid_bfs,dwa,0,True,174,31,0.047853002208285034,2.9528822898864746,172,
+7,grid_dfs,reactive_bfs,0,True,268,68,0.03072071075439453,4.571717977523804,267,
+7,grid_dfs,reactive_dfs,0,False,0,0,0.04384208872215822,34.27188730239868,2000,"Failed to reach goal (reached 1/9 waypoints, dist=196)"
+7,grid_dfs,potential_field,0,True,254,18,0.03075885772705078,4.321796417236328,253,
+7,grid_dfs,greedy,0,True,263,27,0.030833005905151367,4.456839084625244,262,
+7,grid_dfs,dwa,0,True,220,38,0.030750036239624023,3.7301523685455322,219,
+7,astar,reactive_bfs,0,True,182,38,0.03283095359802246,3.0654282569885254,181,
+7,astar,reactive_dfs,0,False,0,0,0.029697717865929008,34.17475461959839,2000,"Failed to reach goal (reached 1/6 waypoints, dist=196)"
+7,astar,potential_field,0,True,178,13,0.02316904067993164,3.0177931785583496,177,
+7,astar,greedy,0,True,181,13,0.02309703826904297,3.0496292114257812,180,
+7,astar,dwa,0,True,146,20,0.02309131622314453,2.4715161323547363,145,
+7,dijkstra,reactive_bfs,0,True,216,58,7.780224613496102,6.605510711669922,214,
+7,dijkstra,reactive_dfs,0,False,0,0,9.825357276073191,38.950944900512695,2000,"Failed to reach goal (reached 1/7 waypoints, dist=196)"
+7,dijkstra,potential_field,0,True,205,14,7.534841724555008,6.037427663803101,203,
+7,dijkstra,greedy,0,False,0,0,4.9267988204956055,34.25371479988098,2000,"Failed to reach goal (reached 4/6 waypoints, dist=55)"
+7,dijkstra,dwa,0,True,174,31,7.891467963345349,5.914291620254517,172,
+7,grid_bfs,reactive_bfs,50,True,213,72,0.038137197494506836,3.6531331539154053,212,
+7,grid_bfs,reactive_dfs,50,False,0,0,0.058070125931408256,100.00001406669617,119,"Failed to reach goal (reached 7/7 waypoints, dist=197)"
+7,grid_bfs,potential_field,50,True,205,15,0.04750679212156683,3.513303279876709,203,
+7,grid_bfs,greedy,50,False,0,0,0.048212528228759766,100.00002717971802,321,"Failed to reach goal (reached 6/6 waypoints, dist=56)"
+7,grid_bfs,dwa,50,True,174,31,0.0478173170122318,2.976433038711548,172,
+7,grid_dfs,reactive_bfs,50,True,266,70,0.030733346939086914,4.557550430297852,265,
+7,grid_dfs,reactive_dfs,50,False,0,0,0.04397041746415198,100.00000619888306,1717,"Failed to reach goal (reached 9/9 waypoints, dist=197)"
+7,grid_dfs,potential_field,50,True,254,18,0.030647754669189453,4.345688343048096,253,
+7,grid_dfs,greedy,50,True,265,29,0.0410008430480957,4.511112213134766,264,
+7,grid_dfs,dwa,50,True,227,52,0.030870914459228516,3.870051145553589,226,
+7,astar,reactive_bfs,50,True,180,41,0.023218154907226562,3.0861666202545166,179,
+7,astar,reactive_dfs,50,False,0,0,0.029863252129871398,100.0000057220459,954,"Failed to reach goal (reached 6/6 waypoints, dist=188)"
+7,astar,potential_field,50,True,182,17,0.023058414459228516,3.1112165451049805,181,
+7,astar,greedy,50,True,195,23,0.023035526275634766,3.3296055793762207,194,
+7,astar,dwa,50,True,178,28,0.02315545082092285,3.0296521186828613,177,
+7,dijkstra,reactive_bfs,50,True,198,69,4.89813232421875,3.411428213119507,197,
+7,dijkstra,reactive_dfs,50,False,0,0,9.893276554299518,39.349806785583496,2000,"Failed to reach goal (reached 1/7 waypoints, dist=196)"
+7,dijkstra,potential_field,50,True,206,16,7.505925081321038,6.0867531299591064,204,
+7,dijkstra,greedy,50,False,0,0,4.903037786483765,100.00003576278687,1816,"Failed to reach goal (reached 6/6 waypoints, dist=55)"
+7,dijkstra,dwa,50,True,181,41,7.940995548269711,6.03012490272522,179,
+7,grid_bfs,reactive_bfs,100,True,224,65,0.04791972512612119,3.864185333251953,222,
+7,grid_bfs,reactive_dfs,100,False,0,0,0.05821094335988164,34.586021423339844,2000,"Failed to reach goal (reached 1/7 waypoints, dist=188)"
+7,grid_bfs,potential_field,100,True,205,14,0.047411846346221864,3.5478737354278564,203,
+7,grid_bfs,greedy,100,False,0,0,0.0482630729675293,100.00003862380981,472,"Failed to reach goal (reached 6/6 waypoints, dist=55)"
+7,grid_bfs,dwa,100,True,175,40,0.0481343271676451,3.012608051300049,173,
+7,grid_dfs,reactive_bfs,100,True,272,83,0.03068685531616211,4.687338590621948,271,
+7,grid_dfs,reactive_dfs,100,False,0,0,0.043792198586743325,100.00003504753113,1501,"Failed to reach goal (reached 9/9 waypoints, dist=197)"
+7,grid_dfs,potential_field,100,True,262,22,0.030916452407836914,4.5215747356414795,261,
+7,grid_dfs,greedy,100,True,289,57,0.04134726524353027,4.963651418685913,288,
+7,grid_dfs,dwa,100,True,288,81,0.030690670013427734,4.941664218902588,287,
+7,astar,reactive_bfs,100,True,189,42,0.02299642562866211,3.266739845275879,188,
+7,astar,reactive_dfs,100,False,0,0,0.029767574917059392,34.596654415130615,2000,"Failed to reach goal (reached 1/6 waypoints, dist=188)"
+7,astar,potential_field,100,True,178,15,0.02315688133239746,3.074130058288574,177,
+7,astar,greedy,100,True,191,30,0.023181915283203125,3.2617173194885254,190,
+7,astar,dwa,100,True,154,28,0.022938966751098633,2.649259567260742,153,
+7,dijkstra,reactive_bfs,100,True,233,67,7.867982022697106,6.9596216678619385,231,
+7,dijkstra,reactive_dfs,100,False,0,0,9.856516134052072,39.59066367149353,2000,"Failed to reach goal (reached 1/7 waypoints, dist=192)"
+7,dijkstra,potential_field,100,True,210,27,7.95955967361806,6.568361759185791,208,
+7,dijkstra,greedy,100,False,0,0,4.957614183425903,100.00002074241638,599,"Failed to reach goal (reached 6/6 waypoints, dist=55)"
+7,dijkstra,dwa,100,True,180,41,7.940679022809491,6.0717933177948,178,
+7,grid_bfs,reactive_bfs,200,True,247,90,0.04771847039228305,4.315391778945923,245,
+7,grid_bfs,reactive_dfs,200,False,0,0,0.04798412322998047,100.00000858306885,1508,"Failed to reach goal (reached 6/6 waypoints, dist=198)"
+7,grid_bfs,potential_field,200,True,214,19,0.047373498091474175,3.7442495822906494,212,
+7,grid_bfs,greedy,200,False,0,0,0.038129568099975586,100.0000205039978,1341,"Failed to reach goal (reached 6/6 waypoints, dist=61)"
+7,grid_bfs,dwa,200,True,173,49,0.047907491913065314,3.0310332775115967,171,
+7,grid_dfs,reactive_bfs,200,False,0,0,0.030901670455932617,100.00003981590271,54,"Failed to reach goal (reached 9/9 waypoints, dist=141)"
+7,grid_dfs,reactive_dfs,200,False,0,0,0.04387736623175442,100.00002121925354,269,"Failed to reach goal (reached 9/9 waypoints, dist=203)"
+7,grid_dfs,potential_field,200,True,279,21,0.03084707260131836,4.919032573699951,278,
+7,grid_dfs,greedy,200,True,308,74,0.0308074951171875,5.365877866744995,307,
+7,grid_dfs,dwa,200,False,0,0,0.030803680419921875,100.0000159740448,127,"Failed to reach goal (reached 9/9 waypoints, dist=79)"
+7,astar,reactive_bfs,200,True,186,40,0.022910356521606445,3.2511956691741943,185,
+7,astar,reactive_dfs,200,False,0,0,0.029708749148994684,100.00003862380981,482,"Failed to reach goal (reached 6/6 waypoints, dist=193)"
+7,astar,potential_field,200,True,178,17,0.02309727668762207,3.119948387145996,177,
+7,astar,greedy,200,True,207,53,0.02323174476623535,3.596646547317505,206,
+7,astar,dwa,200,True,189,56,0.033586554578505456,3.2989954948425293,187,
+7,dijkstra,reactive_bfs,200,False,0,0,4.901513338088989,100.00004029273987,88,"Failed to reach goal (reached 6/6 waypoints, dist=100)"
+7,dijkstra,reactive_dfs,200,False,0,0,9.908928288146853,100.00001049041748,985,"Failed to reach goal (reached 7/7 waypoints, dist=188)"
+7,dijkstra,potential_field,200,True,209,17,7.511119812785182,6.213906764984131,207,
+7,dijkstra,greedy,200,False,0,0,4.936553716659546,100.00002932548523,1180,"Failed to reach goal (reached 6/6 waypoints, dist=55)"
+7,dijkstra,dwa,200,False,0,0,4.956031084060669,100.00003695487976,93,"Failed to reach goal (reached 6/6 waypoints, dist=89)"

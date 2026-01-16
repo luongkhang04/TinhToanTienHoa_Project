@@ -332,3 +332,150 @@ class GreedyLocalPlanner(LocalPlanner):
             return False
         cm = self._ensure_clearance_map()
         return cm[lx, ly] > m
+
+
+class DynamicWindowPlanner(LocalPlanner):
+    """
+    Dynamic Window Approach (DWA) adapted for grid-based local planning.
+    Samples velocity commands within a dynamic window and scores them by
+    goal heading, clearance, and speed.
+    """
+
+    def __init__(self, agent, observation, xlim, ylim,
+                 max_speed=1, max_accel=1, prediction_steps=3, dt=1.0,
+                 heading_weight=1.0, clearance_weight=1.0, speed_weight=0.2,
+                 clearance_cap=5, margin=2):
+        super().__init__(agent, observation, xlim, ylim, margin=margin)
+        self.max_speed = max(1, int(max_speed))
+        self.max_accel = max(0, int(max_accel))
+        self.prediction_steps = max(1, int(prediction_steps))
+        self.dt = float(dt)
+        self.heading_weight = float(heading_weight)
+        self.clearance_weight = float(clearance_weight)
+        self.speed_weight = float(speed_weight)
+        self.clearance_cap = max(1, int(clearance_cap))
+        self.last_action = np.array([0, 0], dtype=int)
+
+    def plan_to_goal(self, current_state, projected_goal):
+        """Select an action using DWA scoring."""
+        if current_state == projected_goal:
+            return move.NONE
+
+        current = np.array(current_state, dtype=int)
+        goal = np.array(projected_goal, dtype=float)
+
+        best_score = None
+        best_action = move.NONE
+
+        for velocity in self._generate_velocity_candidates():
+            score = self._score_velocity(current, goal, velocity)
+            if score is None:
+                continue
+            if best_score is None or score > best_score:
+                best_score = score
+                best_action = velocity
+
+        if best_score is None:
+            self.stuck_count += 1
+            return move.NONE
+
+        if np.array_equal(best_action, move.NONE):
+            self.stuck_count += 1
+        else:
+            self.stuck_count = 0
+
+        self.last_action = np.array(best_action, dtype=int)
+        return np.array(best_action, dtype=int)
+
+    def _generate_velocity_candidates(self):
+        last_vx, last_vy = int(self.last_action[0]), int(self.last_action[1])
+        vx_min = max(-self.max_speed, last_vx - self.max_accel)
+        vx_max = min(self.max_speed, last_vx + self.max_accel)
+        vy_min = max(-self.max_speed, last_vy - self.max_accel)
+        vy_max = min(self.max_speed, last_vy + self.max_accel)
+
+        candidates = []
+        for vx in range(vx_min, vx_max + 1):
+            for vy in range(vy_min, vy_max + 1):
+                if max(abs(vx), abs(vy)) > self.max_speed:
+                    continue
+                candidates.append(np.array([vx, vy], dtype=int))
+        return candidates
+
+    def _score_velocity(self, current, goal, velocity):
+        trajectory = self._simulate_trajectory(current, velocity)
+        if trajectory is None:
+            return None
+
+        final_pos = trajectory[-1]
+        dist_to_goal = np.linalg.norm(goal - final_pos)
+        heading_score = 1.0 / (dist_to_goal + 1.0)
+
+        min_clearance = min(self._clearance_value(pos) for pos in trajectory)
+        if min_clearance <= self.margin:
+            return None
+        clearance_score = min(min_clearance, self.clearance_cap) / float(self.clearance_cap)
+
+        speed = np.linalg.norm(velocity)
+        speed_score = speed / float(max(1, self.max_speed))
+
+        return (self.heading_weight * heading_score +
+                self.clearance_weight * clearance_score +
+                self.speed_weight * speed_score)
+
+    def _simulate_trajectory(self, current, velocity):
+        if np.all(velocity == 0):
+            if not self._is_valid_pos(current):
+                return None
+            return [current]
+
+        trajectory = []
+        for step in range(1, self.prediction_steps + 1):
+            pos = current + (velocity * step)
+            if not self._is_inside_global(pos):
+                return None
+            if not self._is_inside_observation(pos):
+                break
+            if not self._is_valid_pos(pos):
+                return None
+            trajectory.append(pos)
+        if not trajectory:
+            return None
+        return trajectory
+
+    def _is_valid_pos(self, pos):
+        x, y = int(pos[0]), int(pos[1])
+        return self._cell_has_margin((x, y), margin=self.margin)
+
+    def _is_inside_global(self, pos):
+        x, y = int(pos[0]), int(pos[1])
+        return 0 <= x < self.xlim and 0 <= y < self.ylim
+
+    def _is_inside_observation(self, pos):
+        gx, gy = int(pos[0]), int(pos[1])
+        agent_loc = self.agent.location
+        agent_range = self.agent.range
+
+        obs_x_min = max(0, int(agent_loc[0]) - agent_range)
+        obs_y_min = max(0, int(agent_loc[1]) - agent_range)
+        obs_x_max = min(self.xlim - 1, int(agent_loc[0]) + agent_range)
+        obs_y_max = min(self.ylim - 1, int(agent_loc[1]) + agent_range)
+
+        return obs_x_min <= gx <= obs_x_max and obs_y_min <= gy <= obs_y_max
+
+    def _clearance_value(self, pos):
+        gx, gy = int(pos[0]), int(pos[1])
+        agent_loc = self.agent.location
+        agent_range = self.agent.range
+
+        obs_x_min = max(0, int(agent_loc[0]) - agent_range)
+        obs_y_min = max(0, int(agent_loc[1]) - agent_range)
+
+        lx = gx - obs_x_min
+        ly = gy - obs_y_min
+
+        W, H = self.observation.shape
+        if not (0 <= lx < W and 0 <= ly < H):
+            return -1
+        cm = self._ensure_clearance_map()
+        return int(cm[lx, ly])

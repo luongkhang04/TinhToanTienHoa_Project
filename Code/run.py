@@ -15,7 +15,13 @@ import csv
 from utils import move
 from utils.Global import Global
 from planning.global_planning import GridBFSPlanner, GridDFSPlanner, GridAStarPlanner, SimpleDijkstraPlanner
-from planning.local_planning import ReactiveBFSPlanner, ReactiveDFSPlanner, PotentialFieldPlanner, GreedyLocalPlanner
+from planning.local_planning import (
+    ReactiveBFSPlanner,
+    ReactiveDFSPlanner,
+    PotentialFieldPlanner,
+    GreedyLocalPlanner,
+    DynamicWindowPlanner,
+)
 
 
 class PathPlanner:
@@ -88,6 +94,7 @@ class PathPlanner:
             'reactive_dfs': ReactiveDFSPlanner,
             'potential_field': PotentialFieldPlanner,
             'greedy': GreedyLocalPlanner,
+            'dwa': DynamicWindowPlanner,
         }
         
         planner_class = planners.get(planner_name, ReactiveBFSPlanner)
@@ -144,9 +151,19 @@ class PathPlanner:
         steps = 0
         stuck_counter = 0
         stuck_threshold = 20  # Trigger replanning after 20 steps without progress
+        final_goal_tolerance = 3
+        waypoint_tolerance = 2
+        goal_pos_int = tuple(int(x) for x in self.goal_pos)
         
-        while idx_goal < len(global_path) and steps < max_steps:
-            goal = tuple(int(x) for x in global_path[idx_goal])
+        while steps < max_steps:
+            dist_to_final = abs(current_state[0] - goal_pos_int[0]) + abs(current_state[1] - goal_pos_int[1])
+            if dist_to_final <= final_goal_tolerance:
+                break
+
+            if idx_goal >= len(global_path):
+                goal = goal_pos_int
+            else:
+                goal = tuple(int(x) for x in global_path[idx_goal])
             projected_goal = self.local_planner.graph.project_to_surroundings(goal)
             
             # Get local plan
@@ -167,7 +184,8 @@ class PathPlanner:
                              valid_neighbors[0][1] - current_state[1])
                 else:
                     # Completely stuck, try moving to next waypoint
-                    idx_goal += 1
+                    if idx_goal < len(global_path):
+                        idx_goal += 1
                     stuck_counter = 0
                     continue
             
@@ -216,7 +234,7 @@ class PathPlanner:
             
             # Check goal reached (with tolerance)
             dist_to_goal = abs(current_state[0] - goal[0]) + abs(current_state[1] - goal[1])
-            if dist_to_goal <= 2:  # Within 2 cells of waypoint
+            if dist_to_goal <= waypoint_tolerance and idx_goal < len(global_path):
                 idx_goal += 1
                 stuck_counter = 0
             
@@ -225,7 +243,11 @@ class PathPlanner:
             if steps % 50 == 0:
                 print(f"  Step {steps}: at {current_state}, goal {idx_goal}/{len(global_path)}")
         
-        print(f"Planning completed in {self.times[0]} steps")
+        dist_to_final = abs(current_state[0] - goal_pos_int[0]) + abs(current_state[1] - goal_pos_int[1])
+        if dist_to_final <= final_goal_tolerance:
+            print(f"Planning completed in {self.times[0]} steps")
+        else:
+            print(f"Planning stopped at {current_state}, dist to goal {dist_to_final}")
         print(f"Total path length: {len(self.complete_path)}")
         
         return self.times, self.complete_path
@@ -319,7 +341,7 @@ def main():
                        choices=['grid_bfs', 'grid_dfs', 'astar', 'dijkstra'],
                        default='grid_bfs', help='Global planning algorithm')
     parser.add_argument('-l', '--local', dest='local_planner',
-                       choices=['reactive_bfs', 'reactive_dfs', 'potential_field', 'greedy'],
+                       choices=['reactive_bfs', 'reactive_dfs', 'potential_field', 'greedy', 'dwa'],
                        default='reactive_bfs', help='Local planning algorithm')
     parser.add_argument('-o', '--obstacles', type=int, default=100, help='Number of moving obstacles')
     parser.add_argument('-v', '--visualize', action='store_true', help='Show visualization')

@@ -22,7 +22,13 @@ if not os.path.exists(RESULTS_DIR):
 from utils import move
 from utils.Global import Global
 from planning.global_planning import GridBFSPlanner, GridDFSPlanner, GridAStarPlanner, SimpleDijkstraPlanner
-from planning.local_planning import ReactiveBFSPlanner, ReactiveDFSPlanner, PotentialFieldPlanner, GreedyLocalPlanner
+from planning.local_planning import (
+    ReactiveBFSPlanner,
+    ReactiveDFSPlanner,
+    PotentialFieldPlanner,
+    GreedyLocalPlanner,
+    DynamicWindowPlanner,
+)
 from utils.agent_graph import agent_graph
 
 
@@ -42,6 +48,7 @@ class BenchmarkRunner:
         'reactive_dfs': ReactiveDFSPlanner,
         'potential_field': PotentialFieldPlanner,
         'greedy': GreedyLocalPlanner,
+        'dwa': DynamicWindowPlanner,
     }
     
     def __init__(self, maps=None, obstacle_counts=None, max_steps=2000, timeout=100):
